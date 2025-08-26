@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="XVW-Em-mBz" customClass="CustomNavigationBar" customModule="truckerApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="522" height="88"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="siz-xq-rkV">
+                    <rect key="frame" x="16" y="34" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="JWz-B8-j7x"/>
+                        <constraint firstAttribute="height" constant="20" id="o8p-UC-fab"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdM-bh-SSH">
+                    <rect key="frame" x="46" y="16" width="420" height="56"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DdO-d5-VgT">
+                    <rect key="frame" x="476" y="29" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="P2b-CA-TSw"/>
+                        <constraint firstAttribute="width" constant="30" id="fv1-j6-BGK"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBZ-iA-9mN">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="88"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="leadBtn:" destination="XVW-Em-mBz" eventType="touchUpInside" id="6dy-Dw-SYm"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wU-aM-9gi">
+                    <rect key="frame" x="466" y="0.0" width="56" height="88"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="trailingBtn:" destination="XVW-Em-mBz" eventType="touchUpInside" id="u5u-43-f8a"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="FjX-cW-JJ8"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="siz-xq-rkV" firstAttribute="leading" secondItem="FjX-cW-JJ8" secondAttribute="leading" constant="16" id="452-ho-Jjk"/>
+                <constraint firstItem="GBZ-iA-9mN" firstAttribute="leading" secondItem="FjX-cW-JJ8" secondAttribute="leading" id="5es-wt-wke"/>
+                <constraint firstItem="3wU-aM-9gi" firstAttribute="top" secondItem="XVW-Em-mBz" secondAttribute="top" id="6WJ-pV-KN6"/>
+                <constraint firstItem="GBZ-iA-9mN" firstAttribute="top" secondItem="XVW-Em-mBz" secondAttribute="top" id="95y-nN-Trk"/>
+                <constraint firstItem="3wU-aM-9gi" firstAttribute="bottom" secondItem="XVW-Em-mBz" secondAttribute="bottom" id="EPH-p5-BL6"/>
+                <constraint firstAttribute="bottom" secondItem="xdM-bh-SSH" secondAttribute="bottom" constant="16" id="Fye-nW-phk"/>
+                <constraint firstItem="xdM-bh-SSH" firstAttribute="leading" secondItem="siz-xq-rkV" secondAttribute="trailing" constant="10" id="GGW-xV-haK"/>
+                <constraint firstAttribute="trailing" secondItem="3wU-aM-9gi" secondAttribute="trailing" id="Kao-jv-azR"/>
+                <constraint firstItem="xdM-bh-SSH" firstAttribute="leading" secondItem="GBZ-iA-9mN" secondAttribute="trailing" id="NPq-b2-WHz"/>
+                <constraint firstItem="xdM-bh-SSH" firstAttribute="top" secondItem="XVW-Em-mBz" secondAttribute="top" constant="16" id="OXj-6v-e4y"/>
+                <constraint firstAttribute="trailing" secondItem="DdO-d5-VgT" secondAttribute="trailing" constant="16" id="Opv-7l-EcW"/>
+                <constraint firstItem="GBZ-iA-9mN" firstAttribute="bottom" secondItem="XVW-Em-mBz" secondAttribute="bottom" id="PzV-o4-DX9"/>
+                <constraint firstItem="DdO-d5-VgT" firstAttribute="leading" secondItem="xdM-bh-SSH" secondAttribute="trailing" constant="10" id="RZI-Ze-0Y3"/>
+                <constraint firstItem="DdO-d5-VgT" firstAttribute="centerY" secondItem="siz-xq-rkV" secondAttribute="centerY" id="koO-gx-ops"/>
+                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="DdO-d5-VgT" secondAttribute="bottom" constant="39" id="lLU-H4-wP7"/>
+                <constraint firstItem="siz-xq-rkV" firstAttribute="centerY" secondItem="xdM-bh-SSH" secondAttribute="centerY" id="raL-jl-AuN"/>
+                <constraint firstItem="3wU-aM-9gi" firstAttribute="leading" secondItem="xdM-bh-SSH" secondAttribute="trailing" id="wKS-hC-Kwx"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="leadImageWidth" destination="JWz-B8-j7x" id="RZg-PV-H1r"/>
+                <outlet property="leadingImage" destination="siz-xq-rkV" id="dyc-Ga-cQP"/>
+                <outlet property="titleLbl" destination="xdM-bh-SSH" id="Pmf-2a-4kf"/>
+                <outlet property="trailingImage" destination="DdO-d5-VgT" id="hab-u3-uyO"/>
+            </connections>
+            <point key="canvasLocation" x="218.32061068702288" y="-461.26760563380282"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

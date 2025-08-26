@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view tag="520" contentMode="scaleToFill" id="b3v-88-NY3" customClass="GenericToast" customModule="plexaarcalender" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="525" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBK-Tk-YQo">
+                    <rect key="frame" x="54" y="8" width="455" height="89"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app_logo" translatesAutoresizingMaskIntoConstraints="NO" id="OtE-mZ-0De">
+                    <rect key="frame" x="16" y="37.666666666666664" width="30" height="29.999999999999993"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="7zo-oS-b2x"/>
+                        <constraint firstAttribute="height" constant="30" id="fg3-zQ-KNn"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Hk-do-D5I">
+                    <rect key="frame" x="0.0" y="0.0" width="525" height="105"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="MsM-Y2-3MH"/>
+            <color key="backgroundColor" name="clr_primary_very_dark"/>
+            <constraints>
+                <constraint firstItem="JBK-Tk-YQo" firstAttribute="leading" secondItem="OtE-mZ-0De" secondAttribute="trailing" constant="8" id="5KG-B0-1ys"/>
+                <constraint firstItem="7Hk-do-D5I" firstAttribute="top" secondItem="b3v-88-NY3" secondAttribute="top" id="LKu-YT-sox"/>
+                <constraint firstItem="JBK-Tk-YQo" firstAttribute="top" secondItem="b3v-88-NY3" secondAttribute="top" constant="8" id="Sy3-1N-ccH"/>
+                <constraint firstItem="OtE-mZ-0De" firstAttribute="centerY" secondItem="JBK-Tk-YQo" secondAttribute="centerY" id="YjI-PX-rYb"/>
+                <constraint firstAttribute="bottom" secondItem="JBK-Tk-YQo" secondAttribute="bottom" constant="8" id="bxY-WW-7i3"/>
+                <constraint firstItem="MsM-Y2-3MH" firstAttribute="trailing" secondItem="7Hk-do-D5I" secondAttribute="trailing" id="cdU-IZ-BkF"/>
+                <constraint firstItem="OtE-mZ-0De" firstAttribute="leading" secondItem="b3v-88-NY3" secondAttribute="leading" constant="16" id="jhX-Vo-1Kt"/>
+                <constraint firstAttribute="trailing" secondItem="JBK-Tk-YQo" secondAttribute="trailing" constant="16" id="uB4-cf-B6o"/>
+                <constraint firstAttribute="bottom" secondItem="7Hk-do-D5I" secondAttribute="bottom" id="vfb-PH-NBL"/>
+                <constraint firstItem="7Hk-do-D5I" firstAttribute="leading" secondItem="MsM-Y2-3MH" secondAttribute="leading" id="vlG-sy-unh"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="appIcon" destination="OtE-mZ-0De" id="vyu-5y-FAc"/>
+                <outlet property="messageLbl" destination="JBK-Tk-YQo" id="Tp5-Wu-F8g"/>
+                <outlet property="removeBtn" destination="7Hk-do-D5I" id="V6E-g6-3xF"/>
+            </connections>
+            <point key="canvasLocation" x="423.84615384615381" y="-352.25118483412319"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="app_logo" width="30" height="30"/>
+        <namedColor name="clr_primary_very_dark">
+            <color red="0.058823529411764705" green="0.40392156862745099" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AppDialogUI" customModule="truckerApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v19-hu-RId">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" red="0.24316304920000001" green="0.23509243129999999" blue="0.24706026910000001" alpha="0.21294366749999999" colorSpace="custom" customColorSpace="displayP3"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                </button>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="353" placeholderIntrinsicHeight="300" translatesAutoresizingMaskIntoConstraints="NO" id="UVt-pO-Iaw">
+                    <rect key="frame" x="20" y="276" width="353" height="300"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zeroIfta_app_logo" translatesAutoresizingMaskIntoConstraints="NO" id="3cc-0H-FW2">
+                            <rect key="frame" x="15" y="20" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="8es-Qk-kiB"/>
+                                <constraint firstAttribute="width" constant="30" id="9aJ-4J-dna"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8j-cC-Nh6">
+                            <rect key="frame" x="53" y="25" width="290" height="20.333333333333329"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" name="clr_primary_2"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCp-cj-B2b">
+                            <rect key="frame" x="15" y="65" width="323" height="1.6666666666666714"/>
+                            <color key="backgroundColor" red="0.040547678081277724" green="0.28004054603281631" blue="0.75750450274806902" alpha="0.30509623418876669" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1.5" id="JZq-B7-CZM"/>
+                            </constraints>
+                        </view>
+                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="323" placeholderIntrinsicHeight="42.333333333333371" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Q4P-6h-hLA">
+                            <rect key="frame" x="15" y="237.66666666666666" width="323" height="42.333333333333343"/>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Lr-X2-P6w">
+                            <rect key="frame" x="15" y="81.666666666666686" width="323" height="141"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="clr_white"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Q4P-6h-hLA" secondAttribute="bottom" constant="20" id="0nv-PK-RD1"/>
+                        <constraint firstItem="lCp-cj-B2b" firstAttribute="top" secondItem="3cc-0H-FW2" secondAttribute="bottom" constant="15" id="4Ug-NT-AfL"/>
+                        <constraint firstItem="Q4P-6h-hLA" firstAttribute="top" secondItem="7Lr-X2-P6w" secondAttribute="bottom" constant="15" id="8Ck-k0-P35"/>
+                        <constraint firstItem="3cc-0H-FW2" firstAttribute="leading" secondItem="UVt-pO-Iaw" secondAttribute="leading" constant="15" id="B1u-Vx-ztZ"/>
+                        <constraint firstItem="3cc-0H-FW2" firstAttribute="top" secondItem="UVt-pO-Iaw" secondAttribute="top" constant="20" id="CsE-38-2MO"/>
+                        <constraint firstAttribute="trailing" secondItem="i8j-cC-Nh6" secondAttribute="trailing" constant="10" id="Due-5z-rUp"/>
+                        <constraint firstItem="Q4P-6h-hLA" firstAttribute="leading" secondItem="UVt-pO-Iaw" secondAttribute="leading" constant="15" id="OcC-qH-430"/>
+                        <constraint firstItem="7Lr-X2-P6w" firstAttribute="leading" secondItem="UVt-pO-Iaw" secondAttribute="leading" constant="15" id="Sq0-Cf-xkn"/>
+                        <constraint firstAttribute="trailing" secondItem="7Lr-X2-P6w" secondAttribute="trailing" constant="15" id="aOv-hj-4fH"/>
+                        <constraint firstAttribute="trailing" secondItem="lCp-cj-B2b" secondAttribute="trailing" constant="15" id="gHh-zu-obI"/>
+                        <constraint firstItem="i8j-cC-Nh6" firstAttribute="leading" secondItem="3cc-0H-FW2" secondAttribute="trailing" constant="8" id="gkK-Hm-yCR"/>
+                        <constraint firstItem="i8j-cC-Nh6" firstAttribute="centerY" secondItem="3cc-0H-FW2" secondAttribute="centerY" id="jUb-rR-mtH"/>
+                        <constraint firstItem="7Lr-X2-P6w" firstAttribute="top" secondItem="lCp-cj-B2b" secondAttribute="bottom" constant="15" id="vgm-Jx-yaW"/>
+                        <constraint firstAttribute="trailing" secondItem="Q4P-6h-hLA" secondAttribute="trailing" constant="15" id="xKd-hw-Gru"/>
+                        <constraint firstItem="lCp-cj-B2b" firstAttribute="leading" secondItem="UVt-pO-Iaw" secondAttribute="leading" constant="15" id="zon-lH-4DH"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="UVt-pO-Iaw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Ji-gW-zuO"/>
+                <constraint firstAttribute="trailing" secondItem="v19-hu-RId" secondAttribute="trailing" id="ASX-p9-deh"/>
+                <constraint firstItem="v19-hu-RId" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FDM-2o-QPL"/>
+                <constraint firstAttribute="bottom" secondItem="v19-hu-RId" secondAttribute="bottom" id="f8Q-mW-TM6"/>
+                <constraint firstItem="v19-hu-RId" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lel-a9-R8w"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UVt-pO-Iaw" secondAttribute="trailing" constant="20" id="n9M-lJ-Sad"/>
+                <constraint firstItem="UVt-pO-Iaw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="pxn-mp-Mc0"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="buttonStackView" destination="Q4P-6h-hLA" id="ajc-BF-g8U"/>
+                <outlet property="headerTitleLbl" destination="i8j-cC-Nh6" id="XVT-R5-Wyp"/>
+                <outlet property="midStackView" destination="7Lr-X2-P6w" id="e7Y-7v-XIp"/>
+            </connections>
+            <point key="canvasLocation" x="17.557251908396946" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="zeroIfta_app_logo" width="512" height="512"/>
+        <namedColor name="clr_primary_2">
+            <color red="0.035294117647058823" green="0.1803921568627451" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="clr_white">
+            <color red="0.99607843137254903" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

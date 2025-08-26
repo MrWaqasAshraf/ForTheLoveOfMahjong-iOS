@@ -1,0 +1,18 @@
+[
+    { "fuel_type": "Diesel" },
+    { "fuel_type": "Gasoline" },
+    { "fuel_type": "Propane" },
+    { "fuel_type": "Liquid Natural gas" },
+    { "fuel_type": "Compressed Natural gas" },
+    { "fuel_type": "Ethanol" },
+    { "fuel_type": "Methanol" },
+    { "fuel_type": "E-85" },
+    { "fuel_type": "M-85" },
+    { "fuel_type": "A55" },
+    { "fuel_type": "Biodiesel" },
+    { "fuel_type": "Electric" },
+    { "fuel_type": "Hydrogen" },
+    { "fuel_type": "Hybrid electric" },
+    { "fuel_type": "Plug-in hybrid electric" },
+    { "fuel_type": "Other" }
+]
