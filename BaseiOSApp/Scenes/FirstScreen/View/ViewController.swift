@@ -21,20 +21,27 @@ class ViewController: UIViewController {
         print("First screen")
         
         if isFirstOpen {
+            
             appNavigationCoordinator.navigationController = navigationController
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let vc = AppUIViewControllers.mainMapScreen()
+                appNavigationCoordinator.pushUIKit(vc)
+            }
+            
         }
         
     }
 
     @IBAction func nextBtn(_ sender: Any) {
         if isFirstOpen {
-            let vc = AppUIViewControllers.firstScreen()
+            let vc = AppUIViewControllers.mainMapScreen()
             appNavigationCoordinator.pushUIKit(vc)
         }
         else {
             //SampleSwiftUIScreen
-            let swiftUiVc = SampleSwiftUIScreen()
-            appNavigationCoordinator.pushSwiftUI(swiftUiVc)
+//            let swiftUiVc = SampleSwiftUIScreen()
+//            appNavigationCoordinator.pushSwiftUI(swiftUiVc)
             
 //            let vc = AppUIViewControllers.tasksCalendarScreen()
 //            appNavigationCoordinator.pushUIKit(vc)

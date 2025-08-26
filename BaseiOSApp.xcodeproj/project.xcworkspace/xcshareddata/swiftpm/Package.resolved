@@ -1,5 +1,5 @@
 {
-  "originHash" : "74350aa352c5d591ca8d4f79af1d4ddfebb8db922d44b4aaadfe4515f1da67a9",
+  "originHash" : "8368a23d73a65d679c4830846636437de55e5221e6ca117a2dba9e472608a134",
   "pins" : [
     {
       "identity" : "iqkeyboardcore",
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "4347f8eb6bf8880014606684105e447229cc29ea",
         "version" : "1.0.8"
+      }
+    },
+    {
+      "identity" : "sidemenu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jonkykong/SideMenu",
+      "state" : {
+        "revision" : "8bd4fd128923cf5494fa726839af8afe12908ad9",
+        "version" : "6.5.0"
       }
     }
   ],

@@ -6,8 +6,40 @@
 //
 
 import UIKit
+import SideMenu
 
 class AppUIViewControllers {
+    
+    static func filterEventsScreen(viewModel: FilterEventsViewModel = FilterEventsViewModel()) -> FilterEventsScreen {
+        let sb = UIStoryboard(name: FilterEventsScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: FilterEventsScreen.identifier) { coder in
+            FilterEventsScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
+    static func sideMenuScreen(viewModel: SideMenuViewModel = SideMenuViewModel()) -> SideMenuScreen {
+        let sb = UIStoryboard(name: SideMenuScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: SideMenuScreen.identifier) { coder in
+            SideMenuScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
+    static func mainMapScreen(viewModel: MainMapViewModel = MainMapViewModel()) -> MainMapScreen {
+        let sb = UIStoryboard(name: MainMapScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: MainMapScreen.identifier) { coder in
+            MainMapScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
+    static func setupSideMenu(vc: UIViewController) -> SideMenuNavigationController{
+        let sideMenu = SideMenuNavigationController(rootViewController: vc)
+        sideMenu.presentationStyle = .menuSlideIn
+        sideMenu.presentationStyle.onTopShadowOpacity = 0.5
+        return sideMenu
+    }
     
     static func tasksCalendarScreen(viewModel: TasksCalendarViewModel = TasksCalendarViewModel()) -> TasksCalendarScreen {
         let sb = UIStoryboard(name: TasksCalendarScreen.identifier, bundle: nil)

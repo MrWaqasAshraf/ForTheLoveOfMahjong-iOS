@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */; };
+		7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7763B9EC2E5E052B0083408E /* SideMenu */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */,
 				77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +133,7 @@
 			name = BaseiOSApp;
 			packageProductDependencies = (
 				77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */,
+				7763B9EC2E5E052B0083408E /* SideMenu */,
 			);
 			productName = BaseiOSApp;
 			productReference = 77477D8C2E42374200653F05 /* BaseiOSApp.app */;
@@ -216,6 +219,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				77477DE42E42398D00653F05 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 77477D8D2E42374200653F05 /* Products */;
@@ -590,6 +594,14 @@
 				minimumVersion = 7.0.3;
 			};
 		};
+		7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -597,6 +609,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 77477DE42E42398D00653F05 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		7763B9EC2E5E052B0083408E /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
