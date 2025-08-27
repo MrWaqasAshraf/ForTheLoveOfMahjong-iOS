@@ -1,15 +1,15 @@
 //
-//  FilterEventsScreen.swift
+//  AddEventScreen.swift
 //  BaseiOSApp
 //
-//  Created by Waqas Ashraf on 26/08/2025.
+//  Created by Waqas Ashraf on 27/08/2025.
 //
 
 import UIKit
 
-class FilterEventsScreen: UIViewController {
+class AddEventScreen: UIViewController {
     
-    static let identifier = "FilterEventsScreen"
+    static let identifier = "AddEventScreen"
     
     @IBOutlet weak var eventTypesCollectionView: UICollectionView!
     @IBOutlet weak var eventTypesCollectionViewHeight: NSLayoutConstraint!
@@ -28,6 +28,10 @@ class FilterEventsScreen: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        appNavigationCoordinator.shouldShowNavController(show: true, animted: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,15 +48,31 @@ class FilterEventsScreen: UIViewController {
     
     private func setupUiElements() {
         
+        viewModel.eventTypes.value?.removeAll(where: { $0.eventSlug == .all })
+        viewModel.eventCategories.value?.removeAll(where: { $0.eventCategorySlug == .all })
+        
+        let img = UIImage.arrowLeft.withRenderingMode(.alwaysTemplate)
+        let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(goBack))
+        barBtn.tintColor = .black
+        let titleLbl = ReusableLabelUI.fromNib()
+        titleLbl.titleLbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLbl.titleLbl.text =  "Add Event"
+        titleLbl.titleLbl.textColor = .black
+        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .center, customView: titleLbl)]))
         
         let cellNib = UINib(nibName: CustomOptionCell.identifier, bundle: .main)
         eventTypesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
         eventCategoriesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
     }
     
+    @objc
+    private func goBack() {
+        appNavigationCoordinator.pop()
+    }
+    
 }
 
-extension FilterEventsScreen: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AddEventScreen: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == eventTypesCollectionView {
@@ -95,7 +115,7 @@ extension FilterEventsScreen: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension FilterEventsScreen {
+extension AddEventScreen {
     
     private func bindViewModel() {
         
@@ -114,3 +134,4 @@ extension FilterEventsScreen {
     }
     
 }
+

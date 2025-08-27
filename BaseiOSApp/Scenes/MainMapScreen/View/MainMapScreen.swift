@@ -107,6 +107,13 @@ class MainMapScreen: UIViewController {
         present(sideMenuVc, animated: true)
     }
     
+    //MARK: ButtonActions
+    @IBAction func addBtn(_ sender: Any) {
+        let vc = AppUIViewControllers.addEventScreen()
+        appNavigationCoordinator.pushUIKit(vc)
+    }
+    
+    
 }
 
 extension MainMapScreen {

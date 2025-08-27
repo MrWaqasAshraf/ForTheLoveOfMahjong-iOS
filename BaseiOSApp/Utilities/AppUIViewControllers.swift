@@ -10,7 +10,15 @@ import SideMenu
 
 class AppUIViewControllers {
     
-    static func filterEventsScreen(viewModel: FilterEventsViewModel = FilterEventsViewModel()) -> FilterEventsScreen {
+    static func addEventScreen(viewModel: EventAndFilterViewModel = EventAndFilterViewModel()) -> AddEventScreen {
+        let sb = UIStoryboard(name: AddEventScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: AddEventScreen.identifier) { coder in
+            AddEventScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
+    static func filterEventsScreen(viewModel: EventAndFilterViewModel = EventAndFilterViewModel()) -> FilterEventsScreen {
         let sb = UIStoryboard(name: FilterEventsScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(identifier: FilterEventsScreen.identifier) { coder in
             FilterEventsScreen(coder: coder, viewModel: viewModel)

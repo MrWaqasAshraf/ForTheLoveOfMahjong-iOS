@@ -15,6 +15,7 @@ extension String{
     static let clr_primary_light = "clr_primary_light"
     static let clr_primary_light_fixed = "clr_primary_light_fixed"
     
+    static let clr_blue = "clr_blue"
     static let clr_dark = "clr_dark"
     
     static let clr_violet = "clr_violet"
@@ -55,6 +56,7 @@ extension String{
     static let clr_green_1 = "clr_green_1"
     static let clr_primary_3_dk = "clr_primary_3_dk"
     static let clr_gray_1 = "clr_gray_1"
+    static let clr_gray_3 = "clr_gray_3"
     
     //MARK: Images/Icons
     static let showEyeIcon = "eye"
@@ -142,6 +144,10 @@ extension String{
     static let sample_container_img = "sample_container_img"
     static let start_point_icon = "start_point_icon"
     static let circleFilledIconSystem = "circle.fill"
+    static let groupProfileIconSystem = "person.2.fill"
+    static let docIconSystem = "doc.append.rtl"
+    static let hearIconSystem = "heart.fill"
+    static let moonHalfIconSystem = "moon.fill"
     
 }
 
@@ -152,6 +158,7 @@ extension UIColor{
     static let clr_primary_light = UIColor(named: .clr_primary_light)!
     static let clr_primary_light_fixed = UIColor(named: .clr_primary_light_fixed)!
     
+    static let clr_blue = UIColor(named: .clr_blue)!
     static let clr_dark = UIColor(named: .clr_dark)!
     
     static let clr_violet = UIColor(named: .clr_violet)!
@@ -192,6 +199,7 @@ extension UIColor{
     static let clr_green_1 = UIColor(named: .clr_green_1)!
     static let clr_primary_3_dk = UIColor(named: .clr_primary_3_dk)!
     static let clr_gray_1 = UIColor(named: .clr_gray_1)!
+    static let clr_gray_3 = UIColor(named: .clr_gray_3)!
     
 }
 
@@ -290,6 +298,10 @@ extension UIImage {
     static let sample_container_img = UIImage(named: .sample_container_img)!
     static let start_point_icon = UIImage(named: .start_point_icon)!
     static let circleFilledIconSystem = UIImage(systemName: .circleFilledIconSystem)!
+    static let groupProfileIconSystem = UIImage(systemName: .groupProfileIconSystem)!
+    static let docIconSystem = UIImage(systemName: .docIconSystem)!
+    static let hearIconSystem = UIImage(systemName: .hearIconSystem)!
+    static let moonHalfIconSystem = UIImage(systemName: .moonHalfIconSystem)!
     
 }
 
