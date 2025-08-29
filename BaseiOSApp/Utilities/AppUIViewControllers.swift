@@ -10,6 +10,22 @@ import SideMenu
 
 class AppUIViewControllers {
     
+    static func signUpScreen(viewModel: SignUpViewModel = SignUpViewModel()) -> SignUpScreen {
+        let sb = UIStoryboard(name: SignUpScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: SignUpScreen.identifier) { coder in
+            SignUpScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
+    static func signInScreen(viewModel: SignInViewModel = SignInViewModel()) -> SignInScreen {
+        let sb = UIStoryboard(name: SignInScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: SignInScreen.identifier) { coder in
+            SignInScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
     static func addEventScreen(viewModel: EventAndFilterViewModel = EventAndFilterViewModel()) -> AddEventScreen {
         let sb = UIStoryboard(name: AddEventScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(identifier: AddEventScreen.identifier) { coder in
