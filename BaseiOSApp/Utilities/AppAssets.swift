@@ -57,6 +57,7 @@ extension String{
     static let clr_primary_3_dk = "clr_primary_3_dk"
     static let clr_gray_1 = "clr_gray_1"
     static let clr_gray_3 = "clr_gray_3"
+    static let clr_gray_4 = "clr_gray_4"
     
     //MARK: Images/Icons
     static let showEyeIcon = "eye"
@@ -148,6 +149,8 @@ extension String{
     static let docIconSystem = "doc.append.rtl"
     static let hearIconSystem = "heart.fill"
     static let moonHalfIconSystem = "moon.fill"
+    static let event_detail_image = "detail_image"
+    static let clr_transparent_shade_1 = "clr_transparent_shade_1"
     
 }
 
@@ -200,6 +203,8 @@ extension UIColor{
     static let clr_primary_3_dk = UIColor(named: .clr_primary_3_dk)!
     static let clr_gray_1 = UIColor(named: .clr_gray_1)!
     static let clr_gray_3 = UIColor(named: .clr_gray_3)!
+    static let clr_gray_4 = UIColor(named: .clr_gray_4)!
+    static let clr_transparent_shade_1 = UIColor(named: .clr_transparent_shade_1)!
     
 }
 
@@ -302,6 +307,7 @@ extension UIImage {
     static let docIconSystem = UIImage(systemName: .docIconSystem)!
     static let hearIconSystem = UIImage(systemName: .hearIconSystem)!
     static let moonHalfIconSystem = UIImage(systemName: .moonHalfIconSystem)!
+    static let event_detail_image = UIImage(named: .event_detail_image)!
     
 }
 

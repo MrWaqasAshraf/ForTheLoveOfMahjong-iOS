@@ -68,23 +68,33 @@ extension UIViewController {
     //  @objc private func backButtonTapped() {
     //    navigationController?.popViewController(animated: true)
     //  }
-    func initialSetupforHeader(color: UIColor = .clr_primary){
-        //Add to navigation
-        let navAppearance = UINavigationBarAppearance()
-        navAppearance.configureWithOpaqueBackground()
-        navAppearance.backgroundColor = color
-        navigationController?.navigationBar.isTranslucent = false
-        navAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.standardAppearance = navAppearance
-        navigationController?.navigationBar.scrollEdgeAppearance = navAppearance
-        //navigationController?.navigationBar.tintColor = .black
-        navigationItem.leftBarButtonItem = UIBarButtonItem.init()
-        //    let profile = getprofile()
-        //    navigationItem.rightBarButtonItems = [profile]
-        //    let menu = getmenu()
-        //    navigationItem.leftBarButtonItems = [menu]
+    
+    func initialSetupforHeader(color: UIColor = .clr_primary, revertNavBar: Bool = false){
+        
+        if !revertNavBar {
+            //Add to navigation
+            let navAppearance = UINavigationBarAppearance()
+            navAppearance.configureWithOpaqueBackground()
+            navAppearance.backgroundColor = color
+            navigationController?.navigationBar.isTranslucent = true
+//            navAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.standardAppearance = navAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navAppearance
+        }
+        else {
+            //Add to navigation
+            let navAppearance = UINavigationBarAppearance()
+            navAppearance.configureWithTransparentBackground()
+            navAppearance.backgroundColor = .clear
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.standardAppearance = navAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navAppearance
+            navigationController?.navigationBar.compactAppearance = navAppearance
+        }
+        
     }
+    
 }
 

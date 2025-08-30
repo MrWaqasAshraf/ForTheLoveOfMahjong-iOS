@@ -110,7 +110,8 @@ class MainMapScreen: UIViewController {
     //MARK: ButtonActions
     @IBAction func addBtn(_ sender: Any) {
 //        let vc = AppUIViewControllers.addEventScreen()
-        let vc = AppUIViewControllers.signInScreen()
+//        let vc = AppUIViewControllers.signInScreen()
+        let vc = AppUIViewControllers.eventDetailScreen()
         appNavigationCoordinator.pushUIKit(vc)
     }
     
