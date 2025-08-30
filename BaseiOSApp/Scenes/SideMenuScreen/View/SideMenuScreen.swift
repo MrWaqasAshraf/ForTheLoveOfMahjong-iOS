@@ -59,6 +59,22 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = viewModel.sideMenuOptionsList[indexPath.row]
+        switch data.slug {
+        case .profile:
+            dismiss(animated: true)
+            let vc = AppUIViewControllers.signInScreen()
+            appNavigationCoordinator.pushUIKit(vc)
+        case .events:
+            print("TBD")
+        case .favorite:
+            print("TBD")
+        case .darkMode:
+            print("TBD")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }

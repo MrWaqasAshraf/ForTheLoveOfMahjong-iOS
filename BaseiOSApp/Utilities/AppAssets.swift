@@ -58,6 +58,7 @@ extension String{
     static let clr_gray_1 = "clr_gray_1"
     static let clr_gray_3 = "clr_gray_3"
     static let clr_gray_4 = "clr_gray_4"
+    static let clr_primary_light_4 = "clr_primary_light_4"
     
     //MARK: Images/Icons
     static let showEyeIcon = "eye"
@@ -196,6 +197,7 @@ extension UIColor{
     static let clr_black_dk = UIColor(named: .clr_black_dk)!
     static let clr_black = UIColor(named: .clr_black)!
     static let clr_primary_dark = UIColor(named: .clr_primary_dark)!
+    static let clr_primary_light_4 = UIColor(named: .clr_primary_light_4)!
     
     static let clr_white_purple = UIColor(named: .clr_white_purple)!
     static let clr_whilte_purple_2_dk = UIColor(named: .clr_whilte_purple_2_dk)!
