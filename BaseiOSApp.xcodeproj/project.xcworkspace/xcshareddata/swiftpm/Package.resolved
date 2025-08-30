@@ -1,6 +1,24 @@
 {
-  "originHash" : "8368a23d73a65d679c4830846636437de55e5221e6ca117a2dba9e472608a134",
+  "originHash" : "27383cc3c14899a8632d7b047471bf24e9b63bdba1911a1c8cf72f5a71080e08",
   "pins" : [
+    {
+      "identity" : "ios-maps-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-maps-sdk",
+      "state" : {
+        "revision" : "02f8f144ef266da44d50a68d1562ca051bac27cc",
+        "version" : "9.4.0"
+      }
+    },
+    {
+      "identity" : "ios-places-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-places-sdk",
+      "state" : {
+        "revision" : "f18c63a43ed8399a81e539525983377d63b7b003",
+        "version" : "9.4.1"
+      }
+    },
     {
       "identity" : "iqkeyboardcore",
       "kind" : "remoteSourceControl",

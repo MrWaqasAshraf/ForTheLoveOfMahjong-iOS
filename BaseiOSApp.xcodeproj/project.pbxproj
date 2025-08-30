@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */; };
 		7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7763B9EC2E5E052B0083408E /* SideMenu */; };
+		7797B60E2E63669600D3D5F6 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B60D2E63669600D3D5F6 /* GoogleMaps */; };
+		7797B6112E6367AB00D3D5F6 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B6102E6367AB00D3D5F6 /* GooglePlaces */; };
+		7797B6132E6367AB00D3D5F6 /* GooglePlacesSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B6122E6367AB00D3D5F6 /* GooglePlacesSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +74,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */,
+				7797B6132E6367AB00D3D5F6 /* GooglePlacesSwift in Frameworks */,
+				7797B6112E6367AB00D3D5F6 /* GooglePlaces in Frameworks */,
 				77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */,
+				7797B60E2E63669600D3D5F6 /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +140,9 @@
 			packageProductDependencies = (
 				77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */,
 				7763B9EC2E5E052B0083408E /* SideMenu */,
+				7797B60D2E63669600D3D5F6 /* GoogleMaps */,
+				7797B6102E6367AB00D3D5F6 /* GooglePlaces */,
+				7797B6122E6367AB00D3D5F6 /* GooglePlacesSwift */,
 			);
 			productName = BaseiOSApp;
 			productReference = 77477D8C2E42374200653F05 /* BaseiOSApp.app */;
@@ -220,6 +229,8 @@
 			packageReferences = (
 				77477DE42E42398D00653F05 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */,
+				7797B60C2E63669600D3D5F6 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+				7797B60F2E6367AB00D3D5F6 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 77477D8D2E42374200653F05 /* Products */;
@@ -317,7 +328,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.BaseiOSApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.mahjong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -347,7 +358,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.BaseiOSApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.mahjong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -604,6 +615,22 @@
 				minimumVersion = 6.5.0;
 			};
 		};
+		7797B60C2E63669600D3D5F6 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.4.0;
+			};
+		};
+		7797B60F2E6367AB00D3D5F6 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -616,6 +643,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */;
 			productName = SideMenu;
+		};
+		7797B60D2E63669600D3D5F6 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7797B60C2E63669600D3D5F6 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+		7797B6102E6367AB00D3D5F6 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7797B60F2E6367AB00D3D5F6 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
+		};
+		7797B6122E6367AB00D3D5F6 /* GooglePlacesSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7797B60F2E6367AB00D3D5F6 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlacesSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

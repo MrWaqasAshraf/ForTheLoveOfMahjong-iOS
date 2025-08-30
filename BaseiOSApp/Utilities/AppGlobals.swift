@@ -16,6 +16,17 @@ struct UserCreds: Codable {
 
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
 
+var appMapSettings: MapSettingModel {
+    if let appMapSetting = UserDefaultsHelper.appMapSettings {
+        return appMapSetting
+    }
+    else {
+        let defaultSetting = MapSettingModel(mapStyle: .init(mapType: .defaultType, isSelected: true), enableTraffic: false)
+        return defaultSetting
+    }
+    
+}
+
 var appSelectedLanguage: LangaugeModel? {
     let selectedLanguage = UserDefaultsHelper.appSelectedLanguage
     return selectedLanguage

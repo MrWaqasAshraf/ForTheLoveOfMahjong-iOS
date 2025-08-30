@@ -7,12 +7,26 @@
 
 import UIKit
 import SideMenu
+import GoogleMaps
+import GooglePlaces
+import CoreLocation
 
 class MainMapScreen: UIViewController {
     
     static let identifier = "MainMapScreen"
     
     private var sideMenuVc: SideMenuNavigationController?
+    @IBOutlet weak var googleMapView: UIView!
+    
+    //Google maps
+    private var mapView: GMSMapView?
+    
+    private var fetcher: GMSAutocompleteFetcher?
+    private var placesClient: GMSPlacesClient = GMSPlacesClient()
+    private var googlePlacesSearchController: GMSAutocompleteViewController = GMSAutocompleteViewController()
+    
+    private var workItem: DispatchWorkItem?
+    private let customQueue = DispatchQueue(label:"myOwnQueue")
     
     private var viewModel: MainMapViewModel
     
@@ -31,6 +45,7 @@ class MainMapScreen: UIViewController {
         
         bindViewModel()
         setupUiElements()
+        setupGoogleMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,23 +56,6 @@ class MainMapScreen: UIViewController {
         
         //Setup side menu
         let vc = AppUIViewControllers.sideMenuScreen()
-//        vc.closure = { [weak self] in
-//            DispatchQueue.main.async{
-//                self?.displayLogoutAlert()
-//            }
-//        }
-//        vc.languageClosure = { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.displayLanguageUi()
-//            }
-//        }
-//        vc.navigationClosure = { [weak self] nextVc in
-//            if let nextVc {
-//                DispatchQueue.main.async {
-//                    self?.show(nextVc, sender: self)
-//                }
-//            }
-//        }
         sideMenuVc = AppUIViewControllers.setupSideMenu(vc: vc)
         sideMenuVc?.setNavigationBarHidden(true, animated: true)
         //         sideMenuVc?.menuWidth = view.bounds.width - 50
@@ -73,6 +71,124 @@ class MainMapScreen: UIViewController {
         let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(filterEventsScreen))
         barBtn2.tintColor = .black
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .right, barButtons: [barBtn2])]))
+        
+    }
+    
+    private func setupLocationManager(){
+        
+        //Setup core location
+        appLocationManager.delegate = self
+        appLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        // 2
+        
+        customQueue.async {
+            if CLLocationManager.locationServicesEnabled() {
+                // 3
+                appLocationManager.requestLocation()
+                appLocationManager.startUpdatingLocation()
+            } else {
+                // 5
+                appLocationManager.requestAlwaysAuthorization()
+            }
+        }
+        
+    }
+    
+    private func setupGoogleMap(){
+        
+        //Setup core location
+//        appLocationManager.delegate = self
+        // 2
+        
+        setupLocationManager()
+        
+        guard mapView == nil else { return }
+        
+//        let options = GMSMapViewOptions()
+        var marker: GMSMarker?
+        var cameraPos: GMSCameraPosition = GMSCameraPosition()
+        
+        
+        //31.4732206,74.2695823     //Johar town lat long
+//        if let startPoint = viewModel.startPickUpLocationInfo?.coordinates{
+//            let lat = startPoint.latitude
+//        let long = startPoint.longitude
+//            options.camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 15.0)
+//        }
+//        else{
+            if let myLocation = appLocationManager.location?.coordinate{
+                cameraPos = GMSCameraPosition(latitude: myLocation.latitude, longitude: myLocation.longitude, zoom: 15)
+//                options.camera = cameraPos
+            }
+        else {
+            cameraPos = GMSCameraPosition(latitude: 51.5072, longitude: 0.1276, zoom: 15)
+        }
+//        }
+        
+//        if let endPoint = viewModel.endDropOffLocationInfo?.coordinates {
+//            //Setup end marker
+//            marker = GMSMarker(position: endPoint)
+//            marker?.iconView = CustomMarker.fromNib()
+//        }
+//
+//        if let start = viewModel.startPickUpLocationInfo?.coordinates {
+//            //Setup end marker
+//            marker = GMSMarker(position: start)
+//            let markerIcon = CustomMarker.fromNib()
+//            markerIcon.markerImage.image = .start_location_point_icon
+//            marker?.iconView = markerIcon
+//        }
+        
+//        DispatchQueue.main.async {
+//            options.frame = self.googleMapView.bounds
+//        }
+        
+//        let mapViewInit = GMSMapView(options: options)
+        
+        //Old
+        
+        
+        DispatchQueue.main.async {
+            
+            let options = GMSMapViewOptions()
+            options.camera = cameraPos
+            options.frame = self.googleMapView.bounds
+            
+            let mapViewInit = GMSMapView(options: options)
+            mapViewInit.delegate = self
+            mapViewInit.isMyLocationEnabled = true
+            mapViewInit.settings.myLocationButton = false
+            
+            //For dark mode etc (disabled for now)
+            /*
+             switch appMapSettings.mapStyle.mapType {
+                 
+             case .defaultType:
+                 mapViewInit.mapType = .normal
+             case .terrain:
+                 mapViewInit.mapType = .terrain
+             case .satellite:
+                 mapViewInit.mapType = .satellite
+             }
+             mapViewInit.isTrafficEnabled = appMapSettings.enableTraffic
+             
+             
+             self.setMapTheme(map: mapViewInit)
+             */
+            
+            self.mapView = mapViewInit
+        }
+        
+        DispatchQueue.main.async {
+            marker?.map = self.mapView
+        }
+        
+        DispatchQueue.main.async {
+            self.googleMapView.addSubview(self.mapView!)
+        }
+         
+//        let distance = viewModel.getDistance()
+//        distanceLbl.text = "\(String(format: "%.2f", (distance.0 ?? 0))) \(distance.1)"
         
     }
     
@@ -115,6 +231,63 @@ class MainMapScreen: UIViewController {
         appNavigationCoordinator.pushUIKit(vc)
     }
     
+    
+}
+
+extension MainMapScreen: CLLocationManagerDelegate{
+    
+    func locationManager( _ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // 3
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        // 4
+//        appLocationManager.requestLocation()
+        
+        //5
+//        mapView?.isMyLocationEnabled = true
+//        mapView?.settings.myLocationButton = true
+    }
+    
+    // 6
+    func locationManager( _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        
+//        viewModel.checkIfNearFuelStation(currentLat: location.coordinate.latitude, currentLong: location.coordinate.longitude)
+        
+        
+        // 7
+        /*
+         mapView?.camera = GMSCameraPosition(
+             target: location.coordinate,
+             zoom: 15,
+             bearing: 0,
+             viewingAngle: 0)
+         */
+        
+    }
+    
+    // 8
+    func locationManager( _ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+}
+
+extension MainMapScreen: GMSMapViewDelegate {
+    
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        //For future implementation
+        /*
+         viewModel.getLocationInfo(location: mapView.myLocation) { currentLocation, subLocation in
+             print("Current location: \(currentLocation)")
+         }
+         */
+        
+    }
     
 }
 

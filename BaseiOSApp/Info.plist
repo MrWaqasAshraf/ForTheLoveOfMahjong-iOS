@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This enables us to help you find tournaments near your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This enables us to help you find tournaments near your location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This enables us to help you find tournaments near your location</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

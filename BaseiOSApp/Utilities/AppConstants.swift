@@ -118,7 +118,10 @@ enum GMapKey: String{
 //    case apiKey = "AIzaSyBtQuABE7uPsvBnnkXtCNMt9BpG9hjeDIg"
     
     //For ios only
-    case apiKey = "AIzaSyBWwfvwm1ifgUtjH6rdueP70cqPn49BSDQ"
+//    case apiKey = "AIzaSyBWwfvwm1ifgUtjH6rdueP70cqPn49BSDQ"
+    
+    //For ios only
+    case apiKey = "AIzaSyBWwfvwm1ifgUtjH6rdueP70c"
     
 }
 

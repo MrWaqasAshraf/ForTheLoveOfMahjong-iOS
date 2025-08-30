@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hk6-Z3-wzx">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Dn-0o-Hn7">
                                 <rect key="frame" x="10" y="69" width="373" height="45"/>
                                 <subviews>
@@ -138,15 +142,22 @@
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xVi-XS-hyF" secondAttribute="trailing" constant="10" id="7MG-UE-kfh"/>
                             <constraint firstItem="2Dn-0o-Hn7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="9EM-OU-lD5"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Hk6-Z3-wzx" secondAttribute="bottom" id="Eg5-3y-GmS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xVi-XS-hyF" secondAttribute="bottom" constant="20" id="Vrc-z2-a3Y"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Hk6-Z3-wzx" secondAttribute="trailing" id="ak2-fZ-xER"/>
+                            <constraint firstItem="Hk6-Z3-wzx" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="czs-MX-Jfd"/>
+                            <constraint firstItem="Hk6-Z3-wzx" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="d1R-Sz-GRx"/>
                             <constraint firstItem="2Dn-0o-Hn7" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="exf-QR-LNy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2Dn-0o-Hn7" secondAttribute="trailing" constant="10" id="hca-1f-wz3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="googleMapView" destination="Hk6-Z3-wzx" id="5mV-jn-pPo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="106" y="-2"/>
+            <point key="canvasLocation" x="104.58015267175573" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
