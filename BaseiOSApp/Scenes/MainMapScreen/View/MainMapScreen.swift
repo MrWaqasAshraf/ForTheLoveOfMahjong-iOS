@@ -46,6 +46,10 @@ class MainMapScreen: UIViewController {
         bindViewModel()
         setupUiElements()
         setupGoogleMap()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.addMarkers()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,9 +71,14 @@ class MainMapScreen: UIViewController {
         let img: UIImage = .hamburgerIconSystem.withRenderingMode(.alwaysTemplate)
         let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showSideMenuScreen))
         barBtn.tintColor = .black
-        let img2: UIImage = .defaultPersonImage.withRenderingMode(.alwaysTemplate)
-        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(filterEventsScreen))
-        barBtn2.tintColor = .black
+        // 1. Create a UIButton
+        let customButton = UIButton(type: .custom)
+        let img2: UIImage = .filterRoundIcon.withRenderingMode(.alwaysOriginal)
+        customButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        customButton.setImage(img2, for: .normal)
+        customButton.addTarget(self, action:  #selector(filterEventsScreen), for: .touchUpInside)
+//        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(filterEventsScreen))
+        let barBtn2 = UIBarButtonItem(customView: customButton)
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .right, barButtons: [barBtn2])]))
         
     }
@@ -156,7 +165,7 @@ class MainMapScreen: UIViewController {
             
             let mapViewInit = GMSMapView(options: options)
             mapViewInit.delegate = self
-            mapViewInit.isMyLocationEnabled = true
+            mapViewInit.isMyLocationEnabled = false
             mapViewInit.settings.myLocationButton = false
             
             //For dark mode etc (disabled for now)
@@ -189,6 +198,20 @@ class MainMapScreen: UIViewController {
          
 //        let distance = viewModel.getDistance()
 //        distanceLbl.text = "\(String(format: "%.2f", (distance.0 ?? 0))) \(distance.1)"
+        
+    }
+    
+    private func addMarkers() {
+        
+        var marker: GMSMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276))
+        
+        if let myLocation = appLocationManager.location?.coordinate {
+            marker.position = myLocation
+        }
+        
+        let customIcon = CustomMarker.fromNib()
+        marker.iconView = customIcon
+        marker.map = mapView
         
     }
     
@@ -287,6 +310,14 @@ extension MainMapScreen: GMSMapViewDelegate {
          }
          */
         
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        let vc = AppUIViewControllers.eventDetailScreen()
+        appNavigationCoordinator.pushUIKit(vc)
+        
+        return true
     }
     
 }

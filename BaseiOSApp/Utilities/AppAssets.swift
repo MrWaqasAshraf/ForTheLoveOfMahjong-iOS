@@ -42,6 +42,7 @@ extension String{
     static let clr_light_green = "clr_light_green"
     static let clr_primary_light_2 = "clr_primary_light_2"
     static let clr_red = "clr_red"
+    static let clr_red_2 = "clr_red_2"
     static let clr_pink = "clr_pink"
     static let clr_gold = "clr_gold"
     static let clr_orange = "clr_orange"
@@ -89,6 +90,7 @@ extension String{
     static let map_pin_svg_icon = "map-pin-svg"
     static let plusSystemIcon = "plus"
     static let map_marker_svg_2 = "map_marker_svg_2"
+    static let map_marker_svg_3 = "map_marker_svg_3"
     static let jcb_card_icon = "jcb_card_icon"
     static let discover_card_icon = "discover_card_icon"
     static let diners_club_card_icon = "diners_club_card_icon"
@@ -187,6 +189,7 @@ extension UIColor{
     static let clr_light_green = UIColor(named: .clr_light_green)!
     static let clr_primary_light_2 = UIColor(named: .clr_primary_light_2)!
     static let clr_red = UIColor(named: .clr_red)!
+    static let clr_red_2 = UIColor(named: .clr_red_2)!
     static let clr_pink = UIColor(named: .clr_pink)!
     static let clr_gold = UIColor(named: .clr_gold)!
     static let clr_orange = UIColor(named: .clr_orange)!
@@ -249,6 +252,7 @@ extension UIImage {
     static let map_pin_svg_icon = UIImage(named: .map_pin_svg_icon)!
     static let plusSystemIcon = UIImage(systemName: .plusSystemIcon)!
     static let map_marker_svg_2 = UIImage(named: .map_marker_svg_2)!
+    static let map_marker_svg_3 = UIImage(named: .map_marker_svg_3)!
     static let jcb_card_icon = UIImage(named: .jcb_card_icon)!
     static let discover_card_icon = UIImage(named: .discover_card_icon)!
     static let diners_club_card_icon = UIImage(named: .diners_club_card_icon)!

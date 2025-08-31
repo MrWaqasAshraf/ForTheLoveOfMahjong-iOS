@@ -10,6 +10,7 @@ import UIKit
 class CustomMarker: UIView, NibInstantiatable{
     
     @IBOutlet weak var markerImage: UIImageView!
+    @IBOutlet weak var internalImageIcon: UIImageView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var markerImageLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var markerImageTrailingConstraint: NSLayoutConstraint!
