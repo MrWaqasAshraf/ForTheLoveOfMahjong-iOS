@@ -62,7 +62,6 @@ class MainMapScreen: UIViewController {
         let vc = AppUIViewControllers.sideMenuScreen()
         sideMenuVc = AppUIViewControllers.setupSideMenu(vc: vc)
         sideMenuVc?.setNavigationBarHidden(true, animated: true)
-        //         sideMenuVc?.menuWidth = view.bounds.width - 50
         sideMenuVc?.menuWidth = 280
         SideMenuManager.default.leftMenuNavigationController = sideMenuVc
         SideMenuManager.default.addScreenEdgePanGesturesToPresent(toView: view)
@@ -71,14 +70,18 @@ class MainMapScreen: UIViewController {
         let img: UIImage = .hamburgerIconSystem.withRenderingMode(.alwaysTemplate)
         let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(showSideMenuScreen))
         barBtn.tintColor = .black
+        
+        let img2: UIImage = .filter_round_icon.withRenderingMode(.alwaysOriginal)
+        
         // 1. Create a UIButton
-        let customButton = UIButton(type: .custom)
-        let img2: UIImage = .filterRoundIcon.withRenderingMode(.alwaysOriginal)
-        customButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        customButton.setImage(img2, for: .normal)
-        customButton.addTarget(self, action:  #selector(filterEventsScreen), for: .touchUpInside)
-//        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(filterEventsScreen))
-        let barBtn2 = UIBarButtonItem(customView: customButton)
+//        let customButton = UIButton(type: .custom)
+//        customButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+//        customButton.setImage(img2, for: .normal)
+//        customButton.addTarget(self, action:  #selector(filterEventsScreen), for: .touchUpInside)
+//        let barBtn2 = UIBarButtonItem(customView: customButton)
+        
+        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(filterEventsScreen))
+        
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .right, barButtons: [barBtn2])]))
         
     }

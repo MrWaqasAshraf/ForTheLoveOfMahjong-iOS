@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Photos
+import QuickLookThumbnailing
+import SDWebImage
 
 class AddEventScreen: UIViewController {
     
@@ -15,6 +18,12 @@ class AddEventScreen: UIViewController {
     @IBOutlet weak var eventTypesCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var eventCategoriesCollectionView: UICollectionView!
     @IBOutlet weak var eventCategoriesCollectionViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var uploadImageContainerView: UIView!
+    @IBOutlet weak var selectedImageView: UIImageView!
+    @IBOutlet weak var editImageIcon: UIImageView!
+    
+    private var imagePicker = UIImagePickerController()
     
     private var viewModel: EventAndFilterViewModel
     
@@ -37,6 +46,19 @@ class AddEventScreen: UIViewController {
         
         bindViewModel()
         setupUiElements()
+        setupImagePicker()
+    }
+    
+    private func setupImagePicker() {
+        //remove any image saved locally
+        MahjongFileManager.shared.removeFile(path: TempFileURLs.tournamentImage)
+        
+        let imageUrl = MahjongFileManager.shared.readFile(path: TempFileURLs.tournamentImage)
+        selectedImageView.sd_setImage(with: imageUrl)
+        
+        imagePicker.delegate = self
+//        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)! //For videos
+        imagePicker.allowsEditing = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -67,7 +89,109 @@ class AddEventScreen: UIViewController {
     
     @objc
     private func goBack() {
+        MahjongFileManager.shared.removeFile(path: TempFileURLs.tournamentImage)
         appNavigationCoordinator.pop()
+    }
+    
+    private func generateThumbnailRepresentations(fileUrl: URL) {
+
+        let size: CGSize = CGSize(width: 60, height: 90)
+        let scale = UIScreen.main.scale
+        
+        // Create the thumbnail request.
+        let request = QLThumbnailGenerator.Request(fileAt: fileUrl,
+                                                   size: size,
+                                                   scale: scale,
+                                                   representationTypes: .all)
+        
+        // Retrieve the singleton instance of the thumbnail generator and generate the thumbnails.
+        let generator = QLThumbnailGenerator.shared
+        generator.generateRepresentations(for: request) { [weak self] (thumbnail, type, error) in
+            DispatchQueue.main.async {
+                if thumbnail == nil || error != nil {
+                    // Handle the error case gracefully.
+                    print("Thumbnail error: \(String(describing: error?.localizedDescription))")
+                } else {
+                    // Display the thumbnail that you created.
+                    self?.editImageIcon.isHidden = false
+                    self?.selectedImageView.image = thumbnail?.uiImage
+                }
+            }
+        }
+    }
+    
+    private func openImagePicker(sourceType: UIImagePickerController.SourceType){
+        imagePicker.sourceType = sourceType
+        if UIImagePickerController.isSourceTypeAvailable(sourceType){
+//        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+            print("Button capture")
+            
+            present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    //MARK: ButtonActions
+    @IBAction func uploadImageBtn(_ sender: Any) {
+        PhotoOptionsBottomSheet.showBottomSheet(parentView: view) { [weak self] btnIndex, bottomSheet in
+            if btnIndex == 0{
+                DispatchQueue.main.async {
+                    self?.openImagePicker(sourceType: .camera)
+                }
+            }
+            else if btnIndex == 1{
+                DispatchQueue.main.async {
+                    self?.openImagePicker(sourceType: .savedPhotosAlbum)
+                }
+            }
+            bottomSheet.removeFromSuperview()
+        }
+    }
+    
+    
+}
+
+extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        //Gallery image capture
+        //        if let capturedImageUrl = info[.imageURL] as? URL{
+        //            adImage.sd_setImage(with: capturedImageUrl)
+        //            viewModel.imageUrls = [capturedImageUrl]
+        //        }
+        
+        if let assetUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL{
+            print("Media url: \(assetUrl)")
+        }
+        
+        //Camera image capture
+        if let capturedImage = info[.editedImage] as? UIImage {
+            editImageIcon.isHidden = false
+            selectedImageView.image = capturedImage
+            if let imageData = capturedImage.pngData(){
+                let isSaved: Bool = MahjongFileManager.shared.addfileToLocalFiles(fileData: imageData, fileLocationUrl: TempFileURLs.tournamentImage)
+                if !isSaved{
+                    GenericToast.showToast(message: "Some issue occurred")
+                }
+                if let imageUrl = MahjongFileManager.shared.readFile(path: TempFileURLs.tournamentImage){
+                    viewModel.imageUrls = [imageUrl]
+                    print("Tournament image added: \(String(describing: viewModel.imageUrls))")
+                }
+            }
+        }
+        else if let assetUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            let type = assetUrl.pathExtension           //e.g: MOV
+            generateThumbnailRepresentations(fileUrl: assetUrl)
+            print("video url: \(assetUrl): location url \(assetUrl.absoluteString), type: \(type)")
+            viewModel.imageUrls = [assetUrl]
+        }
+        
+        
+//        uploadImageBTN.setImage(nil, for: .normal)
+//        uploadImageBTN.setTitle("", for: .normal)
+        
+        picker.dismiss(animated: true)
     }
     
 }

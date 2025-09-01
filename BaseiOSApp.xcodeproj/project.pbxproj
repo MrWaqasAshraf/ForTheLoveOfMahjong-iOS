@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77232BD22E65B984004BA384 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 77232BD12E65B984004BA384 /* SDWebImage */; };
+		77232BD42E65B984004BA384 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 77232BD32E65B984004BA384 /* SDWebImageMapKit */; };
 		77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */; };
 		7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 7763B9EC2E5E052B0083408E /* SideMenu */; };
 		7797B60E2E63669600D3D5F6 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B60D2E63669600D3D5F6 /* GoogleMaps */; };
@@ -73,10 +75,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77232BD22E65B984004BA384 /* SDWebImage in Frameworks */,
 				7763B9ED2E5E052B0083408E /* SideMenu in Frameworks */,
 				7797B6132E6367AB00D3D5F6 /* GooglePlacesSwift in Frameworks */,
 				7797B6112E6367AB00D3D5F6 /* GooglePlaces in Frameworks */,
 				77477DE62E42398D00653F05 /* IQKeyboardManagerSwift in Frameworks */,
+				77232BD42E65B984004BA384 /* SDWebImageMapKit in Frameworks */,
 				7797B60E2E63669600D3D5F6 /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +147,8 @@
 				7797B60D2E63669600D3D5F6 /* GoogleMaps */,
 				7797B6102E6367AB00D3D5F6 /* GooglePlaces */,
 				7797B6122E6367AB00D3D5F6 /* GooglePlacesSwift */,
+				77232BD12E65B984004BA384 /* SDWebImage */,
+				77232BD32E65B984004BA384 /* SDWebImageMapKit */,
 			);
 			productName = BaseiOSApp;
 			productReference = 77477D8C2E42374200653F05 /* BaseiOSApp.app */;
@@ -231,6 +237,7 @@
 				7763B9EB2E5E052B0083408E /* XCRemoteSwiftPackageReference "SideMenu" */,
 				7797B60C2E63669600D3D5F6 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				7797B60F2E6367AB00D3D5F6 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				77232BD02E65B984004BA384 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 77477D8D2E42374200653F05 /* Products */;
@@ -599,6 +606,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		77232BD02E65B984004BA384 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.2;
+			};
+		};
 		77477DE42E42398D00653F05 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -634,6 +649,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		77232BD12E65B984004BA384 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77232BD02E65B984004BA384 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		77232BD32E65B984004BA384 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77232BD02E65B984004BA384 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
 		77477DE52E42398D00653F05 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 77477DE42E42398D00653F05 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;

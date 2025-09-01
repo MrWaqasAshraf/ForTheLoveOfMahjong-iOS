@@ -154,6 +154,7 @@ extension String{
     static let moonHalfIconSystem = "moon.fill"
     static let event_detail_image = "detail_image"
     static let clr_transparent_shade_1 = "clr_transparent_shade_1"
+    static let filter_round_icon = "filter_round_icon"
     
 }
 
@@ -279,6 +280,7 @@ extension UIImage {
     static let hamburgerIconSystem = UIImage(systemName: .hamburgerIconSystem)!
     static let route_icon_clrBg_svg = UIImage(named: .route_icon_clrBg_svg)!
     static let app_logo_horizontal = UIImage(named: .app_logo_horizontal)!
+    static let filter_round_icon = UIImage(named: .filter_round_icon)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!

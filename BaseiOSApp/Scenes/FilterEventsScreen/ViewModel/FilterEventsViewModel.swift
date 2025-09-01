@@ -41,6 +41,10 @@ class EventAndFilterViewModel {
                                                              .init(title: "Riichi", eventCategorySlug: .richi),
                                                              .init(title: "Wright Petterson", eventCategorySlug: .wrightpetterson)])
     
+    //For Api integration
+    var imageUrls: [URL]?
+    
+    
     func shouldSelectEventType(indexPath: IndexPath) {
         var mutable = eventTypes.value
         for (index, item) in (mutable ?? []).enumerated() {

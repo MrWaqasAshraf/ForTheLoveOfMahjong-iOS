@@ -1,5 +1,5 @@
 {
-  "originHash" : "27383cc3c14899a8632d7b047471bf24e9b63bdba1911a1c8cf72f5a71080e08",
+  "originHash" : "c0ace693762e66720f4f767201e0bbd6dd58d65783bb15d281e7ad44f62d8449",
   "pins" : [
     {
       "identity" : "ios-maps-sdk",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "4347f8eb6bf8880014606684105e447229cc29ea",
         "version" : "1.0.8"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
+        "version" : "5.21.2"
       }
     },
     {

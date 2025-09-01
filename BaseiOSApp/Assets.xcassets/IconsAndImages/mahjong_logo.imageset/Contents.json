@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "filter_riund_small 2.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "filter_riund_small 1.svg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "filter_riund_small.svg",
+      "filename" : "mahjong_logo.svg",
       "idiom" : "universal",
       "scale" : "3x"
     }
