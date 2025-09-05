@@ -7,6 +7,18 @@
 
 import Foundation
 
+// MARK: - GeneralResponse
+struct GeneralResponse: Codable {
+    let status: Int?
+    let message: String?
+}
+
+// MARK: - UserResponse
+struct UserResponse: Codable {
+    let status: Int?
+    let message: String?
+//    var data: UserData?
+}
 
 // MARK: - StaffListResponse
 struct StaffListResponse: Codable {

@@ -31,15 +31,24 @@ class BaseUrlAndEndpointMaker {
 
 enum EndPoint: String {
     
-    case loginApi = "login"
+    case loginApi = "/auth/login"
+    case signUpApi = "/auth/signup"
+    case dashboardApi = "/dashboard/events"
+    case createEventApi = "/events/add"
+    case editEventApi = "events/edit"
+    // /events/edit/21    -> 12 is event id
     
-    case dashboardApi = "/attendace_svc/pb/employee-detail/dashboard/"
+    
+    //Test apis
+    case dashboardTestApi = "/attendace_svc/pb/employee-detail/dashboard/"
     case businessEndpointApi = "/business_svc/pv/business/"
     
     case staffListApi = "/staff_svc/pv/staff/getStaffsByBussinessId"
     //?id=423&pageNo=1&pageSize=25
     case staffByUserAndBusinessId = "/staff_svc/pv/staff/getStaffsByUserAndBusinessId"
     //?userId=574&businessId=423
+    
+    
   
 }
 

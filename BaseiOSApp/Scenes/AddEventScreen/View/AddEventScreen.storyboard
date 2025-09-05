@@ -43,6 +43,9 @@
                                                         <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="addEventBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="skf-57-Yfx"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -185,7 +188,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPm-jK-QV4">
                                                 <rect key="frame" x="0.0" y="492" width="361" height="200"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwA-GI-UPl">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select multiple date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwA-GI-UPl">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="200"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                         <nil key="textColor"/>
@@ -203,16 +206,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPb-rP-g4n">
                                                 <rect key="frame" x="0.0" y="700" width="361" height="87"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XPD-rG-fxP">
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edit_green_icon" translatesAutoresizingMaskIntoConstraints="NO" id="XPD-rG-fxP">
                                                         <rect key="frame" x="327" y="31.666666666666629" width="24" height="24"/>
+                                                        <color key="tintColor" name="clr_primary_light_fixed"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="0lM-vm-H2d"/>
                                                             <constraint firstAttribute="height" constant="24" id="1OX-02-vDL"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZ6-GA-Y9B">
-                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="87"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="87"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="selectEventDatesBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PW2-KM-rTN"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select date" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-xd-Qis">
                                                         <rect key="frame" x="16" y="10" width="295" height="67"/>
@@ -220,13 +227,20 @@
                                                         <color key="textColor" name="clr_gray_dk"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKk-9d-xwE">
+                                                        <rect key="frame" x="311" y="0.0" width="50" height="87"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" name="clr_gray_3"/>
                                                 <constraints>
                                                     <constraint firstItem="XPD-rG-fxP" firstAttribute="centerY" secondItem="vPb-rP-g4n" secondAttribute="centerY" id="3Kb-bn-DwS"/>
-                                                    <constraint firstAttribute="trailing" secondItem="fZ6-GA-Y9B" secondAttribute="trailing" id="8Dt-Ga-AbI"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jKk-9d-xwE" secondAttribute="bottom" id="5bq-Xi-xAa"/>
+                                                    <constraint firstItem="jKk-9d-xwE" firstAttribute="leading" secondItem="fZ6-GA-Y9B" secondAttribute="trailing" id="8Dt-Ga-AbI"/>
                                                     <constraint firstAttribute="bottom" secondItem="fZ6-GA-Y9B" secondAttribute="bottom" id="B8V-BR-sN9"/>
                                                     <constraint firstAttribute="bottom" secondItem="tuO-xd-Qis" secondAttribute="bottom" constant="10" id="HCP-t9-SgO"/>
+                                                    <constraint firstItem="jKk-9d-xwE" firstAttribute="leading" secondItem="tuO-xd-Qis" secondAttribute="trailing" id="RGe-p5-F3g"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jKk-9d-xwE" secondAttribute="trailing" id="UU1-1P-Jbm"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ZZn-wV-to7"/>
                                                     <constraint firstItem="tuO-xd-Qis" firstAttribute="top" secondItem="vPb-rP-g4n" secondAttribute="top" constant="10" id="aKl-Y1-kes"/>
                                                     <constraint firstItem="fZ6-GA-Y9B" firstAttribute="leading" secondItem="vPb-rP-g4n" secondAttribute="leading" id="c9f-HJ-CL9"/>
@@ -234,6 +248,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="XPD-rG-fxP" secondAttribute="trailing" constant="10" id="gLI-mp-EEx"/>
                                                     <constraint firstItem="fZ6-GA-Y9B" firstAttribute="top" secondItem="vPb-rP-g4n" secondAttribute="top" id="mZq-UX-vv1"/>
                                                     <constraint firstItem="XPD-rG-fxP" firstAttribute="leading" secondItem="tuO-xd-Qis" secondAttribute="trailing" constant="16" id="qBM-sq-2dX"/>
+                                                    <constraint firstItem="jKk-9d-xwE" firstAttribute="top" secondItem="vPb-rP-g4n" secondAttribute="top" id="sgI-Lc-Miq"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -654,11 +669,19 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addressField" destination="T5x-Iu-I8C" id="sjY-9V-4ZV"/>
+                        <outlet property="contactField" destination="sT2-db-NSl" id="NEg-dc-7uh"/>
+                        <outlet property="descriptionField" destination="dWg-T6-V9f" id="pWG-ai-adr"/>
+                        <outlet property="editDatesIcon" destination="XPD-rG-fxP" id="4sz-3x-bwS"/>
                         <outlet property="editImageIcon" destination="XJf-P2-wKK" id="gTC-P8-vYW"/>
                         <outlet property="eventCategoriesCollectionView" destination="45R-Ki-Knd" id="ckb-6b-U57"/>
                         <outlet property="eventCategoriesCollectionViewHeight" destination="R8l-0u-XCe" id="bRm-pI-Z2U"/>
+                        <outlet property="eventNameField" destination="K3J-32-zNo" id="zI7-v7-sqi"/>
                         <outlet property="eventTypesCollectionView" destination="vUb-p4-ehR" id="dwu-cc-hWy"/>
                         <outlet property="eventTypesCollectionViewHeight" destination="1Hn-s4-2R5" id="yOQ-ES-kIg"/>
+                        <outlet property="locationNameField" destination="YMi-jl-2jD" id="ctV-Iu-wZB"/>
+                        <outlet property="selectDateTitleLbl" destination="RwA-GI-UPl" id="DtF-ih-G1Y"/>
+                        <outlet property="selectedDatesLbl" destination="tuO-xd-Qis" id="tRi-6S-ceC"/>
                         <outlet property="selectedImageView" destination="ZJx-SK-AMY" id="JqM-a2-uxz"/>
                         <outlet property="uploadImageContainerView" destination="Ihc-kU-O4Z" id="tkN-BP-nDh"/>
                     </connections>
@@ -684,6 +707,9 @@
             <color red="0.27843137254901962" green="0.45490196078431372" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="clr_primary_light">
+            <color red="0.55294117647058827" green="0.6588235294117647" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="clr_primary_light_fixed">
             <color red="0.55294117647058827" green="0.6588235294117647" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">

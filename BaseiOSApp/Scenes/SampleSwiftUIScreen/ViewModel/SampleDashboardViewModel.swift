@@ -62,7 +62,7 @@ class SampleDashboardViewModel: ObservableObject {
         $dashboardResponseV2.eraseToAnyPublisher()
     }
     
-    init(selectedEmpoloyeeId: Int? = nil, businessId: Int? = 456, businessName: String? = "", dateFilter: String? = nil, selectedDateFilter: Date? = nil, businessInfoService: any ServicesDelegate = BusinessInfoService(), dashboardService: any ServicesDelegate = DashboardService(), staffListService: any ServicesDelegate = StaffListService()) {
+    init(selectedEmpoloyeeId: Int? = nil, businessId: Int? = 456, businessName: String? = "", dateFilter: String? = nil, selectedDateFilter: Date? = nil, businessInfoService: any ServicesDelegate = BusinessInfoService(), dashboardService: any ServicesDelegate = DashboardTestService(), staffListService: any ServicesDelegate = StaffListService()) {
         self.selectedEmpoloyeeId = selectedEmpoloyeeId
         self.selectedBusiness.value = BusinessInfoModel(businessId: businessId, businessName: businessName)
         self.dateFilter = dateFilter

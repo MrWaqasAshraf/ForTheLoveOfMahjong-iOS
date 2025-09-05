@@ -11,6 +11,9 @@ class SignInScreen: UIViewController {
     
     static let identifier = "SignInScreen"
     
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     private var viewModel: SignInViewModel
     
     init?(coder: NSCoder, viewModel: SignInViewModel) {
@@ -47,14 +50,34 @@ class SignInScreen: UIViewController {
     
     //MARK: ButtonAction
     @IBAction func signUpBtn(_ sender: Any) {
+        
         let vc = AppUIViewControllers.signUpScreen()
         appNavigationCoordinator.pushUIKit(vc)
+        
+        
+        let isEmpty = (emailField.text?.isEmpty ?? true) && (passwordField.text?.isEmpty ?? true)
+        if isEmpty {
+            GenericToast.showToast(message: "Email/Password required for login")
+        }
+        else {
+            print("Valid")
+            viewModel.loginApi(email: emailField.text, password: passwordField.text)
+        }
+        
     }
     
     
 }
 
 extension SignInScreen {
-    private func bindViewModel() {}
+    
+    private func bindViewModel() {
+        
+        viewModel.loginResponse.bind { response in
+            ActivityIndicator.shared.removeActivityIndicator()
+        }
+        
+    }
+    
 }
 

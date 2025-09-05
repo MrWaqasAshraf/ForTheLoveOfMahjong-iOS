@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DashboardService: ServicesDelegate {
+class DashboardTestService: ServicesDelegate {
     
     func dashboardApi(businessId: Int?, pageNo: Int?, pageSize: Int?, dateFilter: String?, completion: @escaping (Result<(DashboardResponse?, [String: Any], Int?), Error>) -> ()) {
         //AttendanceListResponse
@@ -34,10 +34,10 @@ class DashboardService: ServicesDelegate {
 //        let encString = appSecurityManager.aesEncrypt(text: queryParameters)
 //        let encParams = QueryParamMaker.makeEncryptedQueryParamString(paramString: encString?.convertToCleanEncrptedString())
         
-        getResponse(.get, endPoint: EndPoint.dashboardApi.rawValue + query, completion: completion)
+        getResponse(.get, endPoint: EndPoint.dashboardTestApi.rawValue + query, completion: completion)
     }
     
-    func getResponse(_ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(DashboardResponse?, [String: Any], Int?), Error>) -> ()) {
+    func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(DashboardResponse?, [String: Any], Int?), Error>) -> ()) {
         API.shared.api(type: type, ignoreBaseUrl: ignoreBaseUrl, endpoint: endPoint, parameters: parameters, customHeaders: customHeaders, isMultiPartData: isMultiPartData, rawData: rawData, files: files, expecting: DashboardResponse.self) { result in
             switch result {
             case .success((let data, let json, let resp)):
@@ -136,7 +136,7 @@ class StaffListService: ServicesDelegate {
         getResponse(.get, endPoint: endPoint, completion: completion)
     }
     
-    func getResponse(_ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(StaffListResponse?, [String: Any], Int?), Error>) -> ()) {
+    func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(StaffListResponse?, [String: Any], Int?), Error>) -> ()) {
         API.shared.api(type: type, ignoreBaseUrl: ignoreBaseUrl, endpoint: endPoint, parameters: parameters, customHeaders: customHeaders, isMultiPartData: isMultiPartData, rawData: rawData, files: files, expecting: EncryptionResponse.self) { result in
             switch result {
             case .success((let data, let json, let resp)):

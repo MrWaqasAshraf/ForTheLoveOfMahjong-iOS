@@ -46,6 +46,7 @@ class MainMapScreen: UIViewController {
         bindViewModel()
         setupUiElements()
         setupGoogleMap()
+        callApis()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.addMarkers()
@@ -54,6 +55,11 @@ class MainMapScreen: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         appNavigationCoordinator.shouldShowNavController(show: true, animted: false)
+    }
+    
+    private func callApis() {
+//        ActivityIndicator.shared.showActivityIndicator(view: view)
+        viewModel.dashboardApi()
     }
     
     private func setupUiElements() {
@@ -251,7 +257,7 @@ class MainMapScreen: UIViewController {
     
     //MARK: ButtonActions
     @IBAction func addBtn(_ sender: Any) {
-        let vc = AppUIViewControllers.addEventScreen()
+        let vc = AppUIViewControllers.addEventScreen(viewModel: EventAndFilterViewModel(preSelectTypeAndCategory: true))
 //        let vc = AppUIViewControllers.signInScreen()
 //        let vc = AppUIViewControllers.eventDetailScreen()
         appNavigationCoordinator.pushUIKit(vc)
@@ -328,6 +334,10 @@ extension MainMapScreen: GMSMapViewDelegate {
 extension MainMapScreen {
     
     private func bindViewModel() {
+        
+        viewModel.dashboardResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+        }
         
     }
     

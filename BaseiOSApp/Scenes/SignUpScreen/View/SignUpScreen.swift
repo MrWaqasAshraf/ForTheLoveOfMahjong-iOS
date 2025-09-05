@@ -11,6 +11,12 @@ class SignUpScreen: UIViewController {
     
     static let identifier = "SignUpScreen"
     
+    @IBOutlet weak var firstNameField: UITextField!
+    @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var confirmPasswordField: UITextField!
+    
     private var viewModel: SignUpViewModel
     
     init?(coder: NSCoder, viewModel: SignUpViewModel) {
@@ -45,10 +51,28 @@ class SignUpScreen: UIViewController {
         appNavigationCoordinator.pop()
     }
     
+    @IBAction func signUpBtn(_ sender: Any) {
+        let createAndValidateSignUpPayload = viewModel.createSignInPayload(firstName: firstNameField.text, lastName: lastNameField.text, email: emailField.text, password: passwordField.text, confirmPassword: confirmPasswordField.text)
+        if createAndValidateSignUpPayload.0 {
+            print("Valid")
+//            ActivityIndicator.shared.showActivityIndicator(view: view)
+            viewModel.signUpApi(parameters: createAndValidateSignUpPayload.2)
+        }
+        else {
+            GenericToast.showToast(message: createAndValidateSignUpPayload.1 ?? "")
+        }
+    }
+    
 }
 
 extension SignUpScreen {
-    private func bindViewModel() {}
+    private func bindViewModel() {
+        
+        viewModel.signUpResponse.bind { response in
+            ActivityIndicator.shared.removeActivityIndicator()
+        }
+        
+    }
 }
 
 

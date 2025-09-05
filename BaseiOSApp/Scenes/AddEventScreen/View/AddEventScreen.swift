@@ -19,9 +19,17 @@ class AddEventScreen: UIViewController {
     @IBOutlet weak var eventCategoriesCollectionView: UICollectionView!
     @IBOutlet weak var eventCategoriesCollectionViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var eventNameField: UITextField!
+    @IBOutlet weak var addressField: UITextField!
+    @IBOutlet weak var contactField: UITextField!
+    @IBOutlet weak var descriptionField: UITextField!
+    @IBOutlet weak var locationNameField: UITextField!
     @IBOutlet weak var uploadImageContainerView: UIView!
     @IBOutlet weak var selectedImageView: UIImageView!
     @IBOutlet weak var editImageIcon: UIImageView!
+    @IBOutlet weak var selectedDatesLbl: UILabel!
+    @IBOutlet weak var editDatesIcon: UIImageView!
+    @IBOutlet weak var selectDateTitleLbl: UILabel!
     
     private var imagePicker = UIImagePickerController()
     
@@ -131,6 +139,43 @@ class AddEventScreen: UIViewController {
         
     }
     
+    private func mapSelectedDates() {
+        let selectedDates = viewModel.compileSelectedDatesForLabel()
+        selectedDatesLbl.text = selectedDates
+        if selectedDates.isEmpty {
+            selectedDatesLbl.text = "Select date"
+            selectedDatesLbl.textColor = .clr_gray_dk
+            editDatesIcon.isHidden = true
+        }
+        else {
+            selectedDatesLbl.textColor = .label
+            editDatesIcon.isHidden = false
+        }
+    }
+    
+    private func setupEventTypeViews(eventType: EventOptionSlug) {
+        switch eventType {
+        case .all, .noneOption:
+            print("Do nothing")
+        case .tournament:
+            print("tournament")
+            selectDateTitleLbl.text = "Select multiple dates"
+        case .game:
+            print("game")
+            selectedDatesLbl.text = "Select date"
+        }
+    }
+    
+    private func addSelectedDates(date: SelectedEventDateTime) {
+        let eventType = viewModel.selectedEventType.value
+        if eventType?.eventSlug == .tournament {
+            viewModel.selectedEventDates.value?.append(date)
+        }
+        else if eventType?.eventSlug == .game {
+            viewModel.selectedEventDates.value = [date]
+        }
+    }
+    
     //MARK: ButtonActions
     @IBAction func uploadImageBtn(_ sender: Any) {
         PhotoOptionsBottomSheet.showBottomSheet(parentView: view) { [weak self] btnIndex, bottomSheet in
@@ -148,6 +193,29 @@ class AddEventScreen: UIViewController {
         }
     }
     
+    @IBAction func selectEventDatesBtn(_ sender: Any) {
+        DatePickerUI.addPickerView(parentView: view, datePickerMode: .dateAndTime, minimumTime: .now) { [weak self] pickerUi, btnIndex, selectedDateInStr, selectedDateInDate in
+            if let selectedDateInDate {
+                print("Selected date: \(selectedDateInDate)")
+                print("Selecte time: \(selectedDateInDate.convertToDateString(dateFormat: "HH:mm:ss"))")
+                self?.viewModel.addSelectedDates(date: SelectedEventDateTime(dateTime: selectedDateInDate))
+            }
+            DispatchQueue.main.async {
+                pickerUi.removeFromSuperview()
+            }
+        }
+    }
+    
+    @IBAction func addEventBtn(_ sender: Any) {
+        let createAndValidatePayload = viewModel.createAndValidatePayload(name: eventNameField.text, locationName: locationNameField.text, address: addressField.text, contact: contactField.text, description: descriptionField.text ?? "")
+        if createAndValidatePayload.0 {
+//            ActivityIndicator.shared.showActivityIndicator(view: view)
+            viewModel.createMahjonEventApi(parameters: createAndValidatePayload.2)
+        }
+        else {
+            GenericToast.showToast(message: createAndValidatePayload.1 ?? "")
+        }
+    }
     
 }
 
@@ -243,6 +311,11 @@ extension AddEventScreen {
     
     private func bindViewModel() {
         
+        viewModel.manageEventResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+        }
+        
         viewModel.eventTypes.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.eventTypesCollectionView.reloadData()
@@ -252,6 +325,19 @@ extension AddEventScreen {
         viewModel.eventCategories.bind { [weak self] _ in
             DispatchQueue.main.async {
                 self?.eventCategoriesCollectionView.reloadData()
+            }
+        }
+        
+        viewModel.selectedEventType.bind { [weak self] selectedEventType in
+            guard let selectedEventType, let slug = selectedEventType.eventSlug else { return }
+            DispatchQueue.main.async {
+                self?.setupEventTypeViews(eventType: slug)
+            }
+        }
+        
+        viewModel.selectedEventDates.bind { [weak self] selectedDates in
+            DispatchQueue.main.async {
+                self?.mapSelectedDates()
             }
         }
         

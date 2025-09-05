@@ -24,6 +24,14 @@ extension UINavigationController {
     
 }
 
+extension Collection where Element: Equatable {
+
+    func whatFunction(_ value :  Element) -> [Index] {
+        return self.indices.filter {self[$0] == value}
+    }
+
+}
+
 extension Date {
     
     var startOfWeek: Date? {

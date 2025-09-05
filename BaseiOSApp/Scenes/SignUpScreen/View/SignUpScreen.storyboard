@@ -320,6 +320,9 @@
                                                                                 <real key="value" value="20"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="signUpBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rwp-vn-uMa"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -479,6 +482,13 @@
                             <constraint firstItem="1gg-JQ-DYL" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="hMN-Oi-7RE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="confirmPasswordField" destination="iPQ-0r-Yop" id="tGH-Fv-Aaa"/>
+                        <outlet property="emailField" destination="4LO-pR-Cx2" id="9io-cg-Hsc"/>
+                        <outlet property="firstNameField" destination="xRM-so-4CL" id="Cfs-fx-TXA"/>
+                        <outlet property="lastNameField" destination="nvQ-L1-XQ5" id="yRl-eV-i0s"/>
+                        <outlet property="passwordField" destination="QMK-59-uUY" id="NGn-pF-LwD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -507,7 +517,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
