@@ -10,6 +10,20 @@ import SideMenu
 
 class AppUIViewControllers {
     
+    static func selectEventLocationScreen() -> SelectEventLocationScreen {
+        let sb = UIStoryboard(name: SelectEventLocationScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SelectEventLocationScreen.identifier) as! SelectEventLocationScreen
+        return vc
+    }
+    
+    static func editDatesScreen(viewModel: EditDatesViewModel = EditDatesViewModel()) -> EditDatesScreen {
+        let sb = UIStoryboard(name: EditDatesScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: EditDatesScreen.identifier) { coder in
+            EditDatesScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
     static func eventDetailScreen(viewModel: EvenDetailViewModel = EvenDetailViewModel()) -> EventDetailScreen {
         let sb = UIStoryboard(name: EventDetailScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(identifier: EventDetailScreen.identifier) { coder in

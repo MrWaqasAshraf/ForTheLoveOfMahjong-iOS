@@ -371,3 +371,11 @@ extension CLLocation {
         self.init(latitude: coordinate2D.latitude, longitude: coordinate2D.longitude)
     }
 }
+
+extension CLLocationCoordinate2D {
+    
+    var toCLLocation: CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+}

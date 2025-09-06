@@ -176,7 +176,29 @@ class AddEventScreen: UIViewController {
         }
     }
     
+    private func showEditDatesScreen(){
+        let vc = AppUIViewControllers.editDatesScreen(viewModel: EditDatesViewModel(selectedDates: viewModel.selectedEventDates.value ?? []))
+        vc.modalPresentationStyle = .pageSheet
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+        }
+        vc.closure = { [weak self] dates in
+            self?.viewModel.selectedEventDates.value = dates
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
     //MARK: ButtonActions
+    @IBAction func selectAddressBtn(_ sender: Any) {
+        let vc = AppUIViewControllers.selectEventLocationScreen()
+        vc.closure = { [weak self] selectedAddress, fullAddress, coordinates in
+            DispatchQueue.main.async {
+                self?.addressField.text = fullAddress
+            }
+        }
+        appNavigationCoordinator.pushUIKit(vc)
+    }
+    
     @IBAction func uploadImageBtn(_ sender: Any) {
         PhotoOptionsBottomSheet.showBottomSheet(parentView: view) { [weak self] btnIndex, bottomSheet in
             if btnIndex == 0{
@@ -216,6 +238,13 @@ class AddEventScreen: UIViewController {
             GenericToast.showToast(message: createAndValidatePayload.1 ?? "")
         }
     }
+    
+    @IBAction func editDatesBtn(_ sender: Any) {
+        if let selectedEventDates = viewModel.selectedEventDates.value, !selectedEventDates.isEmpty {
+            showEditDatesScreen()
+        }
+    }
+    
     
 }
 

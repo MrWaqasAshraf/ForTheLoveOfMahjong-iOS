@@ -230,6 +230,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKk-9d-xwE">
                                                         <rect key="frame" x="311" y="0.0" width="50" height="87"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="editDatesBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="x1F-ef-zxa"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" name="clr_gray_3"/>
@@ -392,34 +395,38 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGQ-5i-fq8">
                                                 <rect key="frame" x="0.0" y="1495" width="361" height="40"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T5x-Iu-I8C">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select event address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T5x-Iu-I8C">
                                                         <rect key="frame" x="16" y="0.0" width="295" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                     </textField>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hmr-4W-XCu">
-                                                        <rect key="frame" x="327" y="8" width="24" height="24"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hmr-4W-XCu">
+                                                        <rect key="frame" x="327" y="8.9999999999999964" width="24" height="22.333333333333329"/>
+                                                        <color key="tintColor" name="clr_primary_light"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="nAC-pk-RG7"/>
                                                             <constraint firstAttribute="height" constant="24" id="nnT-ec-39y"/>
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YAF-xF-bX1">
-                                                        <rect key="frame" x="311" y="0.0" width="50" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="selectAddressBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ltV-Ck-0id"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" name="clr_gray_3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="3Ek-8C-GoY"/>
                                                     <constraint firstItem="T5x-Iu-I8C" firstAttribute="leading" secondItem="JGQ-5i-fq8" secondAttribute="leading" constant="16" id="Bu1-r6-JiV"/>
-                                                    <constraint firstItem="YAF-xF-bX1" firstAttribute="leading" secondItem="T5x-Iu-I8C" secondAttribute="trailing" id="KfK-Uc-Zax"/>
                                                     <constraint firstItem="hmr-4W-XCu" firstAttribute="centerY" secondItem="JGQ-5i-fq8" secondAttribute="centerY" id="LF6-0v-ro3"/>
                                                     <constraint firstItem="YAF-xF-bX1" firstAttribute="top" secondItem="JGQ-5i-fq8" secondAttribute="top" id="T90-DE-jOB"/>
                                                     <constraint firstAttribute="trailing" secondItem="hmr-4W-XCu" secondAttribute="trailing" constant="10" id="VPI-ZY-7I4"/>
                                                     <constraint firstAttribute="bottom" secondItem="T5x-Iu-I8C" secondAttribute="bottom" id="b2A-wE-Iet"/>
                                                     <constraint firstItem="hmr-4W-XCu" firstAttribute="leading" secondItem="T5x-Iu-I8C" secondAttribute="trailing" constant="16" id="bGd-cX-q6o"/>
                                                     <constraint firstItem="T5x-Iu-I8C" firstAttribute="top" secondItem="JGQ-5i-fq8" secondAttribute="top" id="dGi-Es-rxG"/>
+                                                    <constraint firstItem="YAF-xF-bX1" firstAttribute="leading" secondItem="JGQ-5i-fq8" secondAttribute="leading" id="dpv-ya-YQ6"/>
                                                     <constraint firstAttribute="bottom" secondItem="YAF-xF-bX1" secondAttribute="bottom" id="izC-Iw-YFG"/>
                                                     <constraint firstAttribute="trailing" secondItem="YAF-xF-bX1" secondAttribute="trailing" id="vZf-0o-1h3"/>
                                                 </constraints>
@@ -694,6 +701,7 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="93"/>
         <image name="edit_green_icon" width="30" height="30"/>
+        <image name="map" catalog="system" width="128" height="112"/>
         <namedColor name="clr_blue">
             <color red="0.094117648899555206" green="0.21568629145622253" blue="0.39607840776443481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

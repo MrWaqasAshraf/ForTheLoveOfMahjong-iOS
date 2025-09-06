@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit Dates Screen-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="EditDatesScreen" id="Y6W-OH-hqX" customClass="EditDatesScreen" customModule="BaseiOSApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="393" placeholderIntrinsicHeight="70" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZHX-Qj-nQ9">
+                                <rect key="frame" x="0.0" y="59" width="393" height="70"/>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jwa-hP-JUA">
+                                <rect key="frame" x="0.0" y="129" width="393" height="689"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="sGv-E8-qGC"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="cAk-rb-Arc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jwa-hP-JUA" secondAttribute="trailing" id="FyF-iW-p4d"/>
+                            <constraint firstItem="ZHX-Qj-nQ9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="JdB-PD-rqJ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ZHX-Qj-nQ9" secondAttribute="trailing" id="Jpw-c4-8dX"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jwa-hP-JUA" secondAttribute="bottom" id="Klo-Dg-8wa"/>
+                            <constraint firstItem="ZHX-Qj-nQ9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ydh-aP-xmV"/>
+                            <constraint firstItem="jwa-hP-JUA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="fLg-2B-t2p"/>
+                            <constraint firstItem="jwa-hP-JUA" firstAttribute="top" secondItem="ZHX-Qj-nQ9" secondAttribute="bottom" id="tY3-qb-ZXl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="eventDatesTableView" destination="jwa-hP-JUA" id="vbm-VV-kQD"/>
+                        <outlet property="navigationBar" destination="ZHX-Qj-nQ9" id="UVB-aV-L9S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

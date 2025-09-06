@@ -59,7 +59,7 @@ class MainMapScreen: UIViewController {
     
     private func callApis() {
 //        ActivityIndicator.shared.showActivityIndicator(view: view)
-        viewModel.dashboardApi()
+//        viewModel.dashboardApi()
     }
     
     private func setupUiElements() {

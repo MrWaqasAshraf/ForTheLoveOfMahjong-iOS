@@ -15,6 +15,7 @@ struct UserCreds: Codable {
 }
 
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
+var locationService: AppLocationService = AppLocationService()
 
 var appMapSettings: MapSettingModel {
     if let appMapSetting = UserDefaultsHelper.appMapSettings {
