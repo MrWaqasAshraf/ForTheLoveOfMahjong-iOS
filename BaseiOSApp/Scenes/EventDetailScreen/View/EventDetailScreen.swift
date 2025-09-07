@@ -17,6 +17,7 @@ class EventDetailScreen: UIViewController {
     @IBOutlet weak var eventLocationNameLbl: UILabel!
     @IBOutlet weak var contactLbl: UILabel!
     @IBOutlet weak var eventDescriptionLbl: UILabel!
+    @IBOutlet weak var datesStackView: UIStackView!
     
     private var viewModel: EvenDetailViewModel
     
@@ -59,6 +60,37 @@ class EventDetailScreen: UIViewController {
         
 //        initialSetupforHeader(color: .clr_transparent_shade_1)
         
+        mapEventDetailData(data: viewModel.eventDetail.value)
+        
+    }
+    
+    private func mapEventDetailData(data: MahjongEventData?) {
+        
+        eventTypeLbl.text = data?.type ?? "..."
+        eventNameLbl.text = data?.name ?? "..."
+        eventLocationLbl.text = data?.locationName ?? "..."
+        eventLocationNameLbl.text = data?.address ?? "..."
+        eventDescriptionLbl.text = data?.description ?? "N/A"
+        contactLbl.text = data?.contact ?? "N/A"
+        
+        if let dates = data?.dateTime {
+            for (index, date) in dates.enumerated() {
+                let dateUi = BulletPointUI.fromNib()
+                dateUi.titleLbl.text = date
+                let addSeparator = index > 0
+                if addSeparator {
+                    let seperator = VerticalLineSeparatorUI.fromNib()
+                    datesStackView.addArrangedSubview(seperator)
+                }
+                datesStackView.addArrangedSubview(dateUi)
+            }
+            
+        }
+        else {
+            let seperator = VerticalLineSeparatorUI.fromNib()
+            seperator.separatorLineView.isHidden = true
+            datesStackView.addArrangedSubview(seperator)
+        }
     }
     
     @objc

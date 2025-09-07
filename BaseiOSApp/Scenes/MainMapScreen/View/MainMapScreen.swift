@@ -54,7 +54,8 @@ class MainMapScreen: UIViewController {
     }
     
     private func addMyLocationMarker() {
-        addMarkers(title: "My location", position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276))
+        let dummyData = MahjongEventData(type: "Tournament", name: "Sample Game", dateTime: ["Wednesday, July 26, 2025 – 07:00 PM", "Thursday, July 26, 2025 – 07:00 PM", "Friday, July 26, 2025 – 07:00 PM"], locationName: "Lahore", address: "Near Minar e Pakistan", lat: 51.5072, lng: 0.1276, category: "Amerain", contact: "12345678", description: "Fresh game for fresh talend", image: nil, userID: "", userName: "Mahjong", userEmail: "info@info.com")
+        addMarkers(title: "My location", position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276), data: dummyData)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -353,7 +354,7 @@ extension MainMapScreen: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        let vc = AppUIViewControllers.eventDetailScreen()
+        let vc = AppUIViewControllers.eventDetailScreen(viewModel: EvenDetailViewModel(eventDetail: marker.userData as? MahjongEventData))
         appNavigationCoordinator.pushUIKit(vc)
         
         return true

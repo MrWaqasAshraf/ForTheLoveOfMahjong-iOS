@@ -301,91 +301,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="oj9-wc-foE" secondAttribute="bottom" id="sqs-zz-BhG"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CrW-1k-l58">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="341" placeholderIntrinsicHeight="81" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CrW-1k-l58">
                                                         <rect key="frame" x="0.0" y="966" width="341" height="81"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQV-2D-ybG">
-                                                                <rect key="frame" x="0.0" y="0.0" width="341" height="33"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunday July 28, 2025 - 9:00 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BF-Zn-B9F">
-                                                                        <rect key="frame" x="28" y="11.333333333333258" width="313" height="15.666666666666664"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                                        <color key="textColor" name="clr_gray_4"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CaW-jd-pui">
-                                                                        <rect key="frame" x="0.0" y="10.666666666666666" width="18" height="16.666666666666671"/>
-                                                                        <color key="tintColor" name="clr_primary_light"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="18" id="mSD-yy-Bfw"/>
-                                                                            <constraint firstAttribute="height" constant="18" id="nl5-fQ-yx8"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="bottom" secondItem="CaW-jd-pui" secondAttribute="bottom" constant="5" id="8UQ-nd-Rp3"/>
-                                                                    <constraint firstItem="3BF-Zn-B9F" firstAttribute="leading" secondItem="CaW-jd-pui" secondAttribute="trailing" constant="10" id="LtG-he-bGc"/>
-                                                                    <constraint firstItem="CaW-jd-pui" firstAttribute="leading" secondItem="BQV-2D-ybG" secondAttribute="leading" id="MSt-np-AUc"/>
-                                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3BF-Zn-B9F" secondAttribute="bottom" id="Yjl-79-Csf"/>
-                                                                    <constraint firstItem="CaW-jd-pui" firstAttribute="centerY" secondItem="3BF-Zn-B9F" secondAttribute="centerY" id="bk6-XZ-54j"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="3BF-Zn-B9F" secondAttribute="trailing" id="gap-qw-ab8"/>
-                                                                    <constraint firstItem="CaW-jd-pui" firstAttribute="top" secondItem="BQV-2D-ybG" secondAttribute="top" constant="10" id="lQc-Il-xr5"/>
-                                                                    <constraint firstItem="3BF-Zn-B9F" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BQV-2D-ybG" secondAttribute="top" id="tQl-36-Lrj"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mb-DV-wpg">
-                                                                <rect key="frame" x="0.0" y="33" width="341" height="15"/>
-                                                                <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="33D-DV-YKl">
-                                                                        <rect key="frame" x="8.6666666666666643" y="0.0" width="1" height="15"/>
-                                                                        <color key="backgroundColor" name="clr_primary_light"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="15" id="4we-xC-loD"/>
-                                                                            <constraint firstAttribute="width" constant="1" id="r3O-hS-bCP"/>
-                                                                        </constraints>
-                                                                    </view>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="33D-DV-YKl" firstAttribute="top" secondItem="2mb-DV-wpg" secondAttribute="top" id="Q3T-sM-T3X"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="33D-DV-YKl" secondAttribute="bottom" id="fF3-dZ-WiF"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQH-sV-Gkp">
-                                                                <rect key="frame" x="0.0" y="48" width="341" height="33"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunday July 28, 2025 - 11:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTK-Ok-FhT">
-                                                                        <rect key="frame" x="28" y="6.3333333333332567" width="313" height="15.666666666666664"/>
-                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
-                                                                        <color key="textColor" name="clr_gray_4"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qI8-H4-WcV">
-                                                                        <rect key="frame" x="0.0" y="5.6666666666666661" width="18" height="16.666666666666671"/>
-                                                                        <color key="tintColor" name="clr_primary_light"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="18" id="DBc-vn-7r8"/>
-                                                                            <constraint firstAttribute="height" constant="18" id="h5F-q6-Atl"/>
-                                                                        </constraints>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="aTK-Ok-FhT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PQH-sV-Gkp" secondAttribute="top" id="4cq-JZ-HaR"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="qI8-H4-WcV" secondAttribute="bottom" constant="10" id="Mqt-tq-OUV"/>
-                                                                    <constraint firstItem="qI8-H4-WcV" firstAttribute="top" secondItem="PQH-sV-Gkp" secondAttribute="top" constant="5" id="NZE-hs-DfK"/>
-                                                                    <constraint firstItem="qI8-H4-WcV" firstAttribute="leading" secondItem="PQH-sV-Gkp" secondAttribute="leading" id="VaC-DQ-aMR"/>
-                                                                    <constraint firstItem="qI8-H4-WcV" firstAttribute="centerY" secondItem="aTK-Ok-FhT" secondAttribute="centerY" id="XP0-uX-2KM"/>
-                                                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aTK-Ok-FhT" secondAttribute="bottom" id="YOT-2d-xVS"/>
-                                                                    <constraint firstItem="aTK-Ok-FhT" firstAttribute="leading" secondItem="qI8-H4-WcV" secondAttribute="trailing" constant="10" id="YYC-V1-T3g"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="aTK-Ok-FhT" secondAttribute="trailing" id="wdw-3b-k3I"/>
-                                                                </constraints>
-                                                            </view>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="33D-DV-YKl" firstAttribute="centerX" secondItem="CaW-jd-pui" secondAttribute="centerX" id="VFf-OE-WCN"/>
-                                                        </constraints>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
@@ -446,6 +363,7 @@
                     <size key="freeformSize" width="393" height="1708"/>
                     <connections>
                         <outlet property="contactLbl" destination="yPf-nX-oPs" id="KTf-gh-VHs"/>
+                        <outlet property="datesStackView" destination="CrW-1k-l58" id="DHK-C6-32M"/>
                         <outlet property="eventDescriptionLbl" destination="A1u-in-Gpr" id="J5M-RI-fOt"/>
                         <outlet property="eventLocationLbl" destination="Muw-Gt-hz0" id="GHa-23-TxN"/>
                         <outlet property="eventLocationNameLbl" destination="AWf-Fz-Kut" id="9oW-fd-9uR"/>
@@ -459,7 +377,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="circle.fill" catalog="system" width="128" height="123"/>
         <image name="detail_image" width="682.66668701171875" height="455.33334350585938"/>
         <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="128" height="96"/>
         <namedColor name="clr_gray_4">
@@ -468,14 +385,11 @@
         <namedColor name="clr_primary">
             <color red="0.27843137254901962" green="0.45490196078431372" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="clr_primary_light">
-            <color red="0.55294117647058827" green="0.6588235294117647" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
