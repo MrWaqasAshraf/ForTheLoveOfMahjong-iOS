@@ -102,10 +102,13 @@ class SignUpViewModel {
         userService.signUpApi(parameters: parameters) { [weak self] result in
             switch result {
             case .success((let data, let json, let resp)):
+                if data?.success == 200, let userModel = data?.data {
+                    appUserData = userModel
+                }
                 self?.signUpResponse.value = data
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.signUpResponse.value = UserResponse(status: -1, message: error.localizedDescription)
+                self?.signUpResponse.value = UserResponse(success: -1, message: error.localizedDescription)
             }
         }
     }

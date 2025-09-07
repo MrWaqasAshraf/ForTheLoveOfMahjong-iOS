@@ -9,7 +9,7 @@ import Foundation
 
 class MainMapViewModel {
     
-    private(set) var dashboardResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
+    private(set) var dashboardResponse: Bindable<MahjongEventsListResponse> = Bindable<MahjongEventsListResponse>()
     
     private var dashbaordService: any ServicesDelegate
     
@@ -25,7 +25,7 @@ class MainMapViewModel {
                 self?.dashboardResponse.value = data
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.dashboardResponse.value = GeneralResponse(status: -1, message: error.localizedDescription)
+                self?.dashboardResponse.value = MahjongEventsListResponse(success: -1, message: error.localizedDescription, data: nil)
             }
         }
         

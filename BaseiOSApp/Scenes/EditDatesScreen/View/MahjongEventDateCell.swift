@@ -27,7 +27,7 @@ class MahjongEventDateCell: UITableViewCell {
     }
     
     func configureCell(data: SelectedEventDateTime?) {
-        titleLbl.text = data?.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a")
+        titleLbl.text = data?.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a")
     }
     
     @IBAction func deleteBtn(_ sender: Any) {

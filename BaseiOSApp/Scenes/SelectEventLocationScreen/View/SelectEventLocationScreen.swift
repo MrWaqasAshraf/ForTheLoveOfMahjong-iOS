@@ -19,18 +19,6 @@ class SelectEventLocationScreen: UIViewController {
     
     var closure: (( _ locationInfo: LocationComponents?, _ fullAddress: String?, _ coordinates: CLLocationCoordinate2D?)->())? = nil
     
-//    private var viewModel: SignInViewModel
-//    
-//    init?(coder: NSCoder, viewModel: SignInViewModel) {
-//        self.viewModel = viewModel
-//        super.init(coder: coder)
-//    }
-//    
-//    @available(*, unavailable)
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

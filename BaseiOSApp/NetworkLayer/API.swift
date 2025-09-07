@@ -190,11 +190,11 @@ class UrlRequestMaker{
 //        let selectedLanguage = appSelectedLanguage
         
         //Setting token
-//        if let token = appAuthToken{
-//            request.addValue("Bearer \(token)", forHTTPHeaderField: HttpHeaderKey.authorization.rawValue)
+        if let token = appAuthToken{
+            request.addValue("Bearer \(token)", forHTTPHeaderField: HttpHeaderKey.authorization.rawValue)
         
 //            request.addValue("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTQ4MDg5NDYsImlzcyI6IklTU1VFUl9FWFBFUlQiLCJhdWQiOiJQTEVYQUFSIiwiVXNlciI6ImV5SjFjMlZ5U1dRaU9pSTNOamdpTENKbGJXRnBiQ0k2SW5GaGRHVnpkR0ZqWTI5MWJuUTJNVGt4T1VCNWIzQnRZV2xzTG1OdmJTSXNJbkp2YkdVaU9pSlBkMjVsY2lJc0luVnpaWEpFWVhSaElqb2lVRXhGV0VGQlVpSjkifQ.I8ZPi7VWoTK2TxPiAua9xUgaGSrg7f_bsZw8w77pqTqPYJ1VAWzF6zzHAvwRG_aCv-sFMoOu7p8Kf64dRXchYn4RxN1lT6llP5k19B90-x84qDDJcWSShWThS4asvDRDRw9qXHmD6frN5J8Td4DB_vBAz6gbXDdtOvt_9lKMP_BRwbIUSQ0QKG3dQZGRaK9ivcH_8U3L0b3yoCQpYJ_kx3hKZzLJdAUQDlIBMEYVtZF2jT6vXMnGOdvnaaWw-a8FL4Wjax8rf01FQ1CAshQ6d7nMXb2tHa20ZmoJXDkV2LwteHGPhnUphgBT0IFHXW5hufYlBBnO3AmLFHdwz26IQQ", forHTTPHeaderField: HttpHeaderKey.authorization.rawValue)
-//        }
+        }
         
         request.addValue("EmbUNYpVwNmmUluogVIiLXK5HwcWY1Oxza7+HfCcDDE=", forHTTPHeaderField: "userId")
         request.addValue("uKWMxf6fL5gc/ShatIIwFN7pPzDcwmt/BO1sSPSn/JkwxjFp9/6QzRA2GvIvC0LSdXz+X/MPZXw/zHF3htUq0g==", forHTTPHeaderField: "DeviceId")

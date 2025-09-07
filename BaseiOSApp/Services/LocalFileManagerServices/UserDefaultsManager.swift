@@ -29,7 +29,7 @@ class UserDefaultsHelper{
     
     static let defaults = UserDefaults.standard
     
-    private static let appName = "base_app"
+    private static let appName = "mahjong_app"
     
     private static let userRootKey = "\(appName)_user"
     private static let credsKey = "\(appName)_creds"
@@ -84,6 +84,43 @@ class UserDefaultsHelper{
             }
             do{
                 let model = try JSONDecoder().decode(LangaugeModel.self, from: data)
+                return model
+            }
+            catch{
+                AppLogger.error("Error decoding/retreiving map setting data: \(error.localizedDescription)")
+                return nil
+            }
+        }
+    }
+    
+    static var appUserData: UserData? {
+        set {
+            do {
+                
+                var mutableNewValue: UserData? = newValue
+                
+                //Save token in keychain
+                if let token = mutableNewValue?.token, token != ""{
+                    KeychainManager.shared.saveInKeyChain(key: CustomKeys.appToken, inputData: mutableNewValue)
+                }
+                
+                mutableNewValue?.token = nil
+                
+                let data = try JSONEncoder().encode(mutableNewValue)
+                
+                defaults.setValue(data, forKey: userRootKey)
+                defaults.synchronize()
+            }
+            catch {
+                print("Unable to encode model")
+            }
+        }
+        get {
+            guard let data = defaults.value(forKey: userRootKey) as? Data else{
+                return nil
+            }
+            do{
+                let model = try JSONDecoder().decode(UserData.self, from: data)
                 return model
             }
             catch{

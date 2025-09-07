@@ -63,13 +63,26 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
         let data = viewModel.sideMenuOptionsList[indexPath.row]
         switch data.slug {
         case .profile:
-            dismiss(animated: true)
-            let vc = AppUIViewControllers.signInScreen()
-            appNavigationCoordinator.pushUIKit(vc)
+            if let appUserData {
+                
+            }
+            else {
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.signInScreen()
+                appNavigationCoordinator.pushUIKit(vc)
+            }
         case .events:
             print("TBD")
         case .favorite:
             print("TBD")
+            if let appUserData {
+                
+            }
+            else {
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.signInScreen()
+                appNavigationCoordinator.pushUIKit(vc)
+            }
         case .darkMode:
             print("TBD")
         }

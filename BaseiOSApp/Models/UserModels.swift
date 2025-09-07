@@ -15,9 +15,21 @@ struct GeneralResponse: Codable {
 
 // MARK: - UserResponse
 struct UserResponse: Codable {
-    let status: Int?
+    let success: Int?
     let message: String?
-//    var data: UserData?
+    var data: UserData?
+}
+
+// MARK: - UserData
+struct UserData: Codable {
+    let userID, firstName, lastName, email: String?
+    let role: String?
+    var token: String?
+
+    enum CodingKeys: String, CodingKey {
+        case userID = "userId"
+        case firstName, lastName, email, role, token
+    }
 }
 
 // MARK: - StaffListResponse

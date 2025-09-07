@@ -17,7 +17,7 @@ protocol ServicesDelegate {
     func signUpApi(parameters: [String: Any]?, completion: @escaping (Result<(UserResponse?, [String: Any], Int?), Error>) -> ())
     func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: Int?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
-    func dashboardEventsApi(completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func dashboardEventsApi(completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -48,7 +48,7 @@ extension ServicesDelegate {
         print("Default updateEventApi implementation")
     }
     
-    func dashboardEventsApi(completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())  {
+    func dashboardEventsApi(completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())  {
         print("Default dashboardEventsApi implementation")
     }
     

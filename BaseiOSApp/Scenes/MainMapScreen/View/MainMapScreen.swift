@@ -46,11 +46,15 @@ class MainMapScreen: UIViewController {
         bindViewModel()
         setupUiElements()
         setupGoogleMap()
-        callApis()
+//        callApis()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.addMarkers()
+            self.addMyLocationMarker()
         }
+    }
+    
+    private func addMyLocationMarker() {
+        addMarkers(title: "My location", position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,8 +62,8 @@ class MainMapScreen: UIViewController {
     }
     
     private func callApis() {
-//        ActivityIndicator.shared.showActivityIndicator(view: view)
-//        viewModel.dashboardApi()
+        ActivityIndicator.shared.showActivityIndicator(view: view)
+        viewModel.dashboardApi()
     }
     
     private func setupUiElements() {
@@ -210,16 +214,21 @@ class MainMapScreen: UIViewController {
         
     }
     
-    private func addMarkers() {
+    private func addMarkers(title: String? = nil, position: CLLocationCoordinate2D, data: MahjongEventData? = nil) {
         
-        var marker: GMSMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276))
+        var marker: GMSMarker = GMSMarker(position: position)
         
         if let myLocation = appLocationManager.location?.coordinate {
             marker.position = myLocation
         }
         
         let customIcon = CustomMarker.fromNib()
+        marker.title = title
+        marker.userData = data
         marker.iconView = customIcon
+        let customMarker = customIcon.asImage()
+        marker.icon = customMarker
+        marker.iconView = nil
         marker.map = mapView
         
     }
@@ -236,6 +245,18 @@ class MainMapScreen: UIViewController {
             }
         }
         
+    }
+    
+    private func addEventMarkers(data: [MahjongEventData]? = nil) {
+        if let data {
+            mapView?.clear()
+            addMyLocationMarker()
+            for event in data {
+                if let lat = event.lat, let long = event.lng {
+                    addMarkers(title: event.name, position: CLLocationCoordinate2D(latitude: lat, longitude: long), data: event)
+                }
+            }
+        }
     }
     
     @objc
@@ -257,10 +278,19 @@ class MainMapScreen: UIViewController {
     
     //MARK: ButtonActions
     @IBAction func addBtn(_ sender: Any) {
-        let vc = AppUIViewControllers.addEventScreen(viewModel: EventAndFilterViewModel(preSelectTypeAndCategory: true))
-//        let vc = AppUIViewControllers.signInScreen()
-//        let vc = AppUIViewControllers.eventDetailScreen()
-        appNavigationCoordinator.pushUIKit(vc)
+        
+        if let appUserData {
+            let vc = AppUIViewControllers.addEventScreen(viewModel: EventAndFilterViewModel(preSelectTypeAndCategory: true))
+    //        let vc = AppUIViewControllers.signInScreen()
+    //        let vc = AppUIViewControllers.eventDetailScreen()
+            appNavigationCoordinator.pushUIKit(vc)
+        }
+        else {
+            dismiss(animated: true)
+            let vc = AppUIViewControllers.signInScreen()
+            appNavigationCoordinator.pushUIKit(vc)
+        }
+        
     }
     
     
@@ -337,6 +367,9 @@ extension MainMapScreen {
         
         viewModel.dashboardResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
+            DispatchQueue.main.async {
+                self?.addEventMarkers(data: response?.data)
+            }
         }
         
     }

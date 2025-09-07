@@ -153,7 +153,7 @@ class EventAndFilterViewModel {
         if let selectedDates = selectedEventDates.value {
             for selectedDate in selectedDates {
                 let connectingString: String = selectedDatesString.isEmpty ? "" : "\n"
-                selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a"))"
+                selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a"))"
             }
         }
         return selectedDatesString

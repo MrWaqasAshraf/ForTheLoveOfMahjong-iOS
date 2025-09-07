@@ -17,6 +17,16 @@ struct UserCreds: Codable {
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
 var locationService: AppLocationService = AppLocationService()
 
+var appUserData: UserData? {
+    set {
+        UserDefaultsHelper.appUserData = newValue
+    }
+    get {
+        let appUser = UserDefaultsHelper.appUserData
+        return appUser
+    }
+}
+
 var appMapSettings: MapSettingModel {
     if let appMapSetting = UserDefaultsHelper.appMapSettings {
         return appMapSetting
@@ -36,11 +46,6 @@ var appSelectedLanguage: LangaugeModel? {
 var appAuthToken: String? {
     let authToken = KeychainManager.shared.retrieveKeyChainItem(key: CustomKeys.appToken, expectedItem: String.self)
     return authToken
-}
-
-var appRsaKey: String? {
-    let rsaKey = KeychainManager.shared.retrieveKeyChainItem(key: CustomKeys.rsaKey, expectedItem: String.self)
-    return rsaKey
 }
 
 var appUserCreds: UserCreds? {

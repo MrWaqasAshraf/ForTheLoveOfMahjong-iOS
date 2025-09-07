@@ -11,6 +11,13 @@ class EventDetailScreen: UIViewController {
     
     static let identifier = "EventDetailScreen"
     
+    @IBOutlet weak var eventTypeLbl: UILabel!
+    @IBOutlet weak var eventNameLbl: UILabel!
+    @IBOutlet weak var eventLocationLbl: UILabel!
+    @IBOutlet weak var eventLocationNameLbl: UILabel!
+    @IBOutlet weak var contactLbl: UILabel!
+    @IBOutlet weak var eventDescriptionLbl: UILabel!
+    
     private var viewModel: EvenDetailViewModel
     
     init?(coder: NSCoder, viewModel: EvenDetailViewModel) {

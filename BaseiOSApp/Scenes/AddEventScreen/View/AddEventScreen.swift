@@ -162,7 +162,7 @@ class AddEventScreen: UIViewController {
             selectDateTitleLbl.text = "Select multiple dates"
         case .game:
             print("game")
-            selectedDatesLbl.text = "Select date"
+            selectDateTitleLbl.text = "Select date"
         }
     }
     
