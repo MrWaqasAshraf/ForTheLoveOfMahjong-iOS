@@ -66,6 +66,10 @@ class SignInScreen: UIViewController {
         
     }
     
+    @IBAction func forgotPasswordBtn(_ sender: Any) {
+        let vc = AppUIViewControllers.forgotPasswordScreen()
+        appNavigationCoordinator.pushUIKit(vc)
+    }
     
 }
 

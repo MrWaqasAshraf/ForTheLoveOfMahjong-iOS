@@ -10,6 +10,14 @@ import SideMenu
 
 class AppUIViewControllers {
     
+    static func forgotPasswordScreen(viewModel: ForgotPasswordViewModel = ForgotPasswordViewModel()) -> ForgotPasswordScreen {
+        let sb = UIStoryboard(name: ForgotPasswordScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: ForgotPasswordScreen.identifier) { coder in
+            ForgotPasswordScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
     static func selectEventLocationScreen() -> SelectEventLocationScreen {
         let sb = UIStoryboard(name: SelectEventLocationScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: SelectEventLocationScreen.identifier) as! SelectEventLocationScreen
