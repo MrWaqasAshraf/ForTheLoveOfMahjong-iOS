@@ -9,15 +9,34 @@ import Foundation
 
 // MARK: - GeneralResponse
 struct GeneralResponse: Codable {
-    let status: Int?
+    let success: Int?
     let message: String?
+    
+    var isSuccessful: Bool {
+        var isSuccess: Bool = false
+        if let success, success >= 200 && success < 300 {
+            isSuccess = true
+        }
+        return isSuccess
+    }
+    
 }
 
 // MARK: - UserResponse
 struct UserResponse: Codable {
+    
     let success: Int?
     let message: String?
     var data: UserData?
+    
+    var isSuccessful: Bool {
+        var isSuccess: Bool = false
+        if let success, success >= 200 && success < 300 {
+            isSuccess = true
+        }
+        return isSuccess
+    }
+    
 }
 
 // MARK: - UserData

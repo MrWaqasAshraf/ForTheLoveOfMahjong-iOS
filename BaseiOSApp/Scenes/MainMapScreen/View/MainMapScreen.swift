@@ -63,7 +63,9 @@ class MainMapScreen: UIViewController {
     }
     
     private func callApis() {
-        ActivityIndicator.shared.showActivityIndicator(view: view)
+        DispatchQueue.main.async {
+            ActivityIndicator.shared.showActivityIndicator(view: self.view)
+        }
         viewModel.dashboardApi()
     }
     
@@ -284,6 +286,9 @@ class MainMapScreen: UIViewController {
             let vc = AppUIViewControllers.addEventScreen(viewModel: EventAndFilterViewModel(preSelectTypeAndCategory: true))
     //        let vc = AppUIViewControllers.signInScreen()
     //        let vc = AppUIViewControllers.eventDetailScreen()
+            vc.closure = { [weak self] in
+//                self?.callApis()
+            }
             appNavigationCoordinator.pushUIKit(vc)
         }
         else {

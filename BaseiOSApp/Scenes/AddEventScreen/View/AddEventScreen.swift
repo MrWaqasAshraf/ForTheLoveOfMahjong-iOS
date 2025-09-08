@@ -33,6 +33,8 @@ class AddEventScreen: UIViewController {
     
     private var imagePicker = UIImagePickerController()
     
+    var closure: (()->())? = nil
+    
     private var viewModel: EventAndFilterViewModel
     
     init?(coder: NSCoder, viewModel: EventAndFilterViewModel) {
@@ -192,9 +194,15 @@ class AddEventScreen: UIViewController {
     @IBAction func selectAddressBtn(_ sender: Any) {
         let vc = AppUIViewControllers.selectEventLocationScreen()
         vc.closure = { [weak self] selectedAddress, fullAddress, coordinates in
+            
+            if let coordinates {
+                self?.viewModel.eventLocationCoordinates = EventLocationInfo(lat: coordinates.latitude, long: coordinates.longitude, address: fullAddress ?? "Game adress")
+            }
+            
             DispatchQueue.main.async {
                 self?.addressField.text = fullAddress
             }
+            
         }
         appNavigationCoordinator.pushUIKit(vc)
     }
@@ -229,14 +237,16 @@ class AddEventScreen: UIViewController {
     }
     
     @IBAction func addEventBtn(_ sender: Any) {
+        
         let createAndValidatePayload = viewModel.createAndValidatePayload(name: eventNameField.text, locationName: locationNameField.text, address: addressField.text, contact: contactField.text, description: descriptionField.text ?? "")
         if createAndValidatePayload.0 {
-//            ActivityIndicator.shared.showActivityIndicator(view: view)
+            ActivityIndicator.shared.showActivityIndicator(view: view)
             viewModel.createMahjonEventApi(parameters: createAndValidatePayload.2)
         }
         else {
             GenericToast.showToast(message: createAndValidatePayload.1 ?? "")
         }
+        
     }
     
     @IBAction func editDatesBtn(_ sender: Any) {
@@ -341,8 +351,18 @@ extension AddEventScreen {
     private func bindViewModel() {
         
         viewModel.manageEventResponse.bind { [weak self] response in
+            
             ActivityIndicator.shared.removeActivityIndicator()
             GenericToast.showToast(message: response?.message ?? "")
+            if response?.isSuccessful == true {
+                if let closure = self?.closure {
+                    closure()
+                    DispatchQueue.main.async {
+                        self?.goBack()
+                    }
+                }
+            }
+            
         }
         
         viewModel.eventTypes.bind { [weak self] _ in

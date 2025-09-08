@@ -13,6 +13,7 @@ class SignInScreen: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var eyeIcon: UIImageView!
     
     private var viewModel: SignInViewModel
     
@@ -55,15 +56,18 @@ class SignInScreen: UIViewController {
         appNavigationCoordinator.pushUIKit(vc)
         
         
-        let isEmpty = (emailField.text?.isEmpty ?? true) && (passwordField.text?.isEmpty ?? true)
+    }
+    
+    @IBAction func signInBtn(_ sender: Any) {
+        let isEmpty = (emailField.text?.isEmpty ?? true) || (passwordField.text?.isEmpty ?? true)
         if isEmpty {
             GenericToast.showToast(message: "Email/Password required for login")
         }
         else {
             print("Valid")
+            ActivityIndicator.shared.showActivityIndicator(view: view)
             viewModel.loginApi(email: emailField.text, password: passwordField.text)
         }
-        
     }
     
     @IBAction func forgotPasswordBtn(_ sender: Any) {
@@ -71,14 +75,24 @@ class SignInScreen: UIViewController {
         appNavigationCoordinator.pushUIKit(vc)
     }
     
+    @IBAction func showPasswordBtn(_ sender: Any) {
+        passwordField.isSecureTextEntry.toggle()
+        eyeIcon.image = passwordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon
+    }
 }
 
 extension SignInScreen {
     
     private func bindViewModel() {
         
-        viewModel.loginResponse.bind { response in
+        viewModel.loginResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+            if response?.success == 200 {
+                DispatchQueue.main.async {
+                    self?.goBack()
+                }
+            }
         }
         
     }

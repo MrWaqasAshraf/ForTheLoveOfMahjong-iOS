@@ -63,8 +63,8 @@ extension String{
     static let clr_gray_dk = "clr_gray_dk"
     
     //MARK: Images/Icons
-    static let showEyeIcon = "eye"
-    static let hideEyeIcon = "eye.slash"
+    static let showEyeIcon = "eye.fill"
+    static let hideEyeIcon = "eye.slash.fill"
     static let arrow_left = "arrow_left"
     static let file_icon = "file_icon"
     static let user_default_icon = "user_default_icon"
@@ -156,6 +156,7 @@ extension String{
     static let event_detail_image = "detail_image"
     static let clr_transparent_shade_1 = "clr_transparent_shade_1"
     static let filter_round_icon = "filter_round_icon"
+    static let logout_icon_system = "door.left.hand.open"
     
 }
 
@@ -295,6 +296,7 @@ extension UIImage {
     static let changeLanguageIconSystem = UIImage(systemName: .changeLanguageIconSystem)!
     static let termsIconSystem = UIImage(systemName: .termsIconSystem)!
     static let settingsIconSystem = UIImage(systemName: .settingsIconSystem)!
+    static let logout_icon_system = UIImage(systemName: .logout_icon_system)!
     
     static let backend_gradient_light_img = UIImage(named: .backend_gradient_light_img)!
     static let background_gradient_dark_img = UIImage(named: .background_gradient_dark_img)!

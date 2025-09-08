@@ -33,4 +33,9 @@ class NavigationCoordinator {
     func popToRoot(animated: Bool = true) {
         navigationController?.popToRootViewController(animated: animated)
     }
+    
+    func popToSpecificVc(vc: AnyClass, animated: Bool = true) {
+        navigationController?.popToViewController(ofClass: vc, animated: animated)
+    }
+    
 }

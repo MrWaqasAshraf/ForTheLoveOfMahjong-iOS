@@ -23,7 +23,7 @@ struct TempFileURLs {
     static private let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     static private let userPhotosURL = documentsURL.appendingPathComponent(MahjongFileDirectories.tournamentPhotosFileDirectory.rawValue)
     
-    static let tournamentImage = userPhotosURL.appendingPathComponent("tournamentImage.png")
+    static let tournamentImage = userPhotosURL.appendingPathComponent("m_image.png")
 //    static let adVideo = userPhotosURL.appendingPathComponent("adImage")
     static let profileImage = userPhotosURL.appendingPathComponent("profileImage.png")
     

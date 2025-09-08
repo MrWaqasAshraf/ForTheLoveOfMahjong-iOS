@@ -31,6 +31,13 @@ class SideMenuScreen: UIViewController {
         setupUiElements()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.checkLogoutStatus()
+        DispatchQueue.main.async {
+            self.sideMenuTableView.reloadData()
+        }
+    }
+    
     private func setupUiElements() {
         
         let cellNib = UINib(nibName: SideMenuOptionCell.identifier, bundle: .main)
@@ -64,7 +71,9 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
         switch data.slug {
         case .profile:
             if let appUserData {
-                
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.profileScreen()
+                appNavigationCoordinator.pushUIKit(vc)
             }
             else {
                 dismiss(animated: true)
@@ -83,6 +92,17 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 let vc = AppUIViewControllers.signInScreen()
                 appNavigationCoordinator.pushUIKit(vc)
             }
+        case .logout:
+            GenericAlert.showAlert(title: "Logout", message: "Are you sure?", actions: [.init(title: "Yes", style: .destructive), .init(title: "No", style: .default)], controller: self) { [weak self] _, btnIndex, _ in
+                if btnIndex == 0 {
+                    UserDefaultsHelper.removeUserAndToken()
+                    self?.viewModel.checkLogoutStatus()
+                    DispatchQueue.main.async {
+                        self?.sideMenuTableView.reloadData()
+                    }
+                }
+            }
+            
         case .darkMode:
             print("TBD")
         }

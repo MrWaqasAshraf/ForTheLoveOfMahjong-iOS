@@ -18,7 +18,7 @@ class GenericToast: UIView, NibInstantiatable{
     typealias buttonAction = ((Int, GenericToast) -> Void)?
     var action : buttonAction = nil
     
-    class func showToast(uniqueTag: Int? = nil, message: String, parentView: UIView? = nil, backgroundColor: UIColor = .black.withAlphaComponent(0.8), toastMessageColor: UIColor = .white, toastImage: UIImage = .AD, animation: AnimationType = .appear, animationDelay: TimeInterval = 5, completion: buttonAction = nil){
+    class func showToast(uniqueTag: Int? = nil, message: String, parentView: UIView? = nil, backgroundColor: UIColor = .black.withAlphaComponent(0.8), toastMessageColor: UIColor = .white, toastImage: UIImage = .mahjongAvatar, animation: AnimationType = .appear, animationDelay: TimeInterval = 5, completion: buttonAction = nil){
         
         DispatchQueue.main.async {
             

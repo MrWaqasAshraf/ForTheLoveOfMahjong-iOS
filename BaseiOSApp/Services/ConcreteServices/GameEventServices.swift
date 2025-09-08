@@ -48,7 +48,7 @@ class ManageMahjongEventsService: ServicesDelegate {
          */
         var files: FileParameters?
         if let images {
-            files = FileParameters(fileName: "Images", urls: images)
+            files = FileParameters(fileName: "image", urls: images)
         }
         getResponse(.post, endPoint: EndPoint.createEventApi.rawValue, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
     }

@@ -21,7 +21,7 @@ class SignInViewModel {
         userService.loginApi(email: email, password: password) { [weak self] result in
             switch result {
             case .success((let data, let json, let resp)):
-                if data?.success == 200, let userModel = data?.data {
+                if data?.isSuccessful == true, let userModel = data?.data {
                     appUserData = userModel
                 }
                 self?.loginResponse.value = data

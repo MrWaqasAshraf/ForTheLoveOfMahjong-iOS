@@ -34,6 +34,12 @@ struct SelectedEventDateTime {
     var dateTime: Date
 }
 
+struct EventLocationInfo {
+    var lat: Double
+    var long: Double
+    var address: String
+}
+
 class EventAndFilterViewModel {
     
     //For UI
@@ -50,6 +56,7 @@ class EventAndFilterViewModel {
     var selectedCategoryType: Bindable<CustomOptionModel> = Bindable()
     
     //For Api integration
+    var eventLocationCoordinates: EventLocationInfo? = nil
     var imageUrls: [URL]?
     var selectedEventDates: Bindable<[SelectedEventDateTime]> = Bindable([])
     private(set) var manageEventResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
@@ -90,12 +97,13 @@ class EventAndFilterViewModel {
          */
         var isValid: Bool = true
         var validationMessage: String = ""
-        var payload: [String: Any] = ["description": description, "lat":40.7589, "lng":-73.9851,]
+        var payload: [String: Any] = ["description": description]
         if let name, name.count > 3 {
             payload.updateValue(name, forKey: "name")
         }
         else {
             isValid = false
+            validationMessage += "Name, "
         }
         
         if let locationName, locationName.count > 3 {
@@ -103,6 +111,7 @@ class EventAndFilterViewModel {
         }
         else {
             isValid = false
+            validationMessage += "Location Name, "
         }
         
         if let contact, contact.count > 6 {
@@ -110,6 +119,7 @@ class EventAndFilterViewModel {
         }
         else {
             isValid = false
+            validationMessage += "Contact, "
         }
         
         if let selectedEventType = selectedEventType.value {
@@ -117,6 +127,7 @@ class EventAndFilterViewModel {
         }
         else {
             isValid = false
+            validationMessage += "Event Type, "
         }
         
         if let selectedCategoryType = selectedCategoryType.value {
@@ -124,6 +135,7 @@ class EventAndFilterViewModel {
         }
         else {
             isValid = false
+            validationMessage += "Event Category, "
         }
         
         if let dates = selectedEventDates.value?.map({ return $0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a") }) {
@@ -131,6 +143,25 @@ class EventAndFilterViewModel {
         }
         else {
             isValid = false
+            validationMessage += "Event Date, "
+        }
+        
+        if let eventLocationCoordinates {
+            //"lat":40.7589, "lng":-73.9851
+            let lat = eventLocationCoordinates.lat
+            let long = eventLocationCoordinates.long
+            payload.updateValue(lat, forKey: "lat")
+            payload.updateValue(long, forKey: "lng")
+            payload.updateValue(eventLocationCoordinates.address, forKey: "address")
+        }
+        else {
+            isValid = false
+            validationMessage += "Event Address, "
+        }
+        
+        if !validationMessage.isEmpty, validationMessage.count > 2 {
+            validationMessage = String(validationMessage.dropLast(2))
+            validationMessage += " Required"
         }
         
         return (isValid, validationMessage, payload)
@@ -143,7 +174,7 @@ class EventAndFilterViewModel {
                 self?.manageEventResponse.value = data
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.manageEventResponse.value = GeneralResponse(status: -1, message: error.localizedDescription)
+                self?.manageEventResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
             }
         }
     }

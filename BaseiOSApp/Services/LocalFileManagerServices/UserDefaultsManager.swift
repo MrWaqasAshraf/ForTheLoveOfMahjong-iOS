@@ -101,7 +101,7 @@ class UserDefaultsHelper{
                 
                 //Save token in keychain
                 if let token = mutableNewValue?.token, token != ""{
-                    KeychainManager.shared.saveInKeyChain(key: CustomKeys.appToken, inputData: mutableNewValue)
+                    KeychainManager.shared.saveInKeyChain(key: CustomKeys.appToken, inputData: token)
                 }
                 
                 mutableNewValue?.token = nil

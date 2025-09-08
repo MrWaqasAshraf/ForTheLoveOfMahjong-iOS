@@ -16,6 +16,8 @@ class SignUpScreen: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
+    @IBOutlet weak var passwordEyeIcon: UIImageView!
+    @IBOutlet weak var confirmPasswordEyeIcon: UIImageView!
     
     private var viewModel: SignUpViewModel
     
@@ -51,11 +53,27 @@ class SignUpScreen: UIViewController {
         appNavigationCoordinator.pop()
     }
     
+    private func goBackToMap() {
+        appNavigationCoordinator.popToSpecificVc(vc: MainMapScreen.self)
+    }
+    
+    //MARK: ButtonActions
+    @IBAction func showPasswordBtn(_ sender: Any) {
+        passwordField.isSecureTextEntry.toggle()
+        passwordEyeIcon.image = passwordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon
+    }
+    
+    @IBAction func showConfirmPasswordBtn(_ sender: Any) {
+        confirmPasswordField.isSecureTextEntry.toggle()
+        confirmPasswordEyeIcon.image = confirmPasswordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon
+    }
+    
+    
     @IBAction func signUpBtn(_ sender: Any) {
         let createAndValidateSignUpPayload = viewModel.createSignInPayload(firstName: firstNameField.text, lastName: lastNameField.text, email: emailField.text, password: passwordField.text, confirmPassword: confirmPasswordField.text)
         if createAndValidateSignUpPayload.0 {
             print("Valid")
-//            ActivityIndicator.shared.showActivityIndicator(view: view)
+            ActivityIndicator.shared.showActivityIndicator(view: view)
             viewModel.signUpApi(parameters: createAndValidateSignUpPayload.2)
         }
         else {
@@ -68,8 +86,14 @@ class SignUpScreen: UIViewController {
 extension SignUpScreen {
     private func bindViewModel() {
         
-        viewModel.signUpResponse.bind { response in
+        viewModel.signUpResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.goBackToMap()
+                }
+            }
         }
         
     }

@@ -149,6 +149,9 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-uV-nlJ">
                                                                         <rect key="frame" x="271" y="0.0" width="50" height="40"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="showPasswordBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jGK-b8-00m"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" name="clr_gray_3"/>
@@ -232,6 +235,9 @@
                                                                                 <real key="value" value="20"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
+                                                                        <connections>
+                                                                            <action selector="signInBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="vUw-a6-uZ0"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -397,6 +403,7 @@
                     </view>
                     <connections>
                         <outlet property="emailField" destination="8VD-SB-oD3" id="9cw-uG-cvo"/>
+                        <outlet property="eyeIcon" destination="cXQ-JB-Q7T" id="AB1-pu-ZC8"/>
                         <outlet property="passwordField" destination="BNi-8o-FbS" id="BaX-BY-oSo"/>
                     </connections>
                 </viewController>

@@ -32,34 +32,11 @@ extension AppSpecificError: LocalizedError {
 
 let del = UIApplication.shared.delegate as! AppDelegate
 
-//Old - deprecated
-//let baseUrlDomain = "http://54.164.54.21"
-//let baseUrlDomain = "https://zeroifta.alnairtech.com"
-//let socketUrlDomain = "https://zeroifta.alnairtech.com"
-
-//Staging
-//let baseUrlDomain = "https://staging.zeroifta.com"
-//let socketUrlDomain = "wss://staging.zeroifta.com/nodeapi/socket"
 
 //Preprod
-let baseUrlDomain = "https://plexaargateway-preprod.findanexpert.net"
+//let baseUrlDomain = "https://plexaargateway-preprod.findanexpert.net"
+let baseUrlDomain = "https://api.fortheloveofmahjongg.com/api"
 let socketUrlDomain = ""
-
-//Live
-//let baseUrlDomain = "https://admin.zeroifta.com"
-////let socketUrlDomain = "https://admin.zeroifta.com/"
-//let socketUrlDomain = "wss://admin.zeroifta.com/nodeapi/socket"
-
-//Dev
-////https://dev.zeroifta.com
-//let baseUrlDomain = "https://dev.zeroifta.com"
-////let socketUrlDomain = "https://dev.zeroifta.com"
-//let socketUrlDomain = "wss://dev.zeroifta.com/nodeapi/socket"
-////let socketUrlDomainV2 = "wss://dev.zeroifta.com/nodeapi/socket"
-
-//Dev - node js
-//let baseUrlDomain = "https://node-dev.zeroifta.com"
-//let socketUrlDomain = "https://node-dev.zeroifta.com"
 
 //Staging
 let baseUrl = "\(baseUrlDomain)"
@@ -190,7 +167,7 @@ class UrlRequestMaker{
 //        let selectedLanguage = appSelectedLanguage
         
         //Setting token
-        if let token = appAuthToken{
+        if let token = appAuthToken {
             request.addValue("Bearer \(token)", forHTTPHeaderField: HttpHeaderKey.authorization.rawValue)
         
 //            request.addValue("Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTQ4MDg5NDYsImlzcyI6IklTU1VFUl9FWFBFUlQiLCJhdWQiOiJQTEVYQUFSIiwiVXNlciI6ImV5SjFjMlZ5U1dRaU9pSTNOamdpTENKbGJXRnBiQ0k2SW5GaGRHVnpkR0ZqWTI5MWJuUTJNVGt4T1VCNWIzQnRZV2xzTG1OdmJTSXNJbkp2YkdVaU9pSlBkMjVsY2lJc0luVnpaWEpFWVhSaElqb2lVRXhGV0VGQlVpSjkifQ.I8ZPi7VWoTK2TxPiAua9xUgaGSrg7f_bsZw8w77pqTqPYJ1VAWzF6zzHAvwRG_aCv-sFMoOu7p8Kf64dRXchYn4RxN1lT6llP5k19B90-x84qDDJcWSShWThS4asvDRDRw9qXHmD6frN5J8Td4DB_vBAz6gbXDdtOvt_9lKMP_BRwbIUSQ0QKG3dQZGRaK9ivcH_8U3L0b3yoCQpYJ_kx3hKZzLJdAUQDlIBMEYVtZF2jT6vXMnGOdvnaaWw-a8FL4Wjax8rf01FQ1CAshQ6d7nMXb2tHa20ZmoJXDkV2LwteHGPhnUphgBT0IFHXW5hufYlBBnO3AmLFHdwz26IQQ", forHTTPHeaderField: HttpHeaderKey.authorization.rawValue)
@@ -621,14 +598,14 @@ class MultiPartRequestBodyHandler{
                     }
                     let fileData = try Data(contentsOf: url)
                     data?.append("--\(boundary)\r\n")
-                    data?.append("Content-Disposition: form-data; name=\"\(urls.fileName)\"; filename=\"\(filename)\"\r\n")
+                    data?.append("Content-Disposition: form-data; name=\"\(urls.fileName)\"; filename=\"\(filename)_\(Date().millisecondsSince1970.description)\"\r\n")
                     
                     //Setup Content-Type using ContentTypeHandler
                     let contentType = ContentTypeHandler.setContentType(fileUrl: url)
                     data?.append("Content-Type: \(contentType)\r\n\r\n")
                     
                     //For debugging
-                    AppLogger.network("Mime/Content type is: \(contentType), file name is: \(urls.fileName)")
+//                    AppLogger.network("Mime/Content type is: \(contentType), file name is: \(urls.fileName)")
                     
                     data?.append(fileData)
                     data?.append("\r\n")

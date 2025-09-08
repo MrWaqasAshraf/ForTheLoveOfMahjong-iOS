@@ -29,6 +29,7 @@ enum SideMenuSlug {
     case events
     case favorite
     case darkMode
+    case logout
     
 }
 
@@ -38,5 +39,20 @@ class SideMenuViewModel {
                                                       .init(title: "Events", slug: .events, image: .docIconSystem),
                                                       .init(title: "Favorite", slug: .favorite, image: .hearIconSystem),
                                                       .init(title: "Dark Mode", slug: .darkMode, image: .moonHalfIconSystem, isOn: false)]
+    
+    init() {
+        checkLogoutStatus()
+    }
+    
+    func checkLogoutStatus() {
+        if let appUserData {
+            if !sideMenuOptionsList.contains(where: { $0.slug == .logout }) {
+                sideMenuOptionsList.append(.init(title: "Logout", slug: .logout, image: .logout_icon_system))
+            }
+        }
+        else {
+            sideMenuOptionsList.removeAll { $0.slug == .logout }
+        }
+    }
     
 }
