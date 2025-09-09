@@ -16,6 +16,9 @@ struct UserCreds: Codable {
 
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
 var locationService: AppLocationService = AppLocationService()
+var a_id: String {
+    return MahjongFileManager.shared.accessPlistValues(plistName: .internalName, keyname: CustomHeaderKeys.a_id.rawValue, returnValuetype: String.self) ?? ""
+}
 
 var appUserData: UserData? {
     set {

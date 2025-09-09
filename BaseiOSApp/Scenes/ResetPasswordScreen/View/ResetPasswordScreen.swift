@@ -11,9 +11,14 @@ class ResetPasswordScreen: UIViewController {
     
     static let identifier = "ResetPasswordScreen"
     
-    private var viewModel: ResetPasswordViewModel
+    @IBOutlet weak var newPasswordField: UITextField!
+    @IBOutlet weak var confirmPasswordField: UITextField!
+    @IBOutlet weak var newPasswordIcon: UIImageView!
+    @IBOutlet weak var confirmPasswordIcon: UIImageView!
     
-    init?(coder: NSCoder, viewModel: ResetPasswordViewModel) {
+    private var viewModel: SignUpViewModel
+    
+    init?(coder: NSCoder, viewModel: SignUpViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -44,6 +49,28 @@ class ResetPasswordScreen: UIViewController {
     private func goBack() {
         appNavigationCoordinator.popToSpecificVc(vc: SignInScreen.self)
     }
+    
+    //MARK: ButtonActions
+    @IBAction func showNewPasswordBtn(_ sender: Any) {
+        newPasswordField.isSecureTextEntry.toggle()
+        newPasswordIcon.image = newPasswordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon
+    }
+    
+    @IBAction func showConfirmPasswordBtn(_ sender: Any) {
+        confirmPasswordField.isSecureTextEntry.toggle()
+        confirmPasswordIcon.image = confirmPasswordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon
+    }
+    
+    @IBAction func resetPasswordBtn(_ sender: Any) {
+        let createAndValidatePayload = viewModel.createAndValidateResetPasswordPayload(newPassword: newPasswordField.text, confirmPassword: confirmPasswordField.text)
+        if createAndValidatePayload.0 {
+            print("Valid payload")
+        }
+        else {
+            GenericToast.showToast(message: createAndValidatePayload.1 ?? "")
+        }
+    }
+    
     
 }
 

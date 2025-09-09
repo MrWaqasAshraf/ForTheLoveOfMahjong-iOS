@@ -11,7 +11,11 @@ import Foundation
 struct MahjongEventsListResponse: Codable {
     let success: Int?
     let message: String?
-    let data: [MahjongEventData]?
+    let data: MahjongDataResult?
+}
+
+struct MahjongDataResult: Codable {
+    let events: [MahjongEventData]?
 }
 
 // MARK: - MahjongEventData
@@ -22,11 +26,23 @@ struct MahjongEventData: Codable {
     let lat, lng: Double?
     let category, contact, description: String?
     let image: String?
-    let userID, userName, userEmail: String?
+    let user: UserInfoData?
+    let userName, userEmail: String?
 
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
-        case userID = "userId"
+        case user = "userId"
         case userName, userEmail
     }
+}
+
+struct UserInfoData: Codable {
+    
+    let id, firstName, lastName: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case firstName, lastName
+    }
+    
 }

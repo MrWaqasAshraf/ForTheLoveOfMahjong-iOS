@@ -46,54 +46,55 @@ class UnAuthorizationHandler {
         
         print("Unauth message: \(message)")
         
-        let topVc = AppUIViewControllers.topMostController()
-        
-        if let topVc, topVc is ViewController /*|| topVc is SignInScreen*/ {
-            print("Do nothing")
-            
-            //For runtime application update
-            if statusCode == 406 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.triggerAppUpdate(message: message)
-                }
-            }
-            
-        }
-        else if let navVc = topVc?.navigationController {
-            
-//            navVc.popToViewController(ofClass: SignInScreen.self)
-            
-            //For runtime application update
-            if statusCode == 406 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.triggerAppUpdate(message: message)
-                }
-            }
-            else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    GenericToast.showToast(message: message)
-                }
-            }
-            
-        }
-        else {
-//            let vc = AppUIViewControllers.setupPreLoginFirstScreen()
-//            NavigationHandler.navigateWithAnimation(controller: vc, setTime: 0)
+        /*
+         let topVc = AppUIViewControllers.topMostController()
+         
+         if let topVc, topVc is ViewController /*|| topVc is SignInScreen*/ {
+             print("Do nothing")
+             
+             //For runtime application update
+             if statusCode == 406 {
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                     self.triggerAppUpdate(message: message)
+                 }
+             }
+             
+         }
+         else if let navVc = topVc?.navigationController {
+             
+ //            navVc.popToViewController(ofClass: SignInScreen.self)
+             
+             //For runtime application update
+             if statusCode == 406 {
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                     self.triggerAppUpdate(message: message)
+                 }
+             }
+             else {
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                     GenericToast.showToast(message: message)
+                 }
+             }
+             
+         }
+         else {
+ //            let vc = AppUIViewControllers.setupPreLoginFirstScreen()
+ //            NavigationHandler.navigateWithAnimation(controller: vc, setTime: 0)
 
-            //For runtime application update
-            if statusCode == 406 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.triggerAppUpdate(message: message)
-                }
-            }
-            else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    GenericToast.showToast(message: message)
-                }
-            }
-            
-        }
-        
+             //For runtime application update
+             if statusCode == 406 {
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                     self.triggerAppUpdate(message: message)
+                 }
+             }
+             else {
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                     GenericToast.showToast(message: message)
+                 }
+             }
+             
+         }
+         */
 
     
 //        AppUIViewControllers

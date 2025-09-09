@@ -64,6 +64,14 @@ class MahjongFileManager{
         
     }
     
+    func accessPlistValues<T>(plistName: PlistFileName, keyname: String, returnValuetype: T.Type) -> T? {
+        if let dict = Bundle.parsePlist(ofName: .internalName), let value = dict[keyname] as? T {
+            return value
+        }
+        else {
+            return nil
+        }
+    }
     
     func addfileToLocalFiles(fileData: Data, isTemp: Bool = true, fileName: String? = nil, fileLocationUrl: URL) -> Bool{
         let fileManager = FileManager.default
@@ -156,6 +164,38 @@ class MahjongFileManager{
             print("Error deleting file")
         }
     }
+    
+}
+
+enum PlistFileName: String {
+    case internalName = "Mahjong-Internal"
+}
+
+extension Bundle {
+    
+    static func infoPlistValue(forKey key: String) -> Any? {
+        guard let value = Bundle.main.object(forInfoDictionaryKey: key) else {
+           return nil
+        }
+        return value
+    }
+    
+    static func parsePlist(ofName name: PlistFileName) -> [String: AnyObject]? {
+
+            // check if plist data available
+        guard let plistURL = Bundle.main.url(forResource: name.rawValue, withExtension: "plist"),
+                let data = try? Data(contentsOf: plistURL)
+                else {
+                    return nil
+            }
+
+            // parse plist into [String: Anyobject]
+            guard let plistDictionary = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: AnyObject] else {
+                return nil
+            }
+
+            return plistDictionary
+        }
     
 }
 

@@ -10,6 +10,14 @@ import SideMenu
 
 class AppUIViewControllers {
     
+    static func resetPasswordScreen(viewModel: SignUpViewModel = SignUpViewModel()) -> ResetPasswordScreen {
+        let sb = UIStoryboard(name: ResetPasswordScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: ResetPasswordScreen.identifier) { coder in
+            ResetPasswordScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
     static func profileScreen(viewModel: ProfileScreenViewModel = ProfileScreenViewModel()) -> ProfileScreen {
         let sb = UIStoryboard(name: ProfileScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(identifier: ProfileScreen.identifier) { coder in

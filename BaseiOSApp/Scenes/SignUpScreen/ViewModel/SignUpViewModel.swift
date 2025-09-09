@@ -9,12 +9,58 @@ import Foundation
 
 class SignUpViewModel {
     
+    //For APIs
+    private(set) var resetToken: String?
     private(set) var signUpResponse: Bindable<UserResponse> = Bindable<UserResponse>()
-    
     private var userService: any ServicesDelegate
     
-    init(userService: any ServicesDelegate = UserService()) {
+    init(resetToken: String? = nil, userService: any ServicesDelegate = UserService()) {
+        self.resetToken = resetToken
         self.userService = userService
+    }
+    
+    func createAndValidateResetPasswordPayload(newPassword: String?, confirmPassword: String?) -> (Bool, String?, [String: Any]) {
+        var isValid: Bool = true
+        var parameters: [String: Any] = ["role":"user"]
+        var validationMessage: String = ""
+        if let newPassword, newPassword != "" {
+            let isValidPassword = validatePassword(string: newPassword)
+            let isValidConfirmPassword = confirmPasswordValidity(password: newPassword, confirmPassword: confirmPassword)
+            
+            if let confirmPassword, confirmPassword != "" {
+                if isValidPassword && isValidConfirmPassword {
+                    parameters.updateValue(newPassword, forKey: "newPassword")
+                }
+                else if !isValidPassword {
+                    isValid = false
+                    validationMessage += "Please enter a valid password"
+                    return (isValid, validationMessage, [:])
+                }
+                else {
+                    isValid = false
+                    validationMessage += "Password mismatch"
+                    return (isValid, validationMessage, [:])
+                }
+            }
+            else {
+                isValid = false
+                validationMessage = "Password mismatch"
+                return (isValid, validationMessage, [:])
+            }
+            
+        }
+        else {
+            isValid = false
+            validationMessage += "Valid Passwords, "
+        }
+        
+        if !validationMessage.isEmpty, validationMessage.count > 2 {
+            validationMessage = String(validationMessage.dropLast(2))
+            validationMessage += " Required"
+        }
+        
+        return (isValid, validationMessage, parameters)
+        
     }
     
     func createSignInPayload(

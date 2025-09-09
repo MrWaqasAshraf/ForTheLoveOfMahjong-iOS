@@ -89,7 +89,13 @@ class ForgotPasswordScreen: UIViewController {
     
     //MARK: ButtonActions
     @IBAction func sendBtn(_ sender: Any) {
-        showOtpUI(inputViewModel: OTPViewModel(email: emailField.text, showEmailOtpUIs: true, showMobileOtpUIs: false))
+        
+        //Temp disabled
+//        showOtpUI(inputViewModel: OTPViewModel(email: emailField.text, showEmailOtpUIs: true, showMobileOtpUIs: false))
+        
+        let vc = AppUIViewControllers.resetPasswordScreen()
+        appNavigationCoordinator.pushUIKit(vc)
+        
     }
     
     

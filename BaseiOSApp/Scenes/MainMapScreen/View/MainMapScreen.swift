@@ -46,7 +46,7 @@ class MainMapScreen: UIViewController {
         bindViewModel()
         setupUiElements()
         setupGoogleMap()
-//        callApis()
+        callApis()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.addMyLocationMarker()
@@ -54,7 +54,7 @@ class MainMapScreen: UIViewController {
     }
     
     private func addMyLocationMarker() {
-        let dummyData = MahjongEventData(type: "Tournament", name: "Sample Game", dateTime: ["Wednesday, July 26, 2025 – 07:00 PM", "Thursday, July 26, 2025 – 07:00 PM", "Friday, July 26, 2025 – 07:00 PM"], locationName: "Lahore", address: "Near Minar e Pakistan", lat: 51.5072, lng: 0.1276, category: "Amerain", contact: "12345678", description: "Fresh game for fresh talend", image: nil, userID: "", userName: "Mahjong", userEmail: "info@info.com")
+        let dummyData = MahjongEventData(type: "Tournament", name: "Sample Game", dateTime: ["Wednesday, July 26, 2025 – 07:00 PM", "Thursday, July 26, 2025 – 07:00 PM", "Friday, July 26, 2025 – 07:00 PM"], locationName: "Lahore", address: "Near Minar e Pakistan", lat: 51.5072, lng: 0.1276, category: "Amerain", contact: "12345678", description: "Fresh game for fresh talend", image: nil, user: nil, userName: "Mahjong", userEmail: "info@info.com")
         addMarkers(title: "My location", position: CLLocationCoordinate2D(latitude: 51.5072, longitude: 0.1276), data: dummyData)
     }
     
@@ -374,7 +374,7 @@ extension MainMapScreen {
         viewModel.dashboardResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
             DispatchQueue.main.async {
-                self?.addEventMarkers(data: response?.data)
+                self?.addEventMarkers(data: response?.data?.events)
             }
         }
         

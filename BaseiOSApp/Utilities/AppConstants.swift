@@ -116,6 +116,10 @@ extension Notification.Name {
     
 }
 
+enum CustomHeaderKeys: String {
+    case a_id = "app-id"
+}
+
 enum HttpHeaderKey: String{
     case authorization = "Authorization"
     case language = "lang"
