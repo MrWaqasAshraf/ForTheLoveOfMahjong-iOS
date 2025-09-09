@@ -20,6 +20,7 @@ struct MahjongDataResult: Codable {
 
 // MARK: - MahjongEventData
 struct MahjongEventData: Codable {
+    let id: String?
     let type, name: String?
     let dateTime: [String]?
     let locationName, address: String?
@@ -32,8 +33,29 @@ struct MahjongEventData: Codable {
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
         case user = "userId"
+        case id = "_id"
         case userName, userEmail
     }
+}
+
+struct MahjongDetailResult: Codable {
+    let event: MahjongEventData?
+}
+
+// MARK: - MahjongEventDetailResponse
+struct MahjongEventDetailResponse: Codable {
+    let success: Int?
+    let message: String?
+    let data: MahjongDetailResult?
+    
+    var isSuccessful: Bool {
+        var isSuccess: Bool = false
+        if let success, success >= 200 && success < 300 {
+            isSuccess = true
+        }
+        return isSuccess
+    }
+    
 }
 
 struct UserInfoData: Codable {

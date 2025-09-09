@@ -36,6 +36,7 @@ class EventDetailScreen: UIViewController {
         
         bindViewModel()
         setupUiElements()
+        callApis()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +45,11 @@ class EventDetailScreen: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         initialSetupforHeader(revertNavBar: true)
+    }
+    
+    private func callApis() {
+        ActivityIndicator.shared.showActivityIndicator(view: view)
+        viewModel.mahjongEventDetailApi()
     }
     
     private func setupUiElements() {
@@ -74,6 +80,10 @@ class EventDetailScreen: UIViewController {
         contactLbl.text = data?.contact ?? "N/A"
         
         if let dates = data?.dateTime {
+            let isEmpty = dates.isEmpty
+            if !isEmpty {
+                datesStackView.removeAllSubviews()
+            }
             for (index, date) in dates.enumerated() {
                 let dateUi = BulletPointUI.fromNib()
                 dateUi.titleLbl.text = date
@@ -87,6 +97,7 @@ class EventDetailScreen: UIViewController {
             
         }
         else {
+            datesStackView.removeAllSubviews()
             let seperator = VerticalLineSeparatorUI.fromNib()
             seperator.separatorLineView.isHidden = true
             datesStackView.addArrangedSubview(seperator)
@@ -102,6 +113,17 @@ class EventDetailScreen: UIViewController {
 }
 
 extension EventDetailScreen {
-    private func bindViewModel() {}
+    
+    private func bindViewModel() {
+        
+        viewModel.eventDetail.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            DispatchQueue.main.async {
+                self?.mapEventDetailData(data: response)
+            }
+        }
+        
+    }
+    
 }
 

@@ -11,9 +11,28 @@ class EvenDetailViewModel {
     
     private(set) var eventDetail: Bindable<MahjongEventData> = Bindable<MahjongEventData>()
     
-    init(eventDetail: MahjongEventData? = nil) {
+    //For API
+    private var eventDetailService: any ServicesDelegate
+    
+    init(eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService()) {
         if let eventDetail {
             self.eventDetail.value = eventDetail
+        }
+        self.eventDetailService = eventDetailService
+    }
+    
+    func mahjongEventDetailApi() {
+        eventDetailService.mahjongEventDetailApi(eventId: eventDetail.value?.id) { [weak self] result in
+            switch result{
+            case .success((let data, let json, _)):
+                self?.eventDetail.value = data?.data?.event
+            case .failure(let error):
+                print(error.localizedDescription)
+                if let eventDetail = self?.eventDetail.value {
+                    self?.eventDetail.value = eventDetail
+                }
+                
+            }
         }
     }
     
