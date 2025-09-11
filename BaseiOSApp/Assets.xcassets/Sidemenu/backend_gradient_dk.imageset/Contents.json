@@ -29,7 +29,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "backend_gradient_light_img.svg",
+      "filename" : "bg_color_img_grd.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -40,7 +40,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "background_gradient_dark_img.svg",
+      "filename" : "bg_color_img_grd 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
