@@ -37,7 +37,10 @@ enum EndPoint: String {
     case createEventApi = "/events/add"
     case editEventApi = "events/edit"
     // /events/edit/21    -> 12 is event id
-    
+    case forgotPasswordApi = "auth/forgot-password"
+    case resendOtpApi = "auth/resend-otp"
+    case verifyOtpApi = "auth/verify-otp"
+    case resetPasswordApi = "auth/reset-password"
     
     //Test apis
     case dashboardTestApi = "/attendace_svc/pb/employee-detail/dashboard/"

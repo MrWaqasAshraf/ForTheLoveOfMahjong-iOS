@@ -17,8 +17,12 @@ protocol ServicesDelegate {
     func signUpApi(parameters: [String: Any]?, completion: @escaping (Result<(UserResponse?, [String: Any], Int?), Error>) -> ())
     func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: Int?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
-    func dashboardEventsApi(completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
+    func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ())
+    func forgotPasswordApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func resendOtpApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func resetPasswordApi(resetToken: String?, newPassword: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -49,12 +53,28 @@ extension ServicesDelegate {
         print("Default updateEventApi implementation")
     }
     
-    func dashboardEventsApi(completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())  {
+    func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())  {
         print("Default dashboardEventsApi implementation")
     }
     
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default mahjongEventDetailApi implementation")
+    }
+    
+    func forgotPasswordApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default forgotPasswordApi implementation")
+    }
+    
+    func resendOtpApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default resendOtpApi implementation")
+    }
+    
+    func resetPasswordApi(resetToken: String?, newPassword: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default resetPasswordApi implementation")
+    }
+    
+    func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default resendOtpApi implementation")
     }
     
     //MARK: Test APIs

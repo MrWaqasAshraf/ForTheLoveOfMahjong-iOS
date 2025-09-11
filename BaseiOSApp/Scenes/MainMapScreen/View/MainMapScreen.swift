@@ -48,9 +48,9 @@ class MainMapScreen: UIViewController {
         setupGoogleMap()
         callApis()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.addMyLocationMarker()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//            self.addMyLocationMarker()
+//        }
     }
     
     private func addMyLocationMarker() {
@@ -253,7 +253,7 @@ class MainMapScreen: UIViewController {
     private func addEventMarkers(data: [MahjongEventData]? = nil) {
         if let data {
             mapView?.clear()
-            addMyLocationMarker()
+//            addMyLocationMarker()
             for event in data {
                 if let lat = event.lat, let long = event.lng {
                     addMarkers(title: event.name, position: CLLocationCoordinate2D(latitude: lat, longitude: long), data: event)
@@ -264,10 +264,15 @@ class MainMapScreen: UIViewController {
     
     @objc
     private func filterEventsScreen(){
-        let vc = AppUIViewControllers.filterEventsScreen()
+        let vc = AppUIViewControllers.filterEventsScreen(viewModel: EventAndFilterViewModel(selectedEventType: viewModel.selectedEventType, selectedCategoryType: viewModel.selectedCategoryType))
         vc.modalPresentationStyle = .pageSheet
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
+        }
+        vc.closure = { [weak self] eventType, category in
+            self?.viewModel.selectedEventType = eventType
+            self?.viewModel.selectedCategoryType = category
+            self?.callApis()
         }
         present(vc, animated: true, completion: nil)
     }
@@ -287,7 +292,7 @@ class MainMapScreen: UIViewController {
     //        let vc = AppUIViewControllers.signInScreen()
     //        let vc = AppUIViewControllers.eventDetailScreen()
             vc.closure = { [weak self] in
-//                self?.callApis()
+                self?.callApis()
             }
             appNavigationCoordinator.pushUIKit(vc)
         }

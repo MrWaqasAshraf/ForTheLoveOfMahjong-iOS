@@ -63,18 +63,35 @@ class EventAndFilterViewModel {
     
     private var manageMahjongEventsService: any ServicesDelegate
     
-    init(preSelectTypeAndCategory: Bool = false, manageMahjongEventsService: any ServicesDelegate = ManageMahjongEventsService()) {
+    init(
+        preSelectTypeAndCategory: Bool = false,
+        selectedEventType: CustomOptionModel? = nil,
+        selectedCategoryType: CustomOptionModel? = nil,
+        manageMahjongEventsService: any ServicesDelegate = ManageMahjongEventsService()
+    ) {
         
         self.manageMahjongEventsService = manageMahjongEventsService
         
         if preSelectTypeAndCategory {
             if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == .tournament }).first as? Int {
                 eventTypes.value?[index].isSelected = true
-                selectedEventType.value = eventTypes.value?[index]
+                self.selectedEventType.value = eventTypes.value?[index]
             }
             if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == .american }).first as? Int {
                 eventCategories.value?[index].isSelected = true
-                selectedCategoryType.value = eventCategories.value?[index]
+                self.selectedCategoryType.value = eventCategories.value?[index]
+            }
+        }
+        else {
+            if let selectedType = selectedEventType, let slug = selectedType.eventSlug {
+                if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == slug }).first as? Int {
+                    eventTypes.value?[index].isSelected = true
+                }
+            }
+            if let selectedCategory = selectedCategoryType, let slug = selectedCategory.eventCategorySlug {
+                if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == slug }).first as? Int {
+                    eventCategories.value?[index].isSelected = true
+                }
             }
         }
         

@@ -16,6 +16,8 @@ class FilterEventsScreen: UIViewController {
     @IBOutlet weak var eventCategoriesCollectionView: UICollectionView!
     @IBOutlet weak var eventCategoriesCollectionViewHeight: NSLayoutConstraint!
     
+    var closure: ((_ eventType: CustomOptionModel?, _ category: CustomOptionModel?)->())? = nil
+    
     private var viewModel: EventAndFilterViewModel
     
     init?(coder: NSCoder, viewModel: EventAndFilterViewModel) {
@@ -44,11 +46,20 @@ class FilterEventsScreen: UIViewController {
     
     private func setupUiElements() {
         
-        
         let cellNib = UINib(nibName: CustomOptionCell.identifier, bundle: .main)
         eventTypesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
         eventCategoriesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
+        
     }
+    
+    //MARK: ButtonActions
+    @IBAction func applyBtn(_ sender: Any) {
+        if let closure {
+            closure(viewModel.selectedEventType.value, viewModel.selectedCategoryType.value)
+            dismiss(animated: true)
+        }
+    }
+    
     
 }
 

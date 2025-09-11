@@ -9,8 +9,10 @@ import Foundation
 
 class DashboardService: ServicesDelegate {
     
-    func dashboardEventsApi(completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
-        getResponse(.get, endPoint: EndPoint.dashboardApi.rawValue, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
+    func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
+        let queryParams: String = QueryParamMaker.makeQueryParam(params: filters)
+        var endPoint: String = EndPoint.dashboardApi.rawValue + queryParams
+        getResponse(.get, endPoint: endPoint, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     
     func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {

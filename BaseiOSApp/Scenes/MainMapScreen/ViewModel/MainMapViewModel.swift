@@ -9,8 +9,10 @@ import Foundation
 
 class MainMapViewModel {
     
+    //For API
+    var selectedEventType: CustomOptionModel?
+    var selectedCategoryType: CustomOptionModel?
     private(set) var dashboardResponse: Bindable<MahjongEventsListResponse> = Bindable<MahjongEventsListResponse>()
-    
     private var dashbaordService: any ServicesDelegate
     
     init(dashbaordService: any ServicesDelegate = DashboardService()) {
@@ -18,8 +20,14 @@ class MainMapViewModel {
     }
     
     func dashboardApi() {
-        
-        dashbaordService.dashboardEventsApi { [weak self] result in
+        var filters: [String] = []
+        if let selectedEventType, selectedEventType.eventSlug != .all {
+            filters.append("type=\(selectedEventType.title)")
+        }
+        if let selectedCategoryType, selectedCategoryType.eventCategorySlug != .all {
+            filters.append("category=\(selectedCategoryType.title)")
+        }
+        dashbaordService.dashboardEventsApi(filters: filters) { [weak self] result in
             switch result {
             case .success((let data, let json, let resp)):
                 self?.dashboardResponse.value = data
