@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,26 +17,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mahjong_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="OPa-3W-pz2">
-                                <rect key="frame" x="16" y="59" width="361" height="250"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="kvs-dO-APF"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3Z-qz-okC">
-                                <rect key="frame" x="16" y="309" width="361" height="1"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="exM-qH-ITC"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrh-jt-ATF">
-                                <rect key="frame" x="16" y="320" width="361" height="20.333333333333314"/>
+                                <rect key="frame" x="16" y="59.000000000000007" width="361" height="20.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="477-1P-kHG">
+                                <rect key="frame" x="0.0" y="99.333333333333343" width="393" height="272.66666666666663"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="u0L-NL-lsp"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="FLl-g7-nsx"/>
+                                </connections>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mahjong_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="OPa-3W-pz2">
+                                <rect key="frame" x="16" y="392" width="361" height="150"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kvs-dO-APF"/>
+                                </constraints>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4il-N6-9D6">
                                 <rect key="frame" x="16" y="552" width="361" height="256"/>
                                 <subviews>
@@ -101,34 +101,23 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="477-1P-kHG">
-                                <rect key="frame" x="0.0" y="360.33333333333331" width="393" height="181.66666666666669"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="u0L-NL-lsp"/>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="FLl-g7-nsx"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="clr_primary_light_4"/>
                         <constraints>
+                            <constraint firstItem="mrh-jt-ATF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="3JQ-zy-hMI"/>
                             <constraint firstItem="mrh-jt-ATF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="9VD-Tm-z4o"/>
-                            <constraint firstItem="x3Z-qz-okC" firstAttribute="top" secondItem="OPa-3W-pz2" secondAttribute="bottom" id="JuD-gl-BPg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4il-N6-9D6" secondAttribute="trailing" constant="16" id="L3V-tn-O2g"/>
                             <constraint firstItem="OPa-3W-pz2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="LRQ-Qd-86M"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mrh-jt-ATF" secondAttribute="trailing" constant="16" id="MaH-90-Xgg"/>
                             <constraint firstItem="477-1P-kHG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Mm6-Pk-f07"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x3Z-qz-okC" secondAttribute="trailing" constant="16" id="OtK-VN-MOB"/>
                             <constraint firstItem="4il-N6-9D6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Qds-bK-iXi"/>
-                            <constraint firstItem="OPa-3W-pz2" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="TJx-SP-azp"/>
+                            <constraint firstItem="OPa-3W-pz2" firstAttribute="top" secondItem="477-1P-kHG" secondAttribute="bottom" constant="20" id="T71-zo-rjl"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="4il-N6-9D6" secondAttribute="bottom" constant="10" id="XIx-jo-Kxx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="477-1P-kHG" secondAttribute="trailing" id="aTv-FF-2ZI"/>
-                            <constraint firstItem="mrh-jt-ATF" firstAttribute="top" secondItem="x3Z-qz-okC" secondAttribute="bottom" constant="10" id="iXp-aF-rMe"/>
-                            <constraint firstItem="4il-N6-9D6" firstAttribute="top" secondItem="477-1P-kHG" secondAttribute="bottom" constant="10" id="jR0-SR-gkd"/>
+                            <constraint firstItem="4il-N6-9D6" firstAttribute="top" secondItem="OPa-3W-pz2" secondAttribute="bottom" constant="10" id="gFi-GZ-Up0"/>
                             <constraint firstItem="477-1P-kHG" firstAttribute="top" secondItem="mrh-jt-ATF" secondAttribute="bottom" constant="20" id="sqR-3c-qm8"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OPa-3W-pz2" secondAttribute="trailing" constant="16" id="uT1-09-wbp"/>
-                            <constraint firstItem="x3Z-qz-okC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="zh2-JT-HsJ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -148,8 +137,5 @@
         <namedColor name="clr_primary_light_4">
             <color red="0.56470588235294117" green="0.67843137254901964" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
