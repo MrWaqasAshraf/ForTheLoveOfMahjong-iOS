@@ -65,6 +65,8 @@ class ResetPasswordScreen: UIViewController {
         let createAndValidatePayload = viewModel.createAndValidateResetPasswordPayload(newPassword: newPasswordField.text, confirmPassword: confirmPasswordField.text)
         if createAndValidatePayload.0 {
             print("Valid payload")
+            ActivityIndicator.shared.showActivityIndicator(view: view)
+            viewModel.resetPasswordApi(payload: createAndValidatePayload.2)
         }
         else {
             GenericToast.showToast(message: createAndValidatePayload.1 ?? "")
@@ -78,7 +80,15 @@ extension ResetPasswordScreen {
     
     private func bindViewModel() {
         
-        
+        viewModel.resetPasswordResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.goBack()
+                }
+            }
+        }
         
     }
     

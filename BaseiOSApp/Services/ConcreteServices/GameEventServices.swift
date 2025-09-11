@@ -11,7 +11,7 @@ class DashboardService: ServicesDelegate {
     
     func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
         let queryParams: String = QueryParamMaker.makeQueryParam(params: filters)
-        var endPoint: String = EndPoint.dashboardApi.rawValue + queryParams
+        let endPoint: String = EndPoint.dashboardApi.rawValue + queryParams
         getResponse(.get, endPoint: endPoint, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     

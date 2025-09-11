@@ -98,7 +98,7 @@ class VerifyReAuthService: ServicesDelegate {
         if let otp, otp != "" {
             params.updateValue(otp, forKey: "otp")
         }
-        getResponse(.post, endPoint: EndPoint.verifyOtpApi.rawValue, parameters: params, completion: completion)
+        getResponse(.post, endPoint: EndPoint.verifyOtpApi.rawValue, parameters: params, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     
     func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]?, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ()) {
@@ -124,7 +124,7 @@ class ReAuthService: ServicesDelegate {
         if let email, email != "" {
             params.updateValue(email, forKey: "email")
         }
-        getResponse(.post, endPoint: EndPoint.forgotPasswordApi.rawValue, parameters: params, completion: completion)
+        getResponse(.post, endPoint: EndPoint.forgotPasswordApi.rawValue, parameters: params, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     
     func resendOtpApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
@@ -132,10 +132,10 @@ class ReAuthService: ServicesDelegate {
         if let email, email != "" {
             params.updateValue(email, forKey: "email")
         }
-        getResponse(.post, endPoint: EndPoint.resendOtpApi.rawValue, parameters: params, completion: completion)
+        getResponse(.post, endPoint: EndPoint.resendOtpApi.rawValue, parameters: params, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     
-    func resetPasswordApi(resetToken: String?, newPassword: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+    func resetPasswordApi(payload: [String: Any]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
         
         /*
          {
@@ -143,14 +143,7 @@ class ReAuthService: ServicesDelegate {
            "newPassword": "Test@123"
          }
          */
-        var params: [String: Any] = [:]
-        if let resetToken, resetToken != "" {
-            params.updateValue(resetToken, forKey: "resetToken")
-        }
-        if let newPassword, newPassword != "" {
-            params.updateValue(newPassword, forKey: "newPassword")
-        }
-        getResponse(.post, endPoint: EndPoint.resetPasswordApi.rawValue, parameters: params, completion: completion)
+        getResponse(.post, endPoint: EndPoint.resetPasswordApi.rawValue, parameters: payload, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     
     func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]?, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {

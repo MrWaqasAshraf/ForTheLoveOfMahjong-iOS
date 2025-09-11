@@ -57,15 +57,15 @@ class ForgotPasswordScreen: UIViewController {
                 
                 if btnIndex == 0 {
                     DispatchQueue.main.async {
-//                        ActivityIndicator.shared.showActivityIndicator(view: otpScreen)
+                        ActivityIndicator.shared.showActivityIndicator(view: otpScreen)
                     }
-                    self?.viewModel.verifyOtpApi(emailOtp: otpViewModel.emailOtpCode.value, phoneOtp: otpViewModel.mobileOtpCode.value)
+                    self?.viewModel.verifyOtpApi(email: otpViewModel.email, emailOtp: otpViewModel.emailOtpCode.value)
                     
                 }
                 else if btnIndex == 101 {
                     //Resend email otp
                     DispatchQueue.main.async {
-//                        ActivityIndicator.shared.showActivityIndicator(view: otpScreen)
+                        ActivityIndicator.shared.showActivityIndicator(view: otpScreen)
                     }
                     self?.viewModel.resendOtpApi(email: otpViewModel.email)
                 }
@@ -87,14 +87,29 @@ class ForgotPasswordScreen: UIViewController {
         }
     }
     
+    private func navigateToResetPasswordScreen(resetToken: String? = nil) {
+        let vc = AppUIViewControllers.resetPasswordScreen(viewModel: SignUpViewModel(resetToken: resetToken))
+        appNavigationCoordinator.pushUIKit(vc)
+    }
+    
     //MARK: ButtonActions
     @IBAction func sendBtn(_ sender: Any) {
+        
+        let isValidEmail = emailField.text?.validateEmail()
+        
+        if isValidEmail == true {
+            ActivityIndicator.shared.showActivityIndicator(view: view)
+            viewModel.forgotPasswordApi(email: emailField.text)
+        }
+        else {
+            GenericToast.showToast(message: "Invalid email")
+        }
+        
         
         //Temp disabled
 //        showOtpUI(inputViewModel: OTPViewModel(email: emailField.text, showEmailOtpUIs: true, showMobileOtpUIs: false))
         
-        let vc = AppUIViewControllers.resetPasswordScreen()
-        appNavigationCoordinator.pushUIKit(vc)
+        
         
     }
     
@@ -104,6 +119,35 @@ class ForgotPasswordScreen: UIViewController {
 extension ForgotPasswordScreen {
     
     private func bindViewModel() {
+        
+        viewModel.verfiyOtpResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.navigateToResetPasswordScreen(resetToken: response?.data?.resetToken)
+                }
+            }
+            else {
+                GenericToast.showToast(message: response?.message ?? "")
+            }
+        }
+        
+        viewModel.resendOtpResponse.bind { response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+        }
+        
+        viewModel.forgotPasswordResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.showOtpUI(inputViewModel: OTPViewModel(email: self?.emailField.text, showEmailOtpUIs: true, showMobileOtpUIs: false))
+                }
+            }
+            else {
+                GenericToast.showToast(message: response?.message ?? "")
+            }
+        }
         
     }
     

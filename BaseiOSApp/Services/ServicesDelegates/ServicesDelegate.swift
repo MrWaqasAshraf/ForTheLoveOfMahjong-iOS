@@ -21,7 +21,7 @@ protocol ServicesDelegate {
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ())
     func forgotPasswordApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func resendOtpApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
-    func resetPasswordApi(resetToken: String?, newPassword: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func resetPasswordApi(payload: [String: Any]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
@@ -69,7 +69,7 @@ extension ServicesDelegate {
         print("Default resendOtpApi implementation")
     }
     
-    func resetPasswordApi(resetToken: String?, newPassword: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+    func resetPasswordApi(payload: [String: Any]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default resetPasswordApi implementation")
     }
     
