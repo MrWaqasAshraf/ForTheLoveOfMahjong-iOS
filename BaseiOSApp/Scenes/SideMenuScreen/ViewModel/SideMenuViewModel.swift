@@ -38,7 +38,8 @@ class SideMenuViewModel {
     var sideMenuOptionsList: [SideMenuOptionModel] = [.init(title: "Profile", slug: .profile, image: .groupProfileIconSystem),
                                                       .init(title: "Events", slug: .events, image: .docIconSystem),
                                                       .init(title: "Favorite", slug: .favorite, image: .hearIconSystem),
-                                                      .init(title: "Dark Mode", slug: .darkMode, image: .moonHalfIconSystem, isOn: false)]
+//                                                      .init(title: "Dark Mode", slug: .darkMode, image: .moonHalfIconSystem, isOn: false)
+    ]
     
     init() {
         checkLogoutStatus()

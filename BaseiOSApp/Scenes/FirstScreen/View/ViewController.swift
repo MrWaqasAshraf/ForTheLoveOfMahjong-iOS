@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     static let identifier = "Main"
     static let vcIdentifier = "ViewController"
     
+    @IBOutlet weak var logoIcon: UIImageView!
+    
     var isFirstOpen: Bool = true
 
     override func viewDidLoad() {
@@ -24,13 +26,20 @@ class ViewController: UIViewController {
             
             appNavigationCoordinator.navigationController = navigationController
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            logoIcon.animShow()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                appNavigationCoordinator.shouldShowNavController(show: true, animted: false)
                 let vc = AppUIViewControllers.mainMapScreen()
                 appNavigationCoordinator.pushUIKit(vc)
             }
             
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        appNavigationCoordinator.shouldShowNavController(show: false, animted: false)
     }
 
     @IBAction func nextBtn(_ sender: Any) {
