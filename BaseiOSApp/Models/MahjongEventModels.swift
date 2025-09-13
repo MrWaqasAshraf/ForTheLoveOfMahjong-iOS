@@ -31,7 +31,7 @@ struct MahjongDataResult: Codable {
 struct MahjongEventData: Codable {
     let id: String?
     let type, name: String?
-    let dateTime, favouritedBy: [String]?
+    var dateTime, favouritedBy: [String]?
     let locationName, address: String?
     let lat, lng: Double?
     let category, contact, description: String?
@@ -39,7 +39,7 @@ struct MahjongEventData: Codable {
     let user: UserInfoData?
     let userName, userEmail: String?
     let isActive: Bool?
-    let viewCount, favouriteCount: Int?
+    var viewCount, favouriteCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
@@ -78,4 +78,32 @@ struct UserInfoData: Codable {
         case firstName, lastName
     }
     
+}
+
+// MARK: - FavouriteInfoResponse
+struct FavouriteInfoResponse: Codable {
+    let success: Int?
+    let message: String?
+    let data: FavouriteInfoData?
+    
+    var isSuccessful: Bool {
+        var isSuccess: Bool = false
+        if let success, success >= 200 && success < 300 {
+            isSuccess = true
+        }
+        return isSuccess
+    }
+    
+}
+
+// MARK: - FavouriteInfoData
+struct FavouriteInfoData: Codable {
+    let eventID, eventName: String?
+    let isFavourited: Bool?
+    let favouriteCount: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case eventID = "eventId"
+        case eventName, isFavourited, favouriteCount
+    }
 }

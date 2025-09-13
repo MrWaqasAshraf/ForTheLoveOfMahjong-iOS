@@ -24,6 +24,7 @@ protocol ServicesDelegate {
     func resetPasswordApi(payload: [String: Any]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ())
     func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
+    func toggleFavouriteEventApi(eventId: String?, completion: @escaping (Result<(FavouriteInfoResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -80,6 +81,10 @@ extension ServicesDelegate {
     
     func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default eventsListApi implementation")
+    }
+    
+    func toggleFavouriteEventApi(eventId: String?, completion: @escaping (Result<(FavouriteInfoResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default toggleFavouriteEventApi implementation")
     }
     
     //MARK: Test APIs

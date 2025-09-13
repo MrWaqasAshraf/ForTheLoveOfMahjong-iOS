@@ -43,6 +43,8 @@ enum EndPoint: String {
     case resendOtpApi = "/auth/resend-otp"
     case verifyOtpApi = "/auth/verify-otp"
     case resetPasswordApi = "/auth/reset-password"
+    case toggleFavouriteEventApi = "/events/favourite"
+    // events/favourite/68c4701e906f31c863134ec3 -> 68c4701e906f31c863134ec3 is event id
     
     //Test apis
     case dashboardTestApi = "/attendace_svc/pb/employee-detail/dashboard/"
@@ -69,18 +71,6 @@ enum SocketEventName: String {
 }
 
 enum NotificationCenterNames {
-    static let updateTripsList: Notification.Name = Notification.Name("updateTripsList")
-    static let updateVehicleInfo: Notification.Name = Notification.Name("updateVehicleInfo")
-    static let updateTrip: Notification.Name = Notification.Name("updateTrip")
-    static let completeTrip: Notification.Name = Notification.Name("completeTrip")
-    static let updateDashboard: Notification.Name = Notification.Name("updateDashboard")
-    static let addCard: Notification.Name = Notification.Name("addCard")
-    
-    //Notifications for events
-    static let socketRouteDeviation: Notification.Name = Notification.Name("routeDeviation")
-    static let socketTripUpdated: Notification.Name = Notification.Name("tripUpdated")
-    static let socketDisconnectedForTrip: Notification.Name = Notification.Name("socketDisconnectedForTrip")
-    static let traitCollectionDidChangeNotification: Notification.Name = Notification.Name("traitCollectionDidChangeNotification")
     
     //Notifications for location manager
     //didFailWithError
@@ -96,18 +86,7 @@ enum NotificationCenterNames {
 
 extension Notification.Name {
     
-    static let updateTripsList: Notification.Name = Notification.Name("updateTripsList")
-    static let updateVehicleInfo: Notification.Name = Notification.Name("updateVehicleInfo")
-    static let updateTrip: Notification.Name = Notification.Name("updateTrip")
-    static let completeTrip: Notification.Name = Notification.Name("completeTrip")
-    static let updateDashboard: Notification.Name = Notification.Name("updateDashboard")
-    static let addCard: Notification.Name = Notification.Name("addCard")
-    
-    //Notifications for events
-    static let socketRouteDeviation: Notification.Name = Notification.Name("routeDeviation")
-    static let socketTripUpdated: Notification.Name = Notification.Name("tripUpdated")
-    static let socketDisconnectedForTrip: Notification.Name = Notification.Name("socketDisconnectedForTrip")
-    static let traitCollectionDidChangeNotification: Notification.Name = Notification.Name("traitCollectionDidChangeNotification")
+    static let toggleFavourite: Notification.Name = Notification.Name("toggleFavourite")
     
     //Notifications for location manager
     //didFailWithError

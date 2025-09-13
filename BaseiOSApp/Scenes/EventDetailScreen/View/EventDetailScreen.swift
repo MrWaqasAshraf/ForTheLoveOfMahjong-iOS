@@ -39,6 +39,7 @@ class EventDetailScreen: UIViewController {
         bindViewModel()
         setupUiElements()
         callApis()
+//        viewModel.groupNotifier()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +89,7 @@ class EventDetailScreen: UIViewController {
         }
         
         let isFavourite = data?.favouritedBy?.filter({ $0 == appUserData?.userID }).first != nil
+        viewModel.isFavouriteEvent = isFavourite
         favouriteIcon.tintColor = isFavourite ? .clr_primary_light : .clr_gray_1
         
         if let dates = data?.dateTime {
@@ -122,7 +124,9 @@ class EventDetailScreen: UIViewController {
     
     //MARK: ButtonActions
     @IBAction func markFavoruiteBtn(_ sender: Any) {
-        
+        viewModel.isFavouriteEvent.toggle()
+        favouriteIcon.tintColor = viewModel.isFavouriteEvent ? .clr_primary_light : .clr_gray_1
+        viewModel.toggleFavouriteApi()
     }
     
     
@@ -136,6 +140,12 @@ extension EventDetailScreen {
             ActivityIndicator.shared.removeActivityIndicator()
             DispatchQueue.main.async {
                 self?.mapEventDetailData(data: response)
+            }
+        }
+        
+        viewModel.favoruiteEventResponse.bind { response in
+            if response?.isSuccessful != true {
+                GenericToast.showToast(message: response?.message ?? "")
             }
         }
         

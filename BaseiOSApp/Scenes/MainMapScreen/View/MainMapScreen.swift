@@ -44,6 +44,7 @@ class MainMapScreen: UIViewController {
         super.viewDidLoad()
         
         bindViewModel()
+        viewModel.observeFavouriteNotifications()
         setupUiElements()
         setupGoogleMap()
         callApis()
