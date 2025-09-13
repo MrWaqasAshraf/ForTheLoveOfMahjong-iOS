@@ -11,30 +11,41 @@ import Foundation
 struct MahjongEventsListResponse: Codable {
     let success: Int?
     let message: String?
-    let data: MahjongDataResult?
+    var data: MahjongDataResult?
+    
+    var isSuccessful: Bool {
+        var isSuccess: Bool = false
+        if let success, success >= 200 && success < 300 {
+            isSuccess = true
+        }
+        return isSuccess
+    }
+    
 }
 
 struct MahjongDataResult: Codable {
-    let events: [MahjongEventData]?
+    var events: [MahjongEventData]?
 }
 
 // MARK: - MahjongEventData
 struct MahjongEventData: Codable {
     let id: String?
     let type, name: String?
-    let dateTime: [String]?
+    let dateTime, favouritedBy: [String]?
     let locationName, address: String?
     let lat, lng: Double?
     let category, contact, description: String?
     let image: String?
     let user: UserInfoData?
     let userName, userEmail: String?
+    let isActive: Bool?
+    let viewCount, favouriteCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
         case user = "userId"
         case id = "_id"
-        case userName, userEmail
+        case userName, userEmail, isActive, viewCount, favouriteCount, favouritedBy
     }
 }
 

@@ -34,6 +34,8 @@ enum EndPoint: String {
     case loginApi = "/auth/login"
     case signUpApi = "/auth/signup"
     case dashboardApi = "/dashboard/events"
+    case eventsListApi = "/events"
+    // for favourite do this - > /events?favouritesOnly=true
     case createEventApi = "/events/add"
     case editEventApi = "/events/edit"
     // /events/edit/21    -> 12 is event id

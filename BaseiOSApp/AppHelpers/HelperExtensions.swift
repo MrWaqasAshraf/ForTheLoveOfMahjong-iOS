@@ -153,24 +153,24 @@ extension NibInstantiatable where Self: UIView {
 }
 
 //import SDWebImage
-//extension UIImageView{
-//    
-////    func getUrlImage(inputRoute: String? = nil, url: String?){
-////        let mutableBaseUrl = "\(baseUrlDomain)\(inputRoute ?? DomainRoute.images.rawValue)"
-////        guard let url else { return }
-////        let imageUrlString: String = "\(mutableBaseUrl)\(url)"
-////        print("Image url: \(imageUrlString)")
-////        let imageUrl: URL? = URL(string: imageUrlString)
-////        self.sd_setImage(with: imageUrl)
-////    }
-////
-//    func getFullUrlImage(url: String?, placeHolderImage: UIImage? = .placeholder_image){
+extension UIImageView{
+    
+//    func getUrlImage(inputRoute: String? = nil, url: String?){
+//        let mutableBaseUrl = "\(baseUrlDomain)\(inputRoute ?? DomainRoute.images.rawValue)"
 //        guard let url else { return }
-//        let imageUrl: URL? = URL(string: url)
-//        self.sd_setImage(with: imageUrl, placeholderImage: placeHolderImage)
+//        let imageUrlString: String = "\(mutableBaseUrl)\(url)"
+//        print("Image url: \(imageUrlString)")
+//        let imageUrl: URL? = URL(string: imageUrlString)
+//        self.sd_setImage(with: imageUrl)
 //    }
-//    
-//}
+//
+    func getFullUrlImage(url: String?, placeHolderImage: UIImage? = .placeholder_image){
+        guard let url else { return }
+        let imageUrl: URL? = URL(string: url)
+        self.sd_setImage(with: imageUrl, placeholderImage: placeHolderImage)
+    }
+    
+}
 
 extension Float {
     

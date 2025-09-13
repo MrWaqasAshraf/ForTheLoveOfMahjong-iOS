@@ -114,6 +114,8 @@ extension String{
     static let truck_travel_icon = "truck_travel_icon"
     static let kebab_menu_icon = "kebab_menu_icon"
     static let app_logo_horizontal = "app_logo_horizontal"
+    static let mahjong_logo = "mahjong_logo"
+    static let mahjong_logo_2 = "mahjong_logo_2"
     
     //Side menu
     static let paymentMethodIconSystem = "creditcard.fill"
@@ -284,6 +286,8 @@ extension UIImage {
     static let route_icon_clrBg_svg = UIImage(named: .route_icon_clrBg_svg)!
     static let app_logo_horizontal = UIImage(named: .app_logo_horizontal)!
     static let filter_round_icon = UIImage(named: .filter_round_icon)!
+    static let mahjong_logo = UIImage(named: .mahjong_logo)!
+    static let mahjong_logo_2 = UIImage(named: .mahjong_logo_2)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!

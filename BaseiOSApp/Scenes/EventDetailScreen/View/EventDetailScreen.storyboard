@@ -102,13 +102,49 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5mS-Cs-VZ4">
+                                                <rect key="frame" x="353" y="10" width="30" height="30"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bHI-KV-OPy">
+                                                        <rect key="frame" x="5" y="6.9999999999999982" width="20" height="17"/>
+                                                        <color key="tintColor" name="clr_gray_1"/>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFg-eL-sfs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <connections>
+                                                            <action selector="markFavoruiteBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Z4R-0t-Bfd"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="QFg-eL-sfs" firstAttribute="leading" secondItem="5mS-Cs-VZ4" secondAttribute="leading" id="4G7-Jk-O4T"/>
+                                                    <constraint firstItem="QFg-eL-sfs" firstAttribute="top" secondItem="5mS-Cs-VZ4" secondAttribute="top" id="8be-FT-l4c"/>
+                                                    <constraint firstAttribute="bottom" secondItem="QFg-eL-sfs" secondAttribute="bottom" id="AHD-vB-FCE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QFg-eL-sfs" secondAttribute="trailing" id="R6g-Y3-5ai"/>
+                                                    <constraint firstAttribute="width" constant="30" id="gl9-b8-MWV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bHI-KV-OPy" secondAttribute="trailing" constant="5" id="hji-3c-Cba"/>
+                                                    <constraint firstItem="bHI-KV-OPy" firstAttribute="top" secondItem="5mS-Cs-VZ4" secondAttribute="top" constant="5" id="k1O-7s-whb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bHI-KV-OPy" secondAttribute="bottom" constant="5" id="pfi-0W-rCS"/>
+                                                    <constraint firstItem="bHI-KV-OPy" firstAttribute="leading" secondItem="5mS-Cs-VZ4" secondAttribute="leading" constant="5" id="xqZ-hv-cNh"/>
+                                                    <constraint firstAttribute="height" constant="30" id="zvy-t0-FqS"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.55557668108201874" green="0.55682874976070751" blue="0.57593514883156982" alpha="0.2016763245033113" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
+                                            <constraint firstItem="5mS-Cs-VZ4" firstAttribute="top" secondItem="Edu-KA-a80" secondAttribute="top" constant="10" id="ARS-u2-pEf"/>
                                             <constraint firstItem="hrK-EJ-rFC" firstAttribute="top" secondItem="Edu-KA-a80" secondAttribute="top" id="Aml-Ba-NAl"/>
                                             <constraint firstAttribute="trailing" secondItem="hrK-EJ-rFC" secondAttribute="trailing" id="Do9-Kt-S8Y"/>
                                             <constraint firstAttribute="bottom" secondItem="hrK-EJ-rFC" secondAttribute="bottom" id="KAC-MT-937"/>
                                             <constraint firstItem="hrK-EJ-rFC" firstAttribute="leading" secondItem="Edu-KA-a80" secondAttribute="leading" id="cu4-0o-qfd"/>
+                                            <constraint firstAttribute="trailing" secondItem="5mS-Cs-VZ4" secondAttribute="trailing" constant="10" id="fWx-k3-1NJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -141,7 +177,7 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Search"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="point.3.filled.connected.trianglepath.dotted" catalog="system" imagePlacement="trailing" title="Share event details">
+                                                <buttonConfiguration key="configuration" style="plain" title="Share event details         ">
                                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 </buttonConfiguration>
                                                 <userDefinedRuntimeAttributes>
@@ -150,11 +186,21 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_icon" translatesAutoresizingMaskIntoConstraints="NO" id="QU1-xz-1oG">
+                                                <rect key="frame" x="240.66666666666669" y="5" width="30" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="KbH-XB-GBS"/>
+                                                    <constraint firstAttribute="width" constant="30" id="KjF-kb-bDH"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="cFu-ro-iJY" secondAttribute="bottom" id="3YM-eg-qVn"/>
+                                            <constraint firstItem="QU1-xz-1oG" firstAttribute="centerY" secondItem="cFu-ro-iJY" secondAttribute="centerY" id="4Pf-zY-T6j"/>
                                             <constraint firstItem="cFu-ro-iJY" firstAttribute="top" secondItem="JS5-9f-d8J" secondAttribute="top" id="B0j-Hu-xgA"/>
+                                            <constraint firstItem="QU1-xz-1oG" firstAttribute="trailing" secondItem="cFu-ro-iJY" secondAttribute="trailing" constant="-20" id="N9m-bq-rXY"/>
                                             <constraint firstItem="cFu-ro-iJY" firstAttribute="centerX" secondItem="JS5-9f-d8J" secondAttribute="centerX" id="m6z-Ac-5k2"/>
                                         </constraints>
                                     </view>
@@ -369,6 +415,8 @@
                         <outlet property="eventLocationNameLbl" destination="AWf-Fz-Kut" id="9oW-fd-9uR"/>
                         <outlet property="eventNameLbl" destination="dW6-7p-jvf" id="swP-Ae-0U5"/>
                         <outlet property="eventTypeLbl" destination="MsE-S5-l2D" id="WHZ-am-2Hd"/>
+                        <outlet property="favouriteIcon" destination="bHI-KV-OPy" id="NtJ-VF-Gfb"/>
+                        <outlet property="favouriteIconContainerView" destination="5mS-Cs-VZ4" id="9lr-mf-vny"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -378,7 +426,11 @@
     </scenes>
     <resources>
         <image name="detail_image" width="682.66668701171875" height="455.33334350585938"/>
-        <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="128" height="96"/>
+        <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="share_icon" width="512" height="512"/>
+        <namedColor name="clr_gray_1">
+            <color red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="clr_gray_4">
             <color red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -389,7 +441,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

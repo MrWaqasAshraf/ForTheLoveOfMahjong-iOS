@@ -15,7 +15,7 @@ class MainMapViewModel {
     private(set) var dashboardResponse: Bindable<MahjongEventsListResponse> = Bindable<MahjongEventsListResponse>()
     private var dashbaordService: any ServicesDelegate
     
-    init(dashbaordService: any ServicesDelegate = DashboardService()) {
+    init(dashbaordService: any ServicesDelegate = EventsListingService()) {
         self.dashbaordService = dashbaordService
     }
     

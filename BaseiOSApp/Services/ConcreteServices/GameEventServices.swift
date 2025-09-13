@@ -7,11 +7,17 @@
 
 import Foundation
 
-class DashboardService: ServicesDelegate {
+class EventsListingService: ServicesDelegate {
     
     func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
         let queryParams: String = QueryParamMaker.makeQueryParam(params: filters)
         let endPoint: String = EndPoint.dashboardApi.rawValue + queryParams
+        getResponse(.get, endPoint: endPoint, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
+    }
+    
+    func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
+        let queryParams: String = QueryParamMaker.makeQueryParam(params: queryParams)
+        let endPoint: String = EndPoint.eventsListApi.rawValue + queryParams
         getResponse(.get, endPoint: endPoint, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
     }
     

@@ -23,6 +23,7 @@ protocol ServicesDelegate {
     func resendOtpApi(email: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func resetPasswordApi(payload: [String: Any]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ())
+    func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -75,6 +76,10 @@ extension ServicesDelegate {
     
     func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default resendOtpApi implementation")
+    }
+    
+    func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default eventsListApi implementation")
     }
     
     //MARK: Test APIs

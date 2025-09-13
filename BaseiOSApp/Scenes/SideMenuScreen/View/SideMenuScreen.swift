@@ -82,10 +82,22 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
             }
         case .events:
             print("TBD")
+            if let appUserData {
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Events", eventsListType: .allEvents))
+                appNavigationCoordinator.pushUIKit(vc)
+            }
+            else {
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.signInScreen()
+                appNavigationCoordinator.pushUIKit(vc)
+            }
         case .favorite:
             print("TBD")
             if let appUserData {
-                
+                dismiss(animated: true)
+                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Favourites", eventsListType: .favourites))
+                appNavigationCoordinator.pushUIKit(vc)
             }
             else {
                 dismiss(animated: true)

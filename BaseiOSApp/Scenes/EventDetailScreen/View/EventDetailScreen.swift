@@ -18,6 +18,8 @@ class EventDetailScreen: UIViewController {
     @IBOutlet weak var contactLbl: UILabel!
     @IBOutlet weak var eventDescriptionLbl: UILabel!
     @IBOutlet weak var datesStackView: UIStackView!
+    @IBOutlet weak var favouriteIconContainerView: UIView!
+    @IBOutlet weak var favouriteIcon: UIImageView!
     
     private var viewModel: EvenDetailViewModel
     
@@ -64,6 +66,8 @@ class EventDetailScreen: UIViewController {
         
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .center, customView: titleLbl)]))
         
+        
+        
 //        initialSetupforHeader(color: .clr_transparent_shade_1)
         
         mapEventDetailData(data: viewModel.eventDetail.value)
@@ -78,6 +82,13 @@ class EventDetailScreen: UIViewController {
         eventLocationNameLbl.text = data?.address ?? "..."
         eventDescriptionLbl.text = data?.description ?? "N/A"
         contactLbl.text = data?.contact ?? "N/A"
+        
+        if let remoteUserId = data?.user?.id {
+            favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
+        }
+        
+        let isFavourite = data?.favouritedBy?.filter({ $0 == appUserData?.userID }).first != nil
+        favouriteIcon.tintColor = isFavourite ? .clr_primary_light : .clr_gray_1
         
         if let dates = data?.dateTime {
             let isEmpty = dates.isEmpty
@@ -107,6 +118,11 @@ class EventDetailScreen: UIViewController {
     @objc
     private func goBack() {
         appNavigationCoordinator.pop()
+    }
+    
+    //MARK: ButtonActions
+    @IBAction func markFavoruiteBtn(_ sender: Any) {
+        
     }
     
     
