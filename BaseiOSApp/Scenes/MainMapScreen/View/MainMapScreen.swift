@@ -106,17 +106,30 @@ class MainMapScreen: UIViewController {
         appLocationManager.desiredAccuracy = kCLLocationAccuracyBest
         // 2
         
-        customQueue.async {
-            if CLLocationManager.locationServicesEnabled() {
-                // 3
-                appLocationManager.requestLocation()
-                appLocationManager.startUpdatingLocation()
-            } else {
-                // 5
-                appLocationManager.requestAlwaysAuthorization()
+        customQueue.async { [weak self] in
+            
+            if appLocationManager.authorizationStatus == .restricted {
+                self?.checkLocationPermission()
             }
+            else {
+                if CLLocationManager.locationServicesEnabled() {
+                    // 3
+                    appLocationManager.requestLocation()
+                    appLocationManager.startUpdatingLocation()
+                }
+                else {
+                    // 5
+                    appLocationManager.requestAlwaysAuthorization()
+                }
+            }
+            
+            
         }
         
+    }
+    
+    private func checkLocationPermission() {
+        locationPermissionsManager.checkLocationSetting()
     }
     
     private func setupGoogleMap(){
