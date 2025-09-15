@@ -47,6 +47,7 @@ class MainMapScreen: UIViewController {
         viewModel.observeFavouriteNotifications()
         setupUiElements()
         setupGoogleMap()
+        checkLocationPermission()
         callApis()
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -100,31 +101,39 @@ class MainMapScreen: UIViewController {
         
     }
     
+    //Don't use
     private func setupLocationManager(){
         
         //Setup core location
         appLocationManager.delegate = self
         appLocationManager.desiredAccuracy = kCLLocationAccuracyBest
-        // 2
+        
         
         customQueue.async { [weak self] in
-            
+//
             if appLocationManager.authorizationStatus == .restricted {
+                print("Restricted")
                 self?.checkLocationPermission()
             }
             else {
                 if CLLocationManager.locationServicesEnabled() {
+                    print("set")
+                    
                     // 3
                     appLocationManager.requestLocation()
                     appLocationManager.startUpdatingLocation()
                 }
                 else {
+                    
+                    print("Not set")
+                    
                     // 5
-                    appLocationManager.requestAlwaysAuthorization()
+//                    appLocationManager.requestAlwaysAuthorization()
+                    appLocationManager.requestWhenInUseAuthorization()
                 }
             }
-            
-            
+//            
+//            
         }
         
     }
@@ -139,7 +148,7 @@ class MainMapScreen: UIViewController {
 //        appLocationManager.delegate = self
         // 2
         
-        setupLocationManager()
+//        setupLocationManager()
         
         guard mapView == nil else { return }
         
@@ -235,11 +244,25 @@ class MainMapScreen: UIViewController {
         
         var marker: GMSMarker = GMSMarker(position: position)
         
-        if let myLocation = appLocationManager.location?.coordinate {
-            marker.position = myLocation
-        }
         
         let customIcon = CustomMarker.fromNib()
+        if let category = data?.category {
+            switch category {
+            case "American":
+                customIcon.markerImage.image = .map_marker_svg_3
+            case "Chinese":
+                customIcon.markerImage.image = .map_marker_svg_5
+            case "Hong Kong":
+                customIcon.markerImage.image = .map_marker_svg_6
+            case "Riichi":
+                customIcon.markerImage.image = .map_marker_svg_7
+            case "Wright Petterson":
+                customIcon.markerImage.image = .map_marker_svg_8
+            default:
+                customIcon.markerImage.image = .map_marker_svg_3
+            }
+        }
+        
         marker.title = title
         marker.userData = data
         marker.iconView = customIcon
@@ -273,6 +296,18 @@ class MainMapScreen: UIViewController {
                     addMarkers(title: event.name, position: CLLocationCoordinate2D(latitude: lat, longitude: long), data: event)
                 }
             }
+            DispatchQueue.main.async {
+                self.moveMarker(eventData: data.first)
+            }
+        }
+        
+    }
+    
+    private func moveMarker(eventData: MahjongEventData?) {
+        if let eventData, let lat = eventData.lat, let long = eventData.lng {
+            let coordiantes = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//            mapView?.camera = GMSCameraPosition(target: coordiantes, zoom: 16)
+            mapView?.animate(to: GMSCameraPosition(target: coordiantes, zoom: 13))
         }
     }
     
@@ -298,7 +333,7 @@ class MainMapScreen: UIViewController {
         present(sideMenuVc, animated: true)
     }
     
-    //MARK: ButtonActions
+    //MARK: Event & ButtonActions
     @IBAction func addBtn(_ sender: Any) {
         
         if let appUserData {
@@ -316,6 +351,21 @@ class MainMapScreen: UIViewController {
             appNavigationCoordinator.pushUIKit(vc)
         }
         
+    }
+    
+    @IBAction func searchDashboardEvents(_ sender: UITextField) {
+        
+        if let searchedEvent = viewModel.searchEvents(searchText: sender.text)/*, let lat = searchedEvent.lat, let long = searchedEvent.lng*/ {
+            
+            DispatchQueue.main.async {
+                self.moveMarker(eventData: searchedEvent)
+            }
+            
+//            DispatchQueue.main.async {
+//                let coordiantes = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//                self.mapView?.camera = GMSCameraPosition(target: coordiantes, zoom: 16)
+//            }
+        }
     }
     
     

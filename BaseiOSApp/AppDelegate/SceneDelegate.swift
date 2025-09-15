@@ -29,6 +29,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        profileFetched.bind { fetched in
+            
+            if fetched == true {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                    
+                    if AppUIViewControllers.topMostController() is MainMapScreen {
+                        if let user = appUserData {
+//                            self.checkLocationSetting()
+                            locationPermissionsManager.checkLocationSetting()
+                        }
+                    }
+                    
+                })
+                                              
+            }
+            
+        }
+        
+        print("did become active - scene")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            
+            if profileFetched.value == true {
+                
+                if let user = appUserData {
+//                    self.checkLocationSetting()
+                    locationPermissionsManager.checkLocationSetting()
+                }
+                
+            }
+            
+        })
+        
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

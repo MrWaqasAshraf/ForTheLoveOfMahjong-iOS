@@ -90,6 +90,9 @@ extension SignUpScreen {
             ActivityIndicator.shared.removeActivityIndicator()
             GenericToast.showToast(message: response?.message ?? "")
             if response?.isSuccessful == true {
+                
+                profileFetched.value = true
+                
                 DispatchQueue.main.async {
                     self?.goBackToMap()
                 }

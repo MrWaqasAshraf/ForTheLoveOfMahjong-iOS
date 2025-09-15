@@ -14,6 +14,9 @@ struct UserCreds: Codable {
     var password: String?
 }
 
+
+var profileFetched: Bindable<Bool> = Bindable(false)
+
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
 var locationService: AppLocationService = AppLocationService()
 var a_id: String {

@@ -92,6 +92,11 @@ extension String{
     static let plusSystemIcon = "plus"
     static let map_marker_svg_2 = "map_marker_svg_2"
     static let map_marker_svg_3 = "map_marker_svg_3"
+    static let map_marker_svg_4 = "map_marker_svg_4"
+    static let map_marker_svg_5 = "map_marker_svg_5"
+    static let map_marker_svg_6 = "map_marker_svg_6"
+    static let map_marker_svg_7 = "map_marker_svg_7"
+    static let map_marker_svg_8 = "map_marker_svg_8"
     static let jcb_card_icon = "jcb_card_icon"
     static let discover_card_icon = "discover_card_icon"
     static let diners_club_card_icon = "diners_club_card_icon"
@@ -288,6 +293,11 @@ extension UIImage {
     static let filter_round_icon = UIImage(named: .filter_round_icon)!
     static let mahjong_logo = UIImage(named: .mahjong_logo)!
     static let mahjong_logo_2 = UIImage(named: .mahjong_logo_2)!
+    static let map_marker_svg_4 = UIImage(named: .map_marker_svg_4)!
+    static let map_marker_svg_5 = UIImage(named: .map_marker_svg_5)!
+    static let map_marker_svg_6 = UIImage(named: .map_marker_svg_6)!
+    static let map_marker_svg_7 = UIImage(named: .map_marker_svg_7)!
+    static let map_marker_svg_8 = UIImage(named: .map_marker_svg_8)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!

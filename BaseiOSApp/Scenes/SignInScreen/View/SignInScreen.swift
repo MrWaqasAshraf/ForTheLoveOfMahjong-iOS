@@ -88,7 +88,10 @@ extension SignInScreen {
         viewModel.loginResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
             GenericToast.showToast(message: response?.message ?? "")
-            if response?.success == 200 {
+            if response?.isSuccessful == true {
+                
+                profileFetched.value = true
+                
                 DispatchQueue.main.async {
                     self?.goBack()
                 }

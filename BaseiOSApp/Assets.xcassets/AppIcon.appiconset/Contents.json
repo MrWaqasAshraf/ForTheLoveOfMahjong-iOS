@@ -1,96 +1,112 @@
 {
   "images" : [
     {
+      "filename" : "40.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "60.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
+      "filename" : "58.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "87.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
+      "filename" : "76.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "38x38"
     },
     {
+      "filename" : "114.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "38x38"
     },
     {
+      "filename" : "80.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
+      "filename" : "120.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
+      "filename" : "120 3.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
+      "filename" : "180.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "60x60"
     },
     {
+      "filename" : "128.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "64x64"
     },
     {
+      "filename" : "192.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
       "size" : "64x64"
     },
     {
+      "filename" : "136.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "68x68"
     },
     {
+      "filename" : "152.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
+      "filename" : "167.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "1024.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -102,6 +118,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "40 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -114,6 +131,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "60 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -126,6 +144,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "58 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -138,6 +157,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "87 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -150,6 +170,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "76 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -162,6 +183,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "114 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -174,6 +196,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "80 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -186,6 +209,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "120 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -198,6 +222,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "120 4.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -210,6 +235,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "180 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -222,6 +248,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "128 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -234,6 +261,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "192 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -246,6 +274,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "136 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -258,6 +287,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "152 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -270,6 +300,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "167 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -282,6 +313,7 @@
           "value" : "dark"
         }
       ],
+      "filename" : "1024 1.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
@@ -293,6 +325,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "40 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -305,6 +338,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "60 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -317,6 +351,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "58 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -329,6 +364,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "87 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -341,6 +377,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "76 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -353,6 +390,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "114 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -365,6 +403,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "80 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -377,6 +416,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "120 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -389,6 +429,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "120 5.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -401,6 +442,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "180 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -413,6 +455,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "128 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -425,6 +468,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "192 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "3x",
@@ -437,6 +481,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "136 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -449,6 +494,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "152 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -461,6 +507,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "167 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "scale" : "2x",
@@ -473,6 +520,7 @@
           "value" : "tinted"
         }
       ],
+      "filename" : "1024 2.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

@@ -45,14 +45,22 @@ class LocationPermissionsManager {
                 removeLocationAlertIfRequired()
             case .authorizedWhenInUse:
                 print("It is authorizedWhenInUse")
-                currentLocationValid = false
-                turnOnLocationOrgoOffline(turnToAlways: true)
-                appLocationManager.requestAlwaysAuthorization()
+//                currentLocationValid = false
+//                turnOnLocationOrgoOffline(turnToAlways: true)
+//                appLocationManager.requestAlwaysAuthorization()
+                
+                
+                currentLocationValid = true
+                removeLocationAlertIfRequired()
             case .authorized:
                 print("It is authorized")
-                currentLocationValid = false
-                turnOnLocationOrgoOffline(turnToAlways: true)
-                appLocationManager.requestAlwaysAuthorization()
+//                currentLocationValid = false
+//                turnOnLocationOrgoOffline(turnToAlways: true)
+//                appLocationManager.requestAlwaysAuthorization()
+                
+                currentLocationValid = true
+                removeLocationAlertIfRequired()
+                
             @unknown default:
                 currentLocationValid = false
                 print("Do nothing")
@@ -107,10 +115,10 @@ class LocationPermissionsManager {
 //                self?.logoutApi(view: dialogUi)
                 self?.clearSessionAndLogout()
                 
-//                DispatchQueue.main.async {
+                DispatchQueue.main.async {
 //                    self?.clearSessionAndLogout()
-//                    dialogUi.removeFromSuperview()
-//                }
+                    dialogUi.removeFromSuperview()
+                }
             }
             
             

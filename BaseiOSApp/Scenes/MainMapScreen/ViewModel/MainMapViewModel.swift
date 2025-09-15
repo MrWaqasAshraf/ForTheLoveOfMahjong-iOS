@@ -12,6 +12,7 @@ class MainMapViewModel {
     //For API
     var selectedEventType: CustomOptionModel?
     var selectedCategoryType: CustomOptionModel?
+    private var allEventsList: [MahjongEventData]?
     private(set) var dashboardResponse: Bindable<MahjongEventsListResponse> = Bindable<MahjongEventsListResponse>()
     private var dashbaordService: any ServicesDelegate
     
@@ -30,9 +31,11 @@ class MainMapViewModel {
         dashbaordService.dashboardEventsApi(filters: filters) { [weak self] result in
             switch result {
             case .success((let data, let json, let resp)):
+                self?.allEventsList = data?.data?.events
                 self?.dashboardResponse.value = data
             case .failure(let error):
                 print(error.localizedDescription)
+                self?.allEventsList = nil
                 self?.dashboardResponse.value = MahjongEventsListResponse(success: -1, message: error.localizedDescription, data: nil)
             }
         }
@@ -41,6 +44,24 @@ class MainMapViewModel {
     
     func observeFavouriteNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(mapFavouriteData), name: .toggleFavourite, object: nil)
+    }
+    
+    func searchEvents(searchText: String?) -> MahjongEventData? {
+        if let searchText, !searchText.replacingOccurrences(of: " ", with: "").isEmpty {
+            let searchedEvents = allEventsList?.filter({
+                $0.name?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.locationName?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.address?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.type?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.category?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.contact?.lowercased().contains(searchText.lowercased()) == true ||
+                $0.dateTime?.filter({ $0.lowercased().contains(searchText.lowercased()) == true }).first?.lowercased().contains(searchText.lowercased()) == true
+            })
+            return searchedEvents?.first
+        }
+        else {
+            return nil
+        }
     }
     
     @objc

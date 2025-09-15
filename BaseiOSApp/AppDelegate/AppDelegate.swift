@@ -10,16 +10,32 @@ import CoreData
 import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private let customQueue = DispatchQueue(label:"myOwnQueue")
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        if let userId = appUserData?.userID, userId != "" {
+            profileFetched.value = true
+        }
+        
+        return true
+        
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //Setup IQKeyboardManager
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.toolbarConfiguration.tintColor = .clr_primary_2
+        
+        //Setup Location manager
+        setupLocationManager()
         
         //Setup G-Maps
         GMSServices.provideAPIKey(GMapKey.apiKey.rawValue)
@@ -89,3 +105,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    private func setupLocationManager(){
+        
+        //Setup core location
+        appLocationManager.delegate = self
+        appLocationManager.desiredAccuracy = kCLLocationAccuracyBest
+        // 2
+        
+        customQueue.async {
+            if CLLocationManager.locationServicesEnabled() {
+                // 3
+                appLocationManager.requestLocation()
+                appLocationManager.startUpdatingLocation()
+            } else {
+                // 5
+                appLocationManager.requestAlwaysAuthorization()
+            }
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        
+        guard manager.delegate != nil else { return }
+        
+    }
+    
+    func locationManager( _ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        // 3
+        
+        guard manager.delegate != nil else { return }
+        
+        switch status {
+        case .notDetermined:
+            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+        case .restricted:
+            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+        case .denied:
+            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+        case .authorizedAlways, .authorizedWhenInUse, .authorized:
+            appLocationManager.startUpdatingLocation()
+        @unknown default:
+            print("Counldn't fetch your location, please enable it")
+            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+        }
+        
+    }
+    
+    // 6
+    func locationManager( _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard manager.delegate != nil else { return }
+        
+    }
+    
+    // 8
+    func locationManager( _ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        guard manager.delegate != nil else { return }
+        
+    }
+    
+}
