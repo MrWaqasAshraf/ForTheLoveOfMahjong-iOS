@@ -34,7 +34,8 @@ class EventInfoCell: UITableViewCell {
         eventAddressLbl.text = data?.address ?? "N/A"
         eventTypeLbl.text = data?.type ?? "N/A"
         eventCategoryLbl.text = data?.category ?? "N/A"
-        eventImage.getFullUrlImage(url: data?.image, placeHolderImage: .mahjong_logo_2)
+        print("Full url: \(baseUrlDomain.dropLast(4).lowercased() + "\(data?.image ?? "")")")
+        eventImage.getFullUrlImage(url: baseUrlDomain.dropLast(4).lowercased() + "\(data?.image ?? "")", placeHolderImage: .mahjong_logo_2)
         favIcon.isHidden = !(flowtype == .favourites)
     }
     

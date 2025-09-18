@@ -411,6 +411,7 @@
                         <outlet property="contactLbl" destination="yPf-nX-oPs" id="KTf-gh-VHs"/>
                         <outlet property="datesStackView" destination="CrW-1k-l58" id="DHK-C6-32M"/>
                         <outlet property="eventDescriptionLbl" destination="A1u-in-Gpr" id="J5M-RI-fOt"/>
+                        <outlet property="eventImage" destination="R1W-cB-uU8" id="1Dr-po-Fz3"/>
                         <outlet property="eventLocationLbl" destination="Muw-Gt-hz0" id="GHa-23-TxN"/>
                         <outlet property="eventLocationNameLbl" destination="AWf-Fz-Kut" id="9oW-fd-9uR"/>
                         <outlet property="eventNameLbl" destination="dW6-7p-jvf" id="swP-Ae-0U5"/>
@@ -441,7 +442,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -296,10 +296,16 @@ class MainMapScreen: UIViewController {
                     addMarkers(title: event.name, position: CLLocationCoordinate2D(latitude: lat, longitude: long), data: event)
                 }
             }
-            DispatchQueue.main.async {
-                self.moveMarker(eventData: data.first)
+            
+            if viewModel.moveCameraAfterResponse {
+                DispatchQueue.main.async {
+                    self.moveMarker(eventData: data.first)
+                }
             }
+            
         }
+        
+        viewModel.resetMoveCameraFlag()
         
     }
     

@@ -109,8 +109,8 @@ class API: APIServiceDelegate {
             ///`false`: Cancels the request if the internet connect goes away
             config.waitsForConnectivity = false
             
-            ///Time out setting if response takes more than 10 seconds
-            config.timeoutIntervalForResource = 10
+            ///Time out setting if response takes more than 50 seconds
+            config.timeoutIntervalForResource = 60
         }
         
         config.httpAdditionalHeaders = ["Accept": "application/json"]
@@ -280,79 +280,157 @@ class URLSessionMaker{
         }
         downloadTask.resume()
     }
+    
+    func uploadApiCall<T: Codable>(request: URLRequest, expecting: T.Type, completion: @escaping (Result<(T, [String: Any], HTTPURLResponse), Error>)->()) {
+        let uploadTask = URLSession.shared.uploadTask(with: request, from: request.httpBody) { [weak self] data, response, error in
+            self?.handleResponseFromServer(request: request, expecting: expecting, data: data, resp: response, error: error, completion: completion)
+        }
+        uploadTask.resume()
+    }
 
     func apiCall<T: Codable>(request: URLRequest, urlSessionConfiguration: URLSessionConfiguration, expecting: T.Type,completion: @escaping (Result<(T, [String: Any], HTTPURLResponse), Error>)->()){
         
 //        AppLogger.network("All API headers are: \(String(describing: request.allHTTPHeaderFields))")
 
         // Using url session to hit end-point
-        let task = URLSession(configuration: urlSessionConfiguration).dataTask(with: request) { data, resp, error in
+        let task = URLSession(configuration: urlSessionConfiguration).dataTask(with: request) { [weak self] data, resp, error in
             
-            // Reading status code For debugging
-            AppLogger.all("Parse response is: \(resp as Any)")
+            self?.handleResponseFromServer(request: request, expecting: expecting, data: data, resp: resp, error: error, completion: completion)
             
-            //For debugging
-            LogApiResponse.shared.logApiResponse(inputData: data, endPoint: request.url?.absoluteString ?? "", response: resp)
             
-            //MARK: NetworkErrorHandling
-            if let networkError = error as? URLError{
-                
-                DispatchQueue.main.async {
-                    ActivityIndicator.shared.removeActivityIndicator()
-                }
-                
-                AppLogger.network("Network error code: \(networkError.code.rawValue), Info: \(networkError.localizedDescription)")
-                DispatchQueue.main.async {
-                    GenericToast.showToast(message: networkError.localizedDescription)
-                }
-                completion(.failure(networkError))
-            }
-            
-            if let httpResponse = resp as? HTTPURLResponse {
-                
-                //Handle session
-                self.checkAuthorization(statusCode: httpResponse.statusCode)
-            }
-            
-            guard let data = data, let resp = resp else {
-                return
-            }
-            
-            let decodedJson = ParsingHandler.shared.decodeDataToJson(data: data)
-            
-            do {
-                
-                // Decode/Parse data
-                let decodedResult = try ParsingHandler.shared.parser(data: data, expected: expecting)
-                
-                //Return Decoded result
-                completion(.success((decodedResult, decodedJson, (resp as! HTTPURLResponse))))
+            /*
+             // Reading status code For debugging
+             AppLogger.all("Parse response is: \(resp as Any)")
+             
+             //For debugging
+             LogApiResponse.shared.logApiResponse(inputData: data, endPoint: request.url?.absoluteString ?? "", response: resp)
+             
+             //MARK: NetworkErrorHandling
+             if let networkError = error as? URLError{
+                 
+                 DispatchQueue.main.async {
+                     ActivityIndicator.shared.removeActivityIndicator()
+                 }
+                 
+                 AppLogger.network("Network error code: \(networkError.code.rawValue), Info: \(networkError.localizedDescription)")
+                 DispatchQueue.main.async {
+                     GenericToast.showToast(message: networkError.localizedDescription)
+                 }
+                 completion(.failure(networkError))
+             }
+             
+             if let httpResponse = resp as? HTTPURLResponse {
+                 
+                 //Handle session
+                 self.checkAuthorization(statusCode: httpResponse.statusCode)
+             }
+             
+             guard let data = data, let resp = resp else {
+                 return
+             }
+             
+             let decodedJson = ParsingHandler.shared.decodeDataToJson(data: data)
+             
+             do {
+                 
+                 // Decode/Parse data
+                 let decodedResult = try ParsingHandler.shared.parser(data: data, expected: expecting)
+                 
+                 //Return Decoded result
+                 completion(.success((decodedResult, decodedJson, (resp as! HTTPURLResponse))))
 
-            }
-            catch {
-                
-                //For debugging
-                let response = resp as! HTTPURLResponse
-                AppLogger.error("Error response is: \(response), Error other respone: \(resp)")
-                //Remove Progress bar
-                DispatchQueue.main.async {
-                    ActivityIndicator.shared.removeActivityIndicator()
-                }
-                //Show parsing error toast
-                DispatchQueue.main.async {
-                    GenericToast.showToast(message: "\(response.statusCode): \(error.localizedDescription)")
-                }
-                
-                let parsingError: AppSpecificError = .cannotParseData(response.statusCode, _jsonObj: decodedJson)
-                
-                //Return error
-                completion(.failure(parsingError))
-            }
+             }
+             catch {
+                 
+                 //For debugging
+                 let response = resp as! HTTPURLResponse
+                 AppLogger.error("Error response is: \(response), Error other respone: \(resp)")
+                 //Remove Progress bar
+                 DispatchQueue.main.async {
+                     ActivityIndicator.shared.removeActivityIndicator()
+                 }
+                 //Show parsing error toast
+                 DispatchQueue.main.async {
+                     GenericToast.showToast(message: "\(response.statusCode): \(error.localizedDescription)")
+                 }
+                 
+                 let parsingError: AppSpecificError = .cannotParseData(response.statusCode, _jsonObj: decodedJson)
+                 
+                 //Return error
+                 completion(.failure(parsingError))
+             }
+             */
+            
+            
         }
+        
         task.resume()
         
         AppLogger.network("All API headers are: \(String(describing: task.currentRequest?.allHTTPHeaderFields))")
         
+    }
+    
+    private func handleResponseFromServer<T: Codable>(request: URLRequest, expecting: T.Type, data: Data?, resp: URLResponse?, error: Error?, completion: @escaping (Result<(T, [String: Any], HTTPURLResponse), Error>)->()) {
+        // Reading status code For debugging
+        AppLogger.all("Parse response is: \(resp as Any)")
+        
+        //For debugging
+        LogApiResponse.shared.logApiResponse(inputData: data, endPoint: request.url?.absoluteString ?? "", response: resp)
+        
+        //MARK: NetworkErrorHandling
+        if let networkError = error as? URLError{
+            
+            DispatchQueue.main.async {
+                ActivityIndicator.shared.removeActivityIndicator()
+            }
+            
+            AppLogger.network("Network error code: \(networkError.code.rawValue), Info: \(networkError.localizedDescription)")
+            DispatchQueue.main.async {
+                GenericToast.showToast(message: networkError.localizedDescription)
+            }
+            completion(.failure(networkError))
+        }
+        
+        if let httpResponse = resp as? HTTPURLResponse {
+            
+            //Handle session
+            self.checkAuthorization(statusCode: httpResponse.statusCode)
+        }
+        
+        guard let data = data, let resp = resp else {
+            return
+        }
+        
+        let decodedJson = ParsingHandler.shared.decodeDataToJson(data: data)
+        
+        do {
+            
+            // Decode/Parse data
+            let decodedResult = try ParsingHandler.shared.parser(data: data, expected: expecting)
+            
+            //Return Decoded result
+            completion(.success((decodedResult, decodedJson, (resp as! HTTPURLResponse))))
+
+        }
+        catch {
+            
+            //For debugging
+            let response = resp as! HTTPURLResponse
+            AppLogger.error("Error response is: \(response), Error other respone: \(resp)")
+            //Remove Progress bar
+            DispatchQueue.main.async {
+                ActivityIndicator.shared.removeActivityIndicator()
+            }
+            //Show parsing error toast
+            DispatchQueue.main.async {
+                GenericToast.showToast(message: "\(response.statusCode): \(error.localizedDescription)")
+            }
+            
+            let parsingError: AppSpecificError = .cannotParseData(response.statusCode, _jsonObj: decodedJson)
+            
+            //Return error
+            completion(.failure(parsingError))
+        }
     }
     
     //MARK: Check authorization
@@ -598,7 +676,7 @@ class MultiPartRequestBodyHandler{
                     }
                     let fileData = try Data(contentsOf: url)
                     data?.append("--\(boundary)\r\n")
-                    data?.append("Content-Disposition: form-data; name=\"\(urls.fileName)\"; filename=\"\(filename)_\(Date().millisecondsSince1970.description)\"\r\n")
+                    data?.append("Content-Disposition: form-data; name=\"\(urls.fileName)\"; filename=\"\(Date().millisecondsSince1970.description)_\(filename)\"\r\n")
                     
                     //Setup Content-Type using ContentTypeHandler
                     let contentType = ContentTypeHandler.setContentType(fileUrl: url)
@@ -700,13 +778,13 @@ class ContentTypeHandler{
                     for contentType in contentTypes{
                         
                         //For debugging
-                        AppLogger.all("Content type is: \(contentType)")
-                        AppLogger.all("File type is: \(typeName), content name is: \(contentType.name)")
+//                        AppLogger.all("Content type is: \(contentType)")
+//                        AppLogger.all("File type is: \(typeName), content name is: \(contentType.name)")
                         
                         if typeName == contentType.name{
                             
                             //for debugging
-                            AppLogger.all("The file's content type is: \(String(describing: contentType.template))")
+//                            AppLogger.all("The file's content type is: \(String(describing: contentType.template))")
                             
                             //Return mimeType/Content-Type,  e.g: image/png, video/3gpp, text/html
                             return contentType.template

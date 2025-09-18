@@ -190,8 +190,13 @@ class AddEventScreen: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    private func endEditing() {
+        view.endEditing(true)
+    }
+    
     //MARK: ButtonActions
     @IBAction func selectAddressBtn(_ sender: Any) {
+        endEditing()
         let vc = AppUIViewControllers.selectEventLocationScreen()
         vc.closure = { [weak self] selectedAddress, fullAddress, coordinates in
             
@@ -208,6 +213,7 @@ class AddEventScreen: UIViewController {
     }
     
     @IBAction func uploadImageBtn(_ sender: Any) {
+        endEditing()
         PhotoOptionsBottomSheet.showBottomSheet(parentView: view) { [weak self] btnIndex, bottomSheet in
             if btnIndex == 0{
                 DispatchQueue.main.async {
@@ -224,6 +230,7 @@ class AddEventScreen: UIViewController {
     }
     
     @IBAction func selectEventDatesBtn(_ sender: Any) {
+        endEditing()
         DatePickerUI.addPickerView(parentView: view, datePickerMode: .dateAndTime, minimumTime: .now) { [weak self] pickerUi, btnIndex, selectedDateInStr, selectedDateInDate in
             if let selectedDateInDate {
                 print("Selected date: \(selectedDateInDate)")
@@ -250,7 +257,9 @@ class AddEventScreen: UIViewController {
     }
     
     @IBAction func editDatesBtn(_ sender: Any) {
+        
         if let selectedEventDates = viewModel.selectedEventDates.value, !selectedEventDates.isEmpty {
+            endEditing()
             showEditDatesScreen()
         }
     }
@@ -276,7 +285,8 @@ extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControlle
         if let capturedImage = info[.editedImage] as? UIImage {
             editImageIcon.isHidden = false
             selectedImageView.image = capturedImage
-            if let imageData = capturedImage.pngData(){
+//            if let imageData = capturedImage.pngData() {
+            if let imageData = capturedImage.jpegData(compressionQuality: 0.6) {
                 let isSaved: Bool = MahjongFileManager.shared.addfileToLocalFiles(fileData: imageData, fileLocationUrl: TempFileURLs.tournamentImage)
                 if !isSaved{
                     GenericToast.showToast(message: "Some issue occurred")

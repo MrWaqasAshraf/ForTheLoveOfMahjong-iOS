@@ -9,6 +9,9 @@ import Foundation
 
 class MainMapViewModel {
     
+    //For UI
+    private(set) var moveCameraAfterResponse: Bool = true
+    
     //For API
     var selectedEventType: CustomOptionModel?
     var selectedCategoryType: CustomOptionModel?
@@ -64,9 +67,16 @@ class MainMapViewModel {
         }
     }
     
+    func resetMoveCameraFlag() {
+        if moveCameraAfterResponse {
+            moveCameraAfterResponse = false
+        }
+    }
+    
     @objc
     private func mapFavouriteData(notify: Notification) {
         if let data = notify.object as? FavouriteInfoData {
+            moveCameraAfterResponse = false
             var mutableObject = dashboardResponse.value
             for (index, var eventItem) in (mutableObject?.data?.events ?? []).enumerated() {
                 if let eventID = data.eventID, let isFavourited = data.isFavourited, let favouriteCount = data.favouriteCount {

@@ -11,6 +11,7 @@ class EventDetailScreen: UIViewController {
     
     static let identifier = "EventDetailScreen"
     
+    @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventTypeLbl: UILabel!
     @IBOutlet weak var eventNameLbl: UILabel!
     @IBOutlet weak var eventLocationLbl: UILabel!
@@ -83,6 +84,7 @@ class EventDetailScreen: UIViewController {
         eventLocationNameLbl.text = data?.address ?? "..."
         eventDescriptionLbl.text = data?.description ?? "N/A"
         contactLbl.text = data?.contact ?? "N/A"
+        eventImage.getFullUrlImage(url: baseUrlDomain.dropLast(4).lowercased() + "\(data?.image ?? "")", placeHolderImage: .event_detail_image)
         
         if let remoteUserId = data?.user?.id {
             favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId

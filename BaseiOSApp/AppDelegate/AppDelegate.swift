@@ -140,16 +140,19 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         switch status {
         case .notDetermined:
-            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+            print("Counldn't fetch your location, please enable it")
+//            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
         case .restricted:
-            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+            print("Counldn't fetch your location, please enable it")
+//            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
         case .denied:
-            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+            print("Counldn't fetch your location, please enable it")
+//            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
         case .authorizedAlways, .authorizedWhenInUse, .authorized:
             appLocationManager.startUpdatingLocation()
         @unknown default:
             print("Counldn't fetch your location, please enable it")
-            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
+//            GenericToast.showToast(message: "Counldn't fetch your location, please enable it")
         }
         
     }

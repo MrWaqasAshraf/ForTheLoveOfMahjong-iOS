@@ -115,28 +115,28 @@ class EventAndFilterViewModel {
         var isValid: Bool = true
         var validationMessage: String = ""
         var payload: [String: Any] = ["description": description]
-        if let name, name.count > 3 {
+        if let name, name.count > 2 {
             payload.updateValue(name, forKey: "name")
         }
         else {
             isValid = false
-            validationMessage += "Name, "
+            validationMessage += "Valid Event Name, "
         }
         
-        if let locationName, locationName.count > 3 {
+        if let locationName, locationName.count > 2 {
             payload.updateValue(locationName, forKey: "locationName")
         }
         else {
             isValid = false
-            validationMessage += "Location Name, "
+            validationMessage += "Valid Location Name, "
         }
         
-        if let contact, contact.count > 6 {
+        if let contact, contact.count > 0 {
             payload.updateValue(contact, forKey: "contact")
         }
         else {
             isValid = false
-            validationMessage += "Contact, "
+            validationMessage += "Valid Contact, "
         }
         
         if let selectedEventType = selectedEventType.value {
