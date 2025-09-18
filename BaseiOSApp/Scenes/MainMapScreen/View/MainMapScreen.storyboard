@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="45"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LSo-GP-jhl">
-                                                <rect key="frame" x="0.0" y="0.0" width="283" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="373" height="45"/>
                                                 <subviews>
                                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VnR-ZF-VW6">
                                                         <rect key="frame" x="10" y="10" width="0.0" height="25"/>
@@ -40,7 +40,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for events" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FMo-xj-aef">
-                                                        <rect key="frame" x="10" y="0.0" width="273" height="45"/>
+                                                        <rect key="frame" x="10" y="0.0" width="363" height="45"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                         <connections>
@@ -64,8 +64,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUg-Uk-cPe">
-                                                <rect key="frame" x="293" y="0.0" width="80" height="45"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUg-Uk-cPe">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="45"/>
                                                 <subviews>
                                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5hb-D2-vME">
                                                         <rect key="frame" x="45" y="10" width="25" height="25"/>
