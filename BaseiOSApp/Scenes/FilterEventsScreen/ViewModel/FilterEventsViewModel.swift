@@ -51,7 +51,7 @@ class EventAndFilterViewModel {
                                                              .init(title: "Chinese", eventCategorySlug: .chinese),
                                                              .init(title: "Hong Kong", eventCategorySlug: .hongkong),
                                                              .init(title: "Riichi", eventCategorySlug: .richi),
-                                                             .init(title: "Wright Petterson", eventCategorySlug: .wrightpetterson)])
+                                                             .init(title: "Wright Patterson", eventCategorySlug: .wrightpetterson)])
     var selectedEventType: Bindable<CustomOptionModel> = Bindable()
     var selectedCategoryType: Bindable<CustomOptionModel> = Bindable()
     

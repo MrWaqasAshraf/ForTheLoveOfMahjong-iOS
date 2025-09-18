@@ -256,7 +256,7 @@ class MainMapScreen: UIViewController {
                 customIcon.markerImage.image = .map_marker_svg_6
             case "Riichi":
                 customIcon.markerImage.image = .map_marker_svg_7
-            case "Wright Petterson":
+            case "Wright Patterson":
                 customIcon.markerImage.image = .map_marker_svg_8
             default:
                 customIcon.markerImage.image = .map_marker_svg_3

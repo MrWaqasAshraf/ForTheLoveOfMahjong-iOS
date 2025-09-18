@@ -86,9 +86,19 @@ class EventDetailScreen: UIViewController {
         contactLbl.text = data?.contact ?? "N/A"
         eventImage.getFullUrlImage(url: baseUrlDomain.dropLast(4).lowercased() + "\(data?.image ?? "")", placeHolderImage: .event_detail_image)
         
-        if let remoteUserId = data?.user?.id {
-            favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
+        
+        if appUserData?.userID != nil {
+            if let remoteUserId = data?.user?.id {
+                favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
+            }
+            else {
+                favouriteIconContainerView.isHidden = true
+            }
         }
+        else {
+            favouriteIconContainerView.isHidden = true
+        }
+        
         
         let isFavourite = data?.favouritedBy?.filter({ $0 == appUserData?.userID }).first != nil
         viewModel.isFavouriteEvent = isFavourite
