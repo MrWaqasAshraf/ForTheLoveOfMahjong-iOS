@@ -45,6 +45,9 @@ enum EndPoint: String {
     case resetPasswordApi = "/auth/reset-password"
     case toggleFavouriteEventApi = "/events/favourite"
     // events/favourite/68c4701e906f31c863134ec3 -> 68c4701e906f31c863134ec3 is event id
+    case eventDeleteRequestApi = "/events/request-delete"
+    case eventDeleteApi = "/events/delete"
+    // events/delete/68cbc75bd28a38e6d5972c5e -> 68cbc75bd28a38e6d5972c5e is event id
     
     //Test apis
     case dashboardTestApi = "/attendace_svc/pb/employee-detail/dashboard/"

@@ -106,8 +106,15 @@ class EventDetailScreen: UIViewController {
                     let editAction = UIAction(title: "Edit", image: actionImageEdit) { action in
                         print("Edit")
                     }
-                    let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { action in
+                    let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { [weak self] action in
                         print("Delete")
+                        DispatchQueue.main.async {
+                            GenericAlert.showAlert(title: "Delete Event", message: "This event will be delete permanently. Are you sure?", actions: [.init(title: "Delete", style: .destructive), .init(title: "Cancel", style: .default)], controller: self) { _, btnIndex, _ in
+                                if btnIndex == 0 {
+                                    self?.eventDeleteApi()
+                                }
+                            }
+                        }
                     }
                     let optionsMenu = UIMenu(children: [editAction, deleteAction])
                     let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
@@ -117,8 +124,11 @@ class EventDetailScreen: UIViewController {
                 }
                 else {
                     if appUserData?.userID == data?.user?.id {
-                        let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { action in
+                        let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { [weak self] action in
                             print("Delete")
+                            DispatchQueue.main.async {
+                                self?.deleteReasonDialog()
+                            }
                         }
                         let optionsMenu = UIMenu(children: [deleteAction])
                         let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
@@ -176,6 +186,37 @@ class EventDetailScreen: UIViewController {
         }
     }
     
+    private func eventDeleteApi() {
+        DispatchQueue.main.async {
+            ActivityIndicator.shared.showActivityIndicator(view: self.view)
+        }
+        viewModel.eventDeleteApi()
+    }
+    
+    private func deleteReasonDialog() {
+        GenericAlert.showAlert(title: "Reason for Deletion", message: "Please tell us why you want this event deleted", textFieldActions: [.init(identifier: 101, placeholder: "Enter delete reason")], actions: [.init(title: "Send Request", style: .default), .init(title: "Cancel", style: .default)], controller: self) { [weak self] _, btnIndex, textFields in
+            
+            if btnIndex == 0 {
+                if let reasonField = textFields?.first {
+                    if let text = reasonField.textFieldValue, !text.replacingOccurrences(of: " ", with: "").isEmpty {
+                        self?.eventDeleteRequestApi(reason: text)
+                    }
+                    else {
+                        GenericToast.showToast(message: "Reason is required")
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    private func eventDeleteRequestApi(reason: String?) {
+        DispatchQueue.main.async {
+            ActivityIndicator.shared.showActivityIndicator(view: self.view)
+        }
+        viewModel.eventDeleteRequestApi(reason: reason)
+    }
+    
     @objc
     private func goBack() {
         appNavigationCoordinator.pop()
@@ -209,6 +250,21 @@ class EventDetailScreen: UIViewController {
 extension EventDetailScreen {
     
     private func bindViewModel() {
+        
+        viewModel.eventDeleteResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.goBack()
+                }
+            }
+        }
+        
+        viewModel.eventDeleteRequestResponse.bind { response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+        }
         
         viewModel.eventDetail.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()

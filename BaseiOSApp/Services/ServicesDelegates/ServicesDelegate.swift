@@ -25,6 +25,8 @@ protocol ServicesDelegate {
     func verifyOtpApi(email: String?, otp: String?, completion: @escaping (Result<(VerifyOtpResponse?, [String: Any], Int?), Error>) -> ())
     func eventsListApi(queryParams: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
     func toggleFavouriteEventApi(eventId: String?, completion: @escaping (Result<(FavouriteInfoResponse?, [String: Any], Int?), Error>) -> ())
+    func eventDeleteRequestApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func eventDeleteApi(eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -85,6 +87,14 @@ extension ServicesDelegate {
     
     func toggleFavouriteEventApi(eventId: String?, completion: @escaping (Result<(FavouriteInfoResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default toggleFavouriteEventApi implementation")
+    }
+    
+    func eventDeleteRequestApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default eventDeleteRequestApi implementation")
+    }
+    
+    func eventDeleteApi(eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        print("Default eventDeleteApi implementation")
     }
     
     //MARK: Test APIs

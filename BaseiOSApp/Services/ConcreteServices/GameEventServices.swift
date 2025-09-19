@@ -94,6 +94,25 @@ class ManageMahjongEventsService: ServicesDelegate {
         getResponse(.post, endPoint: endPoint, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
     }
     
+    func eventDeleteRequestApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        var parameters: [String: Any] = [:]
+        if let eventId {
+            parameters.updateValue(eventId, forKey: "eventId")
+        }
+        if let reason {
+            parameters.updateValue(reason, forKey: "reason")
+        }
+        getResponse(.post, endPoint: EndPoint.eventDeleteRequestApi.rawValue, parameters: parameters, completion: completion)
+    }
+    
+    func eventDeleteApi(eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+        var endPoint: String = EndPoint.eventDeleteApi.rawValue
+        if let eventId {
+            endPoint += "/\(eventId)"
+        }
+        getResponse(.delete, endPoint: endPoint, completion: completion)
+    }
+    
     func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
         
         let config: URLSessionConfiguration = URLSessionConfiguration.default

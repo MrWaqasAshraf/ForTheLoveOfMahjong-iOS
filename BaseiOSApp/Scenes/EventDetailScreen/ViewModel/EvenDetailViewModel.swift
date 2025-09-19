@@ -18,15 +18,43 @@ class EvenDetailViewModel {
     
     //For API
     private(set) var favoruiteEventResponse: Bindable<FavouriteInfoResponse> = Bindable<FavouriteInfoResponse>()
+    private(set) var eventDeleteResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
+    private(set) var eventDeleteRequestResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
     private var eventDetailService: any ServicesDelegate
     private var favouriteMahjongEventService: any ServicesDelegate
+    private var manageMahjongEventService: any ServicesDelegate
     
-    init(eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService()) {
+    init(eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService(), manageMahjongEventService: any ServicesDelegate = ManageMahjongEventsService()) {
         if let eventDetail {
             self.eventDetail.value = eventDetail
         }
         self.eventDetailService = eventDetailService
         self.favouriteMahjongEventService = favouriteMahjongEventService
+        self.manageMahjongEventService = manageMahjongEventService
+    }
+    
+    func eventDeleteApi() {
+        manageMahjongEventService.eventDeleteApi(eventId: eventDetail.value?.id) { [weak self] result in
+            switch result{
+            case .success((let data, let json, _)):
+                self?.eventDeleteResponse.value = data
+            case .failure(let error):
+                print(error.localizedDescription)
+                self?.eventDeleteResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func eventDeleteRequestApi(reason: String?) {
+        manageMahjongEventService.eventDeleteRequestApi(eventId: eventDetail.value?.id, reason: reason) { [weak self] result in
+            switch result{
+            case .success((let data, let json, _)):
+                self?.eventDeleteRequestResponse.value = data
+            case .failure(let error):
+                print(error.localizedDescription)
+                self?.eventDeleteRequestResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
+            }
+        }
     }
     
     func toggleFavouriteApi() {
@@ -89,7 +117,6 @@ class EvenDetailViewModel {
                 if let eventDetail = self?.eventDetail.value {
                     self?.eventDetail.value = eventDetail
                 }
-                
             }
         }
     }
