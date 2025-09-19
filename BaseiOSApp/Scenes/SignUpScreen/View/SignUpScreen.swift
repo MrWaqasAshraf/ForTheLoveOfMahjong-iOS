@@ -58,6 +58,10 @@ class SignUpScreen: UIViewController {
     }
     
     //MARK: ButtonActions
+    @IBAction func signInBtn(_ sender: Any) {
+        appNavigationCoordinator.pop()
+    }
+    
     @IBAction func showPasswordBtn(_ sender: Any) {
         passwordField.isSecureTextEntry.toggle()
         passwordEyeIcon.image = passwordField.isSecureTextEntry ? .showEyeIcon : .hideEyeIcon

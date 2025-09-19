@@ -74,9 +74,9 @@ enum AppLogger{
     }
     
     fileprivate static func handleAllPrint(info: Any){
-//        #if DEBUG
+        #if DEBUG
         print(info)
-//        #endif
+        #endif
     }
     
     fileprivate static func handleLog(logType: LogType, str: String, shouldLogContext: Bool, context: Context){

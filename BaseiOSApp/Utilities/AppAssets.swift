@@ -121,6 +121,7 @@ extension String{
     static let app_logo_horizontal = "app_logo_horizontal"
     static let mahjong_logo = "mahjong_logo"
     static let mahjong_logo_2 = "mahjong_logo_2"
+    static let trash_icon_system = "trash"
     
     //Side menu
     static let paymentMethodIconSystem = "creditcard.fill"
@@ -298,6 +299,7 @@ extension UIImage {
     static let map_marker_svg_6 = UIImage(named: .map_marker_svg_6)!
     static let map_marker_svg_7 = UIImage(named: .map_marker_svg_7)!
     static let map_marker_svg_8 = UIImage(named: .map_marker_svg_8)!
+    static let trash_icon_system = UIImage(systemName: .trash_icon_system)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!
