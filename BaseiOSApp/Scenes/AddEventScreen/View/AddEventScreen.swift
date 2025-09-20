@@ -308,7 +308,9 @@ class AddEventScreen: UIViewController {
                 if let selectedDateInDate {
                     print("Selected date: \(selectedDateInDate)")
                     print("Selecte time: \(selectedDateInDate.convertToDateString(dateFormat: "HH:mm:ss"))")
-                    self?.viewModel.addSelectedDates(date: SelectedEventDateTime(type: .tournament, dateTime: selectedDateInDate))
+                    var selectedDt = SelectedEventDateTime(type: .tournament, dateTime: selectedDateInDate)
+                    selectedDt.dateTime = selectedDateInDate
+                    self?.viewModel.addSelectedDates(date: selectedDt)
                 }
                 DispatchQueue.main.async {
                     pickerUi.removeFromSuperview()
