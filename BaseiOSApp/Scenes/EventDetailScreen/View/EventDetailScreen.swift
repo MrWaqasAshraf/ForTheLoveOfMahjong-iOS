@@ -11,6 +11,7 @@ class EventDetailScreen: UIViewController {
     
     static let identifier = "EventDetailScreen"
     
+    @IBOutlet weak var shareBtnView: UIView!
     @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var eventTypeLbl: UILabel!
     @IBOutlet weak var eventNameLbl: UILabel!
@@ -60,6 +61,7 @@ class EventDetailScreen: UIViewController {
         
 //        initialSetupforHeader(color: .clr_transparent_shade_1)
         
+        shareBtnView.isHidden = !viewModel.showShareBtn
         mapEventDetailData(data: viewModel.eventDetail.value, firstLoad: true)
         
     }

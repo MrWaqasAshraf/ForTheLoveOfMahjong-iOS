@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DaySelectionUI" customModule="BaseiOSApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAF-gG-yZE">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" red="0.24316304920000001" green="0.23509243129999999" blue="0.24706026910000001" alpha="0.21294366749999999" colorSpace="custom" customColorSpace="displayP3"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <connections>
+                        <action selector="closeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="naa-Wp-65F"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LX0-da-z1e">
+                    <rect key="frame" x="20" y="349" width="353" height="154"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="110-Wb-fuz">
+                            <rect key="frame" x="10" y="10" width="333" height="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="LIj-m7-O1j">
+                            <rect key="frame" x="0.0" y="44" width="353" height="100"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Vkr-T3-dIH"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="iN0-l3-epB" id="8cC-ZS-blK"/>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="CtN-cN-Gqm"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="110-Wb-fuz" firstAttribute="top" secondItem="LX0-da-z1e" secondAttribute="top" constant="10" id="C5p-l3-QZI"/>
+                        <constraint firstItem="110-Wb-fuz" firstAttribute="leading" secondItem="LX0-da-z1e" secondAttribute="leading" constant="10" id="Orx-Ed-gdY"/>
+                        <constraint firstAttribute="bottom" secondItem="LIj-m7-O1j" secondAttribute="bottom" constant="10" id="Rnu-wA-AMx"/>
+                        <constraint firstItem="LIj-m7-O1j" firstAttribute="top" secondItem="110-Wb-fuz" secondAttribute="bottom" constant="10" id="SnX-53-M9V"/>
+                        <constraint firstAttribute="trailing" secondItem="110-Wb-fuz" secondAttribute="trailing" constant="10" id="ZQj-2I-Mt1"/>
+                        <constraint firstAttribute="trailing" secondItem="LIj-m7-O1j" secondAttribute="trailing" id="tx2-Dd-j2a"/>
+                        <constraint firstItem="LIj-m7-O1j" firstAttribute="leading" secondItem="LX0-da-z1e" secondAttribute="leading" id="uGS-py-dbR"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="LX0-da-z1e" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9Rm-Ft-6Jg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="LX0-da-z1e" secondAttribute="trailing" constant="20" id="A6v-g9-Ksh"/>
+                <constraint firstItem="ZAF-gG-yZE" firstAttribute="leading" secondItem="LX0-da-z1e" secondAttribute="leading" constant="-20" id="R1L-XP-735"/>
+                <constraint firstAttribute="trailing" secondItem="ZAF-gG-yZE" secondAttribute="trailing" id="S8z-la-bRZ"/>
+                <constraint firstItem="ZAF-gG-yZE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ws8-JU-yEY"/>
+                <constraint firstItem="LX0-da-z1e" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="yAr-63-EBZ"/>
+                <constraint firstAttribute="bottom" secondItem="ZAF-gG-yZE" secondAttribute="bottom" id="yep-do-6gM"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="listTable" destination="LIj-m7-O1j" id="PSC-Ee-14Y"/>
+                <outlet property="listTableHeight" destination="Vkr-T3-dIH" id="fId-qB-GmS"/>
+            </connections>
+            <point key="canvasLocation" x="55.725190839694655" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

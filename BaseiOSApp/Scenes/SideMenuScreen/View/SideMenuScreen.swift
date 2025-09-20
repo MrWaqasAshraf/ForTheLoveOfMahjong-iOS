@@ -81,7 +81,6 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 appNavigationCoordinator.pushUIKit(vc)
             }
         case .events:
-            print("TBD")
             if let appUserData {
                 dismiss(animated: true)
                 let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Events", eventsListType: .allEvents))
@@ -93,7 +92,6 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 appNavigationCoordinator.pushUIKit(vc)
             }
         case .favorite:
-            print("TBD")
             if let appUserData {
                 dismiss(animated: true)
                 let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Favourites", eventsListType: .favourites))
@@ -105,13 +103,19 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 appNavigationCoordinator.pushUIKit(vc)
             }
         case .logout:
-            GenericAlert.showAlert(title: "Logout", message: "Are you sure?", actions: [.init(title: "Yes", style: .destructive), .init(title: "No", style: .default)], controller: self) { [weak self] _, btnIndex, _ in
-                if btnIndex == 0 {
+            
+            let lbl = ReusableLabelUI.fromNib()
+            lbl.titleLbl.text = "Are you sure you want to logout?"
+            AppDialogUI.addDialogView(headerTitle: "Logout", midViews: [lbl], buttons: [.init("", style: .empty, height: 40), .init("Cancel", style: .cancel, height: 40), .init("Logout", style: .appDefault, height: 40)]) { [weak self] btnIndex, dialog in
+                if btnIndex == 2 {
                     UserDefaultsHelper.removeUserAndToken()
                     self?.viewModel.checkLogoutStatus()
                     DispatchQueue.main.async {
                         self?.sideMenuTableView.reloadData()
                     }
+                }
+                DispatchQueue.main.async {
+                    dialog.removeFromSuperview()
                 }
             }
             

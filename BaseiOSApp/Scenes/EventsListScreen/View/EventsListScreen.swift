@@ -93,6 +93,22 @@ extension EventsListScreen: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = viewModel.eventsListResponse.value?.data?.events?[indexPath.row]
+        if data?.approvalStatus == "approved" {
+            let vc = AppUIViewControllers.eventDetailScreen(viewModel: EvenDetailViewModel(showShareBtn: false, eventDetail: data))
+            appNavigationCoordinator.pushUIKit(vc)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isOnLast = indexPath.row == (viewModel.eventsListResponse.value?.data?.events?.count ?? 0) - 1
+        if isOnLast && !viewModel.isLast && !viewModel.isPaginating && !viewModel.isSearchEnabled {
+            ActivityIndicator.shared.showActivityIndicatorOnBottom(view: view)
+            viewModel.eventsListApi(paginate: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }

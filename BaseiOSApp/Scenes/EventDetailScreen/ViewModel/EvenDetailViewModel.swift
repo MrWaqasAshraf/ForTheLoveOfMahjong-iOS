@@ -16,6 +16,9 @@ class EvenDetailViewModel {
     private let customQueue = DispatchQueue(label:"myOwnQueue")
     private var apiDispatchGroup = DispatchGroup()
     
+    //For UI
+    private(set) var showShareBtn: Bool
+    
     //For API
     private(set) var favoruiteEventResponse: Bindable<FavouriteInfoResponse> = Bindable<FavouriteInfoResponse>()
     private(set) var eventDeleteResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
@@ -24,10 +27,11 @@ class EvenDetailViewModel {
     private var favouriteMahjongEventService: any ServicesDelegate
     private var manageMahjongEventService: any ServicesDelegate
     
-    init(eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService(), manageMahjongEventService: any ServicesDelegate = ManageMahjongEventsService()) {
+    init(showShareBtn: Bool = true, eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService(), manageMahjongEventService: any ServicesDelegate = ManageMahjongEventsService()) {
         if let eventDetail {
             self.eventDetail.value = eventDetail
         }
+        self.showShareBtn = showShareBtn
         self.eventDetailService = eventDetailService
         self.favouriteMahjongEventService = favouriteMahjongEventService
         self.manageMahjongEventService = manageMahjongEventService

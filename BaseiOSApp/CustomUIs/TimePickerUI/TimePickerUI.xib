@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="kSk-jg-xGi" customClass="TimePickerUI" customModule="plexaarcalender" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="kSk-jg-xGi" customClass="TimePickerUI" customModule="BaseiOSApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -57,6 +58,35 @@
                         <constraint firstAttribute="height" constant="50" id="v8t-jb-sBz"/>
                     </constraints>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogh-y4-XPU">
+                    <rect key="frame" x="161" y="215" width="71" height="38"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWb-pj-dzN">
+                            <rect key="frame" x="20" y="10" width="31" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <color key="textColor" name="clr_primary_light_fixed"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="tWb-pj-dzN" firstAttribute="top" secondItem="ogh-y4-XPU" secondAttribute="top" constant="10" id="FKo-t7-OqN"/>
+                        <constraint firstAttribute="bottom" secondItem="tWb-pj-dzN" secondAttribute="bottom" constant="10" id="Fx3-pU-Jfv"/>
+                        <constraint firstAttribute="trailing" secondItem="tWb-pj-dzN" secondAttribute="trailing" constant="20" id="KjE-q8-aZh"/>
+                        <constraint firstItem="tWb-pj-dzN" firstAttribute="leading" secondItem="ogh-y4-XPU" secondAttribute="leading" constant="20" id="to3-oT-TGI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" name="clr_primary_light_fixed"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="v7x-Ft-C1u"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,11 +96,13 @@
                 <constraint firstItem="7as-7O-89e" firstAttribute="bottom" secondItem="7zx-cw-gym" secondAttribute="bottom" id="2aF-IX-eFl"/>
                 <constraint firstItem="7zx-cw-gym" firstAttribute="leading" secondItem="v7x-Ft-C1u" secondAttribute="leading" constant="20" id="BGP-pw-rwK"/>
                 <constraint firstItem="7as-7O-89e" firstAttribute="trailing" secondItem="Rky-O3-DWd" secondAttribute="trailing" id="CdU-R1-psp"/>
+                <constraint firstItem="ogh-y4-XPU" firstAttribute="centerX" secondItem="v7x-Ft-C1u" secondAttribute="centerX" id="Vlo-fx-4nY"/>
                 <constraint firstItem="Rky-O3-DWd" firstAttribute="centerY" secondItem="kSk-jg-xGi" secondAttribute="centerY" constant="-55" id="Vzi-sF-L1o"/>
                 <constraint firstAttribute="bottom" secondItem="NAy-2H-oyS" secondAttribute="bottom" id="dEu-8E-LGh"/>
                 <constraint firstItem="Rky-O3-DWd" firstAttribute="leading" secondItem="kSk-jg-xGi" secondAttribute="leading" constant="16" id="fFC-fm-nJO"/>
                 <constraint firstItem="NAy-2H-oyS" firstAttribute="leading" secondItem="v7x-Ft-C1u" secondAttribute="leading" id="hhH-Qc-7yf"/>
                 <constraint firstItem="v7x-Ft-C1u" firstAttribute="trailing" secondItem="7zx-cw-gym" secondAttribute="trailing" constant="20" id="ivC-IG-zTi"/>
+                <constraint firstItem="7as-7O-89e" firstAttribute="top" secondItem="ogh-y4-XPU" secondAttribute="bottom" constant="10" id="lSc-ia-7ce"/>
                 <constraint firstItem="v7x-Ft-C1u" firstAttribute="trailing" secondItem="NAy-2H-oyS" secondAttribute="trailing" id="ngk-u8-usG"/>
                 <constraint firstItem="7zx-cw-gym" firstAttribute="top" secondItem="Rky-O3-DWd" secondAttribute="bottom" constant="20" id="rLx-3N-Beh"/>
                 <constraint firstItem="7as-7O-89e" firstAttribute="top" secondItem="Rky-O3-DWd" secondAttribute="top" id="wq9-43-hae"/>
@@ -82,16 +114,21 @@
             <connections>
                 <outlet property="datePickerView" destination="Rky-O3-DWd" id="Hv7-d5-eWo"/>
                 <outlet property="pickerBgView" destination="7as-7O-89e" id="h5c-kx-RXS"/>
+                <outlet property="titleContainer" destination="ogh-y4-XPU" id="5nI-gn-488"/>
+                <outlet property="titleLbl" destination="tWb-pj-dzN" id="aNv-Z6-2sn"/>
             </connections>
             <point key="canvasLocation" x="275.57251908396944" y="62.676056338028175"/>
         </view>
     </objects>
     <resources>
+        <namedColor name="clr_primary_light_fixed">
+            <color red="0.55294117647058827" green="0.6588235294117647" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

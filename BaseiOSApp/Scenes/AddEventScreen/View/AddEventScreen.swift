@@ -21,6 +21,7 @@ class AddEventScreen: UIViewController {
     
     @IBOutlet weak var eventNameField: UITextField!
     @IBOutlet weak var addressField: UITextField!
+    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var contactField: UITextField!
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var locationNameField: UITextField!
@@ -30,6 +31,10 @@ class AddEventScreen: UIViewController {
     @IBOutlet weak var selectedDatesLbl: UILabel!
     @IBOutlet weak var editDatesIcon: UIImageView!
     @IBOutlet weak var selectDateTitleLbl: UILabel!
+    
+    //Placeholders
+    @IBOutlet weak var placeholderCameraIcon: UIImageView!
+    @IBOutlet weak var placeholderUploadLbl: UILabel!
     
     private var imagePicker = UIImagePickerController()
     
@@ -194,6 +199,47 @@ class AddEventScreen: UIViewController {
         view.endEditing(true)
     }
     
+    private func shouldShowPlaceholderUis(show: Bool) {
+        placeholderUploadLbl.isHidden = !show
+        placeholderCameraIcon.isHidden = !show
+    }
+    
+    private func showTimePicker(isStartTime: Bool, title: String) {
+        if !isStartTime {
+            ActivityIndicator.shared.removeActivityIndicator()
+        }
+        TimePickerUI.addPickerView(title: title) { [weak self] pickerUi, btnIndex, selectedTimeInString, selectTimeinDateFormat in
+            if let selectTimeinDateFormat {
+                print(selectTimeinDateFormat)
+                if isStartTime {
+                    self?.viewModel.selectedEventDayAndTimeForGame.value?.startTime = selectTimeinDateFormat
+                    ActivityIndicator.shared.showActivityIndicator(view: self?.view ?? .init())
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self?.showTimePicker(isStartTime: false, title: "Game End time")
+                    }
+                }
+                else {
+                    if let startTimeInMilli = self?.viewModel.selectedEventDayAndTimeForGame.value?.startTime?.millisecondsSince1970 {
+                        let endTimeMilli = selectTimeinDateFormat.millisecondsSince1970
+                        if endTimeMilli >= startTimeInMilli {
+                            self?.viewModel.selectedEventDayAndTimeForGame.value?.endTime = selectTimeinDateFormat
+                        }
+                        else {
+                            GenericToast.showToast(message: "End time cannot be smaller than start time")
+                        }
+                    }
+                    else {
+                        GenericToast.showToast(message: "Invalid start time set")
+                    }
+                    
+                }
+            }
+            DispatchQueue.main.async {
+                pickerUi.removeFromSuperview()
+            }
+        }
+    }
+    
     //MARK: ButtonActions
     @IBAction func selectAddressBtn(_ sender: Any) {
         endEditing()
@@ -231,21 +277,41 @@ class AddEventScreen: UIViewController {
     
     @IBAction func selectEventDatesBtn(_ sender: Any) {
         endEditing()
-        DatePickerUI.addPickerView(parentView: view, datePickerMode: .dateAndTime, minimumTime: .now) { [weak self] pickerUi, btnIndex, selectedDateInStr, selectedDateInDate in
-            if let selectedDateInDate {
-                print("Selected date: \(selectedDateInDate)")
-                print("Selecte time: \(selectedDateInDate.convertToDateString(dateFormat: "HH:mm:ss"))")
-                self?.viewModel.addSelectedDates(date: SelectedEventDateTime(dateTime: selectedDateInDate))
-            }
-            DispatchQueue.main.async {
-                pickerUi.removeFromSuperview()
+        if viewModel.selectedEventType.value?.eventSlug == .tournament {
+            DatePickerUI.addPickerView(parentView: view, datePickerMode: .dateAndTime, minimumTime: .now) { [weak self] pickerUi, btnIndex, selectedDateInStr, selectedDateInDate in
+                if let selectedDateInDate {
+                    print("Selected date: \(selectedDateInDate)")
+                    print("Selecte time: \(selectedDateInDate.convertToDateString(dateFormat: "HH:mm:ss"))")
+                    self?.viewModel.addSelectedDates(date: SelectedEventDateTime(type: .tournament, dateTime: selectedDateInDate))
+                }
+                DispatchQueue.main.async {
+                    pickerUi.removeFromSuperview()
+                }
             }
         }
+        else if viewModel.selectedEventType.value?.eventSlug == .game {
+            DispatchQueue.main.async {
+                let daysView = DaySelectionUI.fromNib()
+                daysView.closure = { [weak self] selectedDay in
+                    if let selectedDay {
+                        print(selectedDay)
+                        self?.viewModel.selectedEventDayAndTimeForGame.value = SelectedEventDateTime(type: .game, dateTime: Date(), selectedDay: selectedDay.optionValue)
+                        DispatchQueue.main.async {
+                            self?.showTimePicker(isStartTime: true, title: "Game Start time")
+                        }
+                    }
+                }
+                daysView.frame = self.view.bounds
+                self.view.addSubview(daysView)
+            }
+            
+        }
+        
     }
     
     @IBAction func addEventBtn(_ sender: Any) {
         
-        let createAndValidatePayload = viewModel.createAndValidatePayload(name: eventNameField.text, locationName: locationNameField.text, address: addressField.text, contact: contactField.text, description: descriptionField.text ?? "")
+        let createAndValidatePayload = viewModel.createAndValidatePayload(name: eventNameField.text, contactName: nameField.text, locationName: locationNameField.text, address: addressField.text, contact: contactField.text, description: descriptionField.text ?? "")
         if createAndValidatePayload.0 {
             ActivityIndicator.shared.showActivityIndicator(view: view)
             viewModel.createMahjonEventApi(parameters: createAndValidatePayload.2)
@@ -267,6 +333,24 @@ class AddEventScreen: UIViewController {
     
 }
 
+extension AddEventScreen: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == contactField {
+            // Define the allowed characters
+            let allowedCharacters = NSCharacterSet(charactersIn: "1234567890+-() ")
+            
+            // Create a character set from the replacement string (the new character(s) being typed)
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            // Check if all characters in the replacement string are within the allowed characters
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
+        return true
+    }
+    
+}
+
 extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -283,6 +367,7 @@ extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControlle
         
         //Camera image capture
         if let capturedImage = info[.editedImage] as? UIImage {
+            shouldShowPlaceholderUis(show: false)
             editImageIcon.isHidden = false
             selectedImageView.image = capturedImage
 //            if let imageData = capturedImage.pngData() {
@@ -298,6 +383,7 @@ extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControlle
             }
         }
         else if let assetUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            shouldShowPlaceholderUis(show: false)
             let type = assetUrl.pathExtension           //e.g: MOV
             generateThumbnailRepresentations(fileUrl: assetUrl)
             print("video url: \(assetUrl): location url \(assetUrl.absoluteString), type: \(type)")
@@ -398,6 +484,25 @@ extension AddEventScreen {
             DispatchQueue.main.async {
                 self?.mapSelectedDates()
             }
+        }
+        
+        viewModel.selectedEventDayAndTimeForGame.bind { [weak self] data in
+            var allSet: Int = 0
+            if let data {
+                if let day = data.selectedDay {
+                    allSet += 1
+                }
+                if let startTime = data.startTime {
+                    allSet += 1
+                }
+                if let endTime = data.endTime {
+                    allSet += 1
+                }
+                if allSet == 3 {
+                    self?.viewModel.selectedEventDates.value?.append(data)
+                }
+            }
+            
         }
         
     }

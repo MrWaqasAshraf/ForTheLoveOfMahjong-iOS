@@ -10,7 +10,7 @@ import Foundation
 // MARK: - MahjongEventsListResponse
 struct MahjongEventsListResponse: Codable {
     let success: Int?
-    let message: String?
+    var message: String?
     var data: MahjongDataResult?
     
     var isSuccessful: Bool {
@@ -39,13 +39,14 @@ struct MahjongEventData: Codable {
     let user: UserInfoData?
     let userName, userEmail: String?
     let isActive: Bool?
+    let approvalStatus: String?
     var viewCount, favouriteCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
         case user = "userId"
         case id = "_id"
-        case userName, userEmail, isActive, viewCount, favouriteCount, favouritedBy
+        case userName, userEmail, isActive, viewCount, favouriteCount, favouritedBy, approvalStatus
     }
 }
 

@@ -31,7 +31,11 @@ enum EventCategorySlug {
 }
 
 struct SelectedEventDateTime {
+    var type: EventOptionSlug = .noneOption
     var dateTime: Date
+    var selectedDay: String? = nil
+    var startTime: Date? = nil
+    var endTime: Date? = nil
 }
 
 struct EventLocationInfo {
@@ -54,6 +58,7 @@ class EventAndFilterViewModel {
                                                              .init(title: "Wright Patterson", eventCategorySlug: .wrightpetterson)])
     var selectedEventType: Bindable<CustomOptionModel> = Bindable()
     var selectedCategoryType: Bindable<CustomOptionModel> = Bindable()
+    var selectedEventDayAndTimeForGame: Bindable<SelectedEventDateTime> = Bindable<SelectedEventDateTime>()
     
     //For Api integration
     var eventLocationCoordinates: EventLocationInfo? = nil
@@ -97,7 +102,7 @@ class EventAndFilterViewModel {
         
     }
     
-    func createAndValidatePayload(name: String?, locationName: String?, address: String?, contact: String?, description: String = "") -> (Bool, String?, [String: Any]) {
+    func createAndValidatePayload(name: String?, contactName: String?, locationName: String?, address: String?, contact: String?, description: String = "") -> (Bool, String?, [String: Any]) {
         /*
          {
          "type":"Tournament",
@@ -115,12 +120,21 @@ class EventAndFilterViewModel {
         var isValid: Bool = true
         var validationMessage: String = ""
         var payload: [String: Any] = ["description": description]
+        
         if let name, name.count > 2 {
             payload.updateValue(name, forKey: "name")
         }
         else {
             isValid = false
             validationMessage += "Valid Event Name, "
+        }
+        
+        if let contactName, contactName.count > 2 {
+            payload.updateValue(contactName, forKey: "person_name")
+        }
+        else {
+            isValid = false
+            validationMessage += "Valid Contact Person Name, "
         }
         
         if let locationName, locationName.count > 2 {
@@ -140,7 +154,43 @@ class EventAndFilterViewModel {
         }
         
         if let selectedEventType = selectedEventType.value {
+            
             payload.updateValue(selectedEventType.title, forKey: "type")
+            
+            if selectedEventType.eventSlug == .tournament {
+                if let dates = selectedEventDates.value?.map({ return $0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a") }) {
+                    payload.updateValue(dates, forKey: "dateTime")
+                }
+                else {
+                    isValid = false
+                    validationMessage += "Event Date, "
+                }
+            }
+            else if selectedEventType.eventSlug == .game {
+                if let dates = selectedEventDates.value?.map({ model in
+                    
+                    var returnDate: String?
+                    if let start = model.startTime, let end = model.endTime, let day = model.selectedDay, day != "" {
+                        let startTime = start.convertToDateString(dateFormat: "HH:mm a")
+                        let endTime = end.convertToDateString(dateFormat: "HH:mm a")
+                        returnDate = "\(day) - \(startTime) to \(endTime)"
+                    }
+                    return returnDate
+                    
+                }).compactMap({ $0 }), !dates.isEmpty {
+                    payload.updateValue(dates, forKey: "dateTime")
+                }
+                else {
+                    isValid = false
+                    validationMessage += "Event Date, "
+                }
+            }
+            else {
+                isValid = false
+                validationMessage += "Event Type, "
+            }
+            
+            
         }
         else {
             isValid = false
@@ -148,20 +198,18 @@ class EventAndFilterViewModel {
         }
         
         if let selectedCategoryType = selectedCategoryType.value {
+            
             payload.updateValue(selectedCategoryType.title, forKey: "category")
+            
+            
+            
         }
         else {
             isValid = false
             validationMessage += "Event Category, "
         }
         
-        if let dates = selectedEventDates.value?.map({ return $0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a") }) {
-            payload.updateValue(dates, forKey: "dateTime")
-        }
-        else {
-            isValid = false
-            validationMessage += "Event Date, "
-        }
+        
         
         if let eventLocationCoordinates {
             //"lat":40.7589, "lng":-73.9851
@@ -201,7 +249,14 @@ class EventAndFilterViewModel {
         if let selectedDates = selectedEventDates.value {
             for selectedDate in selectedDates {
                 let connectingString: String = selectedDatesString.isEmpty ? "" : "\n"
-                selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a"))"
+                if selectedEventType.value?.eventSlug == .tournament {
+                    selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a"))"
+                }
+                else if selectedEventType.value?.eventSlug == .game {
+                    if let start = selectedDate.startTime, let end = selectedDate.endTime, let day = selectedDate.selectedDay, day != "" {
+                        selectedDatesString += "\(connectingString)\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
+                    }
+                }
             }
         }
         return selectedDatesString
@@ -233,11 +288,19 @@ class EventAndFilterViewModel {
         else {
             selectedEventType.value = nil
         }
-        if selectedEventType.value?.eventSlug == .game {
-            if let item = selectedEventDates.value?.first {
-                selectedEventDates.value = [item]
-            }
-        }
+        
+        //Old
+        /*
+         if selectedEventType.value?.eventSlug == .game {
+             if let item = selectedEventDates.value?.first {
+                 selectedEventDates.value = [item]
+             }
+         }
+         */
+        
+        //New
+        selectedEventDates.value = []
+        
         eventTypes.value = mutable
     }
     

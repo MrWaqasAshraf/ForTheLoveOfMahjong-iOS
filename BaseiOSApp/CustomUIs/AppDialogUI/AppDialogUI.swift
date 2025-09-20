@@ -59,6 +59,7 @@ class AppDialogUI: UIView, NibInstantiatable {
         if let tag {
             
             for subView in keyWindow?.subviews ?? [] {
+                // 11011 belongs to the AppDialog related to Location force logout in LocationPermissionsManager.swift
                 if subView.tag == 11011 {
                     return infoView
                 }

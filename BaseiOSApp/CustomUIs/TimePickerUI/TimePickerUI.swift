@@ -11,16 +11,19 @@ class TimePickerUI: UIView, NibInstantiatable{
     
     typealias buttonAction = (TimePickerUI, Int, String?, Date?) -> Void?
     
+    @IBOutlet weak var titleContainer: UIView!
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var pickerBgView: UIView!
     @IBOutlet weak var datePickerView: UIDatePicker!
     private var action: buttonAction? = nil
     
     @discardableResult
-    class func addPickerView(parentView: UIView? = nil, minimumTime: Date? = nil, maximumDate: Date? = nil, setInterval: Int = 0, closure: @escaping buttonAction) -> TimePickerUI{
+    class func addPickerView(parentView: UIView? = nil, title: String? = nil, minimumTime: Date? = nil, maximumDate: Date? = nil, setInterval: Int = 0, closure: @escaping buttonAction) -> TimePickerUI{
         let pickerView = TimePickerUI.fromNib()
         pickerView.action = closure
         pickerView.datePickerView.minimumDate = minimumTime
         pickerView.datePickerView.maximumDate = maximumDate
+        pickerView.titleLbl.text = title ?? "Select Time"
         pickerView.datePickerView.minuteInterval = setInterval
         pickerView.pickerBgView.layer.cornerRadius = 10
         pickerView.datePickerView.locale = Locale.init(identifier: "en")
