@@ -27,14 +27,15 @@ class MahjongEventDateCell: UITableViewCell {
     }
     
     func configureCell(data: SelectedEventDateTime?) {
-        if data?.type == .tournament {
-            titleLbl.text = data?.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a")
-        }
-        else if data?.type == .game {
-            if let start = data?.startTime, let end = data?.endTime, let day = data?.selectedDay, day != "" {
-                titleLbl.text = "\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
-            }
-        }
+        titleLbl.text = data?.selectedDateTime
+//        if data?.type == .tournament {
+//            titleLbl.text = data?.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a")
+//        }
+//        else if data?.type == .game {
+//            if let start = data?.startTime, let end = data?.endTime, let day = data?.selectedDay, day != "" {
+//                titleLbl.text = "\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
+//            }
+//        }
     }
     
     @IBAction func deleteBtn(_ sender: Any) {

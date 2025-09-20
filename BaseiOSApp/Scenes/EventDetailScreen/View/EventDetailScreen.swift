@@ -105,8 +105,12 @@ class EventDetailScreen: UIViewController {
                 
                 if appUserData?.role == "role" {
                     
-                    let editAction = UIAction(title: "Edit", image: actionImageEdit) { action in
+                    let editAction = UIAction(title: "Edit", image: actionImageEdit) { [weak self] action in
                         print("Edit")
+                        DispatchQueue.main.async {
+                            guard let data = self?.viewModel.eventDetail.value else { return }
+                            self?.navigateToAddEventScreenForEdit(data: data)
+                        }
                     }
                     let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { [weak self] action in
                         print("Delete")
@@ -126,13 +130,19 @@ class EventDetailScreen: UIViewController {
                 }
                 else {
                     if appUserData?.userID == data?.user?.id {
+                        let editAction = UIAction(title: "Edit", image: actionImageEdit) { [weak self] action in
+                            DispatchQueue.main.async {
+                                guard let data = self?.viewModel.eventDetail.value else { return }
+                                self?.navigateToAddEventScreenForEdit(data: data)
+                            }
+                        }
                         let deleteAction = UIAction(title: "Delete", image: actionImageDelete) { [weak self] action in
                             print("Delete")
                             DispatchQueue.main.async {
                                 self?.deleteReasonDialog()
                             }
                         }
-                        let optionsMenu = UIMenu(children: [deleteAction])
+                        let optionsMenu = UIMenu(children: [editAction, deleteAction])
                         let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
                         barBtn2.tintColor = .white
                         allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
@@ -186,6 +196,11 @@ class EventDetailScreen: UIViewController {
             seperator.separatorLineView.isHidden = true
             datesStackView.addArrangedSubview(seperator)
         }
+    }
+    
+    private func navigateToAddEventScreenForEdit(data: MahjongEventData) {
+        let vc = AppUIViewControllers.addEventScreen(viewModel: EventAndFilterViewModel(eventDetailForEdit: data))
+        appNavigationCoordinator.pushUIKit(vc)
     }
     
     private func eventDeleteApi() {

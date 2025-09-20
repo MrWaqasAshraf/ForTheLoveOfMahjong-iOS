@@ -32,10 +32,27 @@ enum EventCategorySlug {
 
 struct SelectedEventDateTime {
     var type: EventOptionSlug = .noneOption
-    var dateTime: Date
+    
+    var dateTime: Date {
+        didSet {
+            if type == .tournament {
+                selectedDateTime = dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a")
+            }
+        }
+    }
+    
     var selectedDay: String? = nil
     var startTime: Date? = nil
-    var endTime: Date? = nil
+    var endTime: Date? = nil {
+        didSet {
+            if type == .game {
+                if let start = startTime, let end = endTime, let day = selectedDay, day != "" {
+                    selectedDateTime = "\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
+                }
+            }
+        }
+    }
+    var selectedDateTime: String?
 }
 
 struct EventLocationInfo {
@@ -61,44 +78,80 @@ class EventAndFilterViewModel {
     var selectedEventDayAndTimeForGame: Bindable<SelectedEventDateTime> = Bindable<SelectedEventDateTime>()
     
     //For Api integration
+    private(set) var eventDetailForEdit: MahjongEventData? = nil
     var eventLocationCoordinates: EventLocationInfo? = nil
     var imageUrls: [URL]?
     var selectedEventDates: Bindable<[SelectedEventDateTime]> = Bindable([])
     private(set) var manageEventResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
+    //MahjongEventDetailService
     
     private var manageMahjongEventsService: any ServicesDelegate
+    private var mahjongEventDetailService: any ServicesDelegate
     
     init(
+        eventDetailForEdit: MahjongEventData? = nil,
         preSelectTypeAndCategory: Bool = false,
         selectedEventType: CustomOptionModel? = nil,
         selectedCategoryType: CustomOptionModel? = nil,
-        manageMahjongEventsService: any ServicesDelegate = ManageMahjongEventsService()
+        manageMahjongEventsService: any ServicesDelegate = ManageMahjongEventsService(),
+        mahjongEventDetailService: any ServicesDelegate = MahjongEventDetailService()
     ) {
         
+        self.eventDetailForEdit = eventDetailForEdit
         self.manageMahjongEventsService = manageMahjongEventsService
+        self.mahjongEventDetailService = mahjongEventDetailService
         
-        if preSelectTypeAndCategory {
-            if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == .tournament }).first as? Int {
-                eventTypes.value?[index].isSelected = true
-                self.selectedEventType.value = eventTypes.value?[index]
+        if let eventDetailForEdit {
+            
+            if let address = eventDetailForEdit.address, let lat = eventDetailForEdit.lat, let lng = eventDetailForEdit.lng {
+                eventLocationCoordinates = EventLocationInfo(lat: lat, long: lng, address: address)
             }
-            if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == .american }).first as? Int {
-                eventCategories.value?[index].isSelected = true
-                self.selectedCategoryType.value = eventCategories.value?[index]
-            }
+            
+//            DispatchQueue.global().asyncAfter(deadline: .now() + 0.3) {
+                if let selectedTypeIndex = self.eventTypes.value?.indices.filter({ self.eventTypes.value?[$0].title == eventDetailForEdit.type }).first as? Int {
+                    self.selectedEventType.value = self.eventTypes.value?[selectedTypeIndex]
+                    self.eventTypes.value?[selectedTypeIndex].isSelected = true
+                }
+                if let selectedCategoryIndex = self.eventCategories.value?.indices.filter({ self.eventCategories.value?[$0].title == eventDetailForEdit.category }).first as? Int {
+                    self.selectedCategoryType.value = self.eventCategories.value?[selectedCategoryIndex]
+                    self.eventCategories.value?[selectedCategoryIndex].isSelected = true
+                }
+//            }
+            
+            let selectedDates = eventDetailForEdit.dateTime?.map({ model in
+                let selected = SelectedEventDateTime(type: selectedEventType?.eventSlug ?? .noneOption, dateTime: Date(), selectedDay: nil, startTime: nil, endTime: nil, selectedDateTime: model)
+                return selected
+            })
+            
+            selectedEventDates.value = selectedDates
+            
         }
         else {
-            if let selectedType = selectedEventType, let slug = selectedType.eventSlug {
-                if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == slug }).first as? Int {
+            if preSelectTypeAndCategory {
+                if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == .tournament }).first as? Int {
                     eventTypes.value?[index].isSelected = true
+                    self.selectedEventType.value = eventTypes.value?[index]
                 }
-            }
-            if let selectedCategory = selectedCategoryType, let slug = selectedCategory.eventCategorySlug {
-                if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == slug }).first as? Int {
+                if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == .american }).first as? Int {
                     eventCategories.value?[index].isSelected = true
+                    self.selectedCategoryType.value = eventCategories.value?[index]
+                }
+                
+            }
+            else {
+                if let selectedType = selectedEventType, let slug = selectedType.eventSlug {
+                    if let index = eventTypes.value?.indices.filter({ eventTypes.value?[$0].eventSlug == slug }).first as? Int {
+                        eventTypes.value?[index].isSelected = true
+                    }
+                }
+                if let selectedCategory = selectedCategoryType, let slug = selectedCategory.eventCategorySlug {
+                    if let index = eventCategories.value?.indices.filter({ eventCategories.value?[$0].eventCategorySlug == slug }).first as? Int {
+                        eventCategories.value?[index].isSelected = true
+                    }
                 }
             }
         }
+        
         
     }
     
@@ -157,38 +210,79 @@ class EventAndFilterViewModel {
             
             payload.updateValue(selectedEventType.title, forKey: "type")
             
-            if selectedEventType.eventSlug == .tournament {
-                if let dates = selectedEventDates.value?.map({ return $0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a") }) {
-                    payload.updateValue(dates, forKey: "dateTime")
-                }
-                else {
-                    isValid = false
-                    validationMessage += "Event Date, "
-                }
-            }
-            else if selectedEventType.eventSlug == .game {
-                if let dates = selectedEventDates.value?.map({ model in
-                    
-                    var returnDate: String?
-                    if let start = model.startTime, let end = model.endTime, let day = model.selectedDay, day != "" {
-                        let startTime = start.convertToDateString(dateFormat: "HH:mm a")
-                        let endTime = end.convertToDateString(dateFormat: "HH:mm a")
-                        returnDate = "\(day) - \(startTime) to \(endTime)"
+            if let eventDetailForEdit {
+                var selectedDateTimes: [String] = /*eventDetailForEdit.dateTime ?? */[]
+                if selectedEventType.eventSlug == .tournament {
+                    if let dates = selectedEventDates.value?.map({ return /*$0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a")*/ $0.selectedDateTime  }).compactMap({ $0 }) {
+                        selectedDateTimes.append(contentsOf: dates)
+                        payload.updateValue(selectedDateTimes, forKey: "dateTime")
                     }
-                    return returnDate
-                    
-                }).compactMap({ $0 }), !dates.isEmpty {
-                    payload.updateValue(dates, forKey: "dateTime")
+                    else {
+                        isValid = false
+                        validationMessage += "Event Date, "
+                    }
                 }
-                else {
-                    isValid = false
-                    validationMessage += "Event Date, "
+                else if selectedEventType.eventSlug == .game {
+                    if let dates = selectedEventDates.value?.map({ model in
+                        
+                        var returnDate: String? = model.selectedDateTime
+                        
+//                        if let start = model.startTime, let end = model.endTime, let day = model.selectedDay, day != "" {
+//                            let startTime = start.convertToDateString(dateFormat: "HH:mm a")
+//                            let endTime = end.convertToDateString(dateFormat: "HH:mm a")
+//                            returnDate = "\(day) - \(startTime) to \(endTime)"
+//                        }
+                        
+                        return returnDate
+                        
+                    }).compactMap({ $0 }), !dates.isEmpty {
+                        selectedDateTimes.append(contentsOf: dates)
+                        payload.updateValue(selectedDateTimes, forKey: "dateTime")
+                    }
+                    else {
+                        isValid = false
+                        validationMessage += "Event Date, "
+                    }
                 }
             }
             else {
-                isValid = false
-                validationMessage += "Event Type, "
+                if selectedEventType.eventSlug == .tournament {
+                    if let dates = selectedEventDates.value?.map({ return /*$0.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - HH:mm a")*/ $0.selectedDateTime  }).compactMap({ $0 }) {
+                        payload.updateValue(dates, forKey: "dateTime")
+                    }
+                    else {
+                        isValid = false
+                        validationMessage += "Event Date, "
+                    }
+                }
+                else if selectedEventType.eventSlug == .game {
+                    if let dates = selectedEventDates.value?.map({ model in
+                        
+                        var returnDate: String? = model.selectedDateTime
+                        
+//                        if let start = model.startTime, let end = model.endTime, let day = model.selectedDay, day != "" {
+//                            let startTime = start.convertToDateString(dateFormat: "HH:mm a")
+//                            let endTime = end.convertToDateString(dateFormat: "HH:mm a")
+//                            returnDate = "\(day) - \(startTime) to \(endTime)"
+//                        }
+                        
+                        return returnDate
+                        
+                    }).compactMap({ $0 }), !dates.isEmpty {
+                        payload.updateValue(dates, forKey: "dateTime")
+                    }
+                    else {
+                        isValid = false
+                        validationMessage += "Event Date, "
+                    }
+                }
+                else {
+                    isValid = false
+                    validationMessage += "Event Type, "
+                }
             }
+            
+            
             
             
         }
@@ -200,8 +294,6 @@ class EventAndFilterViewModel {
         if let selectedCategoryType = selectedCategoryType.value {
             
             payload.updateValue(selectedCategoryType.title, forKey: "category")
-            
-            
             
         }
         else {
@@ -232,16 +324,47 @@ class EventAndFilterViewModel {
         return (isValid, validationMessage, payload)
     }
     
-    func createMahjonEventApi(parameters: [String: Any]?) {
-        manageMahjongEventsService.createEventApi(parameters: parameters, images: imageUrls) { [weak self] result in
+    private func getEventDetailApi() {
+        mahjongEventDetailService.mahjongEventDetailApi(eventId: eventDetailForEdit?.id) { result in
             switch result {
             case .success((let data, let json, let resp)):
-                self?.manageEventResponse.value = data
+                if let eventData = data?.data?.event {
+                    NotificationCenter.default.post(name: .eventDetail, object: eventData)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
-                self?.manageEventResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
             }
         }
+    }
+    
+    func createMahjonEventApi(parameters: [String: Any]?) {
+        
+        if let eventDetailForEdit {
+            manageMahjongEventsService.updateEventApi(parameters: parameters, images: nil, eventId: eventDetailForEdit.id) { [weak self] result in
+                switch result {
+                case .success((let data, let json, let resp)):
+                    self?.manageEventResponse.value = data
+                    if data?.isSuccessful == true {
+                        self?.getEventDetailApi()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self?.manageEventResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
+                }
+            }
+        }
+        else {
+            manageMahjongEventsService.createEventApi(parameters: parameters, images: imageUrls) { [weak self] result in
+                switch result {
+                case .success((let data, let json, let resp)):
+                    self?.manageEventResponse.value = data
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self?.manageEventResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
+                }
+            }
+        }
+        
     }
     
     func compileSelectedDatesForLabel() -> String {
@@ -250,12 +373,14 @@ class EventAndFilterViewModel {
             for selectedDate in selectedDates {
                 let connectingString: String = selectedDatesString.isEmpty ? "" : "\n"
                 if selectedEventType.value?.eventSlug == .tournament {
-                    selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a"))"
+//                    selectedDatesString += "\(connectingString)\(selectedDate.dateTime.convertToDateString(dateFormat: "EEEE, MMMM dd, yyyy - hh:mm a"))"
+                    selectedDatesString += "\(connectingString)\(selectedDate.selectedDateTime ?? "")"
                 }
                 else if selectedEventType.value?.eventSlug == .game {
-                    if let start = selectedDate.startTime, let end = selectedDate.endTime, let day = selectedDate.selectedDay, day != "" {
-                        selectedDatesString += "\(connectingString)\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
-                    }
+//                    if let start = selectedDate.startTime, let end = selectedDate.endTime, let day = selectedDate.selectedDay, day != "" {
+//                        selectedDatesString += "\(connectingString)\(day) - \(start.convertToDateString(dateFormat: "hh:mm a")) to \(end.convertToDateString(dateFormat: "hh:mm a"))"
+//                    }
+                    selectedDatesString += "\(connectingString)\(selectedDate.selectedDateTime ?? "")"
                 }
             }
         }
@@ -300,6 +425,7 @@ class EventAndFilterViewModel {
         
         //New
         selectedEventDates.value = []
+        eventDetailForEdit?.dateTime = []
         
         eventTypes.value = mutable
     }

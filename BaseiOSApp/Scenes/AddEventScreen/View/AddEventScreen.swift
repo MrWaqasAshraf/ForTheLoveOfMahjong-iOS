@@ -31,6 +31,7 @@ class AddEventScreen: UIViewController {
     @IBOutlet weak var selectedDatesLbl: UILabel!
     @IBOutlet weak var editDatesIcon: UIImageView!
     @IBOutlet weak var selectDateTitleLbl: UILabel!
+    @IBOutlet weak var selectImageBtn: UIButton!
     
     //Placeholders
     @IBOutlet weak var placeholderCameraIcon: UIImageView!
@@ -60,8 +61,8 @@ class AddEventScreen: UIViewController {
         super.viewDidLoad()
         
         bindViewModel()
-        setupUiElements()
         setupImagePicker()
+        setupUiElements()
     }
     
     private func setupImagePicker() {
@@ -100,12 +101,37 @@ class AddEventScreen: UIViewController {
         let cellNib = UINib(nibName: CustomOptionCell.identifier, bundle: .main)
         eventTypesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
         eventCategoriesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
+        
+        if let eventData = viewModel.eventDetailForEdit {
+            mapEventData(data: eventData)
+        }
+        
+    }
+    
+    private func mapEventData(data: MahjongEventData) {
+        eventNameField.text = data.name
+        locationNameField.text = data.locationName
+        addressField.text = data.address
+        nameField.text = data.personName
+        contactField.text = data.contact
+        descriptionField.text = data.description
+        shouldShowPlaceholderUis(show: false)
+        editImageIcon.isHidden = true
+        selectImageBtn.isEnabled = false
+        print("Full image: \(baseUrlDomain.dropLast(4).lowercased())\(data.image ?? "")")
+        selectedImageView.getFullUrlImage(url: "\(baseUrlDomain.dropLast(4).lowercased())\(data.image ?? "")", placeHolderImage: .placeholderImg)
+        mapSelectedDates()
     }
     
     @objc
     private func goBack() {
         MahjongFileManager.shared.removeFile(path: TempFileURLs.tournamentImage)
         appNavigationCoordinator.pop()
+    }
+    
+    private func goBackToMainScreen() {
+        MahjongFileManager.shared.removeFile(path: TempFileURLs.tournamentImage)
+        appNavigationCoordinator.popToSpecificVc(vc: MainMapScreen.self)
     }
     
     private func generateThumbnailRepresentations(fileUrl: URL) {
@@ -313,6 +339,7 @@ class AddEventScreen: UIViewController {
         
         let createAndValidatePayload = viewModel.createAndValidatePayload(name: eventNameField.text, contactName: nameField.text, locationName: locationNameField.text, address: addressField.text, contact: contactField.text, description: descriptionField.text ?? "")
         if createAndValidatePayload.0 {
+            print("params are: \(createAndValidatePayload.2)")
             ActivityIndicator.shared.showActivityIndicator(view: view)
             viewModel.createMahjonEventApi(parameters: createAndValidatePayload.2)
         }
@@ -453,9 +480,9 @@ extension AddEventScreen {
             if response?.isSuccessful == true {
                 if let closure = self?.closure {
                     closure()
-                    DispatchQueue.main.async {
-                        self?.goBack()
-                    }
+                }
+                DispatchQueue.main.async {
+                    self?.goBackToMainScreen()
                 }
             }
             

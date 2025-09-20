@@ -90,6 +90,7 @@ enum NotificationCenterNames {
 extension Notification.Name {
     
     static let toggleFavourite: Notification.Name = Notification.Name("toggleFavourite")
+    static let eventDetail: Notification.Name = Notification.Name("eventDetail")
     
     //Notifications for location manager
     //didFailWithError

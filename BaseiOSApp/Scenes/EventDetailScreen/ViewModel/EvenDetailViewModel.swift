@@ -37,6 +37,16 @@ class EvenDetailViewModel {
         self.manageMahjongEventService = manageMahjongEventService
     }
     
+    func observeNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(mapEventUpdateData), name: .eventDetail, object: nil)
+    }
+    
+    @objc func mapEventUpdateData(notify: Notification) {
+        if let data = notify.object as? MahjongEventData {
+            eventDetail.value = data
+        }
+    }
+    
     func eventDeleteApi() {
         manageMahjongEventService.eventDeleteApi(eventId: eventDetail.value?.id) { [weak self] result in
             switch result{

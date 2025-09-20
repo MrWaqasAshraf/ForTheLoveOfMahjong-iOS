@@ -40,12 +40,14 @@ struct MahjongEventData: Codable {
     let userName, userEmail: String?
     let isActive: Bool?
     let approvalStatus: String?
+    let personName: String?
     var viewCount, favouriteCount: Int?
 
     enum CodingKeys: String, CodingKey {
         case type, name, dateTime, locationName, address, lat, lng, category, contact, description, image
         case user = "userId"
         case id = "_id"
+        case personName = "person_name"
         case userName, userEmail, isActive, viewCount, favouriteCount, favouritedBy, approvalStatus
     }
 }

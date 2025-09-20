@@ -47,6 +47,7 @@ class MainMapViewModel {
     
     func observeFavouriteNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(mapFavouriteData), name: .toggleFavourite, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(mapEventUpdateData), name: .eventDetail, object: nil)
     }
     
     func searchEvents(searchText: String?) -> MahjongEventData? {
@@ -70,6 +71,19 @@ class MainMapViewModel {
     func resetMoveCameraFlag() {
         if moveCameraAfterResponse {
             moveCameraAfterResponse = false
+        }
+    }
+    
+    @objc func mapEventUpdateData(notify: Notification) {
+        if let data = notify.object as? MahjongEventData {
+            moveCameraAfterResponse = false
+            var mutableObject = dashboardResponse.value
+            for (index, var eventItem) in (mutableObject?.data?.events ?? []).enumerated() {
+                if eventItem.id == data.id {
+                    mutableObject?.data?.events?[index] = data
+                }
+            }
+            dashboardResponse.value = mutableObject
         }
     }
     

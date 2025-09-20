@@ -68,7 +68,7 @@ class ManageMahjongEventsService: ServicesDelegate {
         getResponse(.post, endPoint: EndPoint.createEventApi.rawValue, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
     }
     
-    func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: Int?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+    func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
         /*
          {
              "type":"Tournament",
@@ -89,9 +89,9 @@ class ManageMahjongEventsService: ServicesDelegate {
         }
         var files: FileParameters?
         if let images {
-            files = FileParameters(fileName: "Images", urls: images)
+            files = FileParameters(fileName: "image", urls: images)
         }
-        getResponse(.post, endPoint: endPoint, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
+        getResponse(.put, endPoint: endPoint, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
     }
     
     func eventDeleteRequestApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {

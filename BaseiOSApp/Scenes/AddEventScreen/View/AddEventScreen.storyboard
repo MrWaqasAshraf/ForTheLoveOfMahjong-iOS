@@ -752,6 +752,7 @@
                         <outlet property="placeholderCameraIcon" destination="4pt-6A-e0E" id="oBN-Xe-2c4"/>
                         <outlet property="placeholderUploadLbl" destination="KPH-px-xLX" id="maD-6F-7Wp"/>
                         <outlet property="selectDateTitleLbl" destination="RwA-GI-UPl" id="DtF-ih-G1Y"/>
+                        <outlet property="selectImageBtn" destination="UR3-cc-DnF" id="8QE-TC-USZ"/>
                         <outlet property="selectedDatesLbl" destination="tuO-xd-Qis" id="tRi-6S-ceC"/>
                         <outlet property="selectedImageView" destination="ZJx-SK-AMY" id="JqM-a2-uxz"/>
                         <outlet property="uploadImageContainerView" destination="Ihc-kU-O4Z" id="tkN-BP-nDh"/>
