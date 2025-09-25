@@ -32,6 +32,9 @@ class EventsListViewModel {
         if eventsListType == .favourites {
             params.append("favouritesOnly=true")
         }
+        else {
+            params.append("isSpecial=true")
+        }
         return params
     }
     private var allEventsList: [MahjongEventData]?

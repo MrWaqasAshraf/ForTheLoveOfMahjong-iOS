@@ -83,7 +83,7 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
         case .events:
             if let appUserData {
                 dismiss(animated: true)
-                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Events", eventsListType: .allEvents))
+                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Special events", eventsListType: .allEvents))
                 appNavigationCoordinator.pushUIKit(vc)
             }
             else {
@@ -102,6 +102,8 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 let vc = AppUIViewControllers.signInScreen()
                 appNavigationCoordinator.pushUIKit(vc)
             }
+        case .contactUs:
+            GenericToast.showToast(message: "Feature under development")
         case .logout:
             
             let lbl = ReusableLabelUI.fromNib()

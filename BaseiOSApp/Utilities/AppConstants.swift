@@ -91,6 +91,7 @@ extension Notification.Name {
     
     static let toggleFavourite: Notification.Name = Notification.Name("toggleFavourite")
     static let eventDetail: Notification.Name = Notification.Name("eventDetail")
+    static let eventAdded: Notification.Name = Notification.Name("eventAdded")
     
     //Notifications for location manager
     //didFailWithError

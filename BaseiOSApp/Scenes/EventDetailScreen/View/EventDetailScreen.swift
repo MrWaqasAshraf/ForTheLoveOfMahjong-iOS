@@ -17,6 +17,7 @@ class EventDetailScreen: UIViewController {
     @IBOutlet weak var eventNameLbl: UILabel!
     @IBOutlet weak var eventLocationLbl: UILabel!
     @IBOutlet weak var eventLocationNameLbl: UILabel!
+    @IBOutlet weak var personNameLbl: UILabel!
     @IBOutlet weak var contactLbl: UILabel!
     @IBOutlet weak var eventDescriptionLbl: UILabel!
     @IBOutlet weak var datesStackView: UIStackView!
@@ -78,6 +79,7 @@ class EventDetailScreen: UIViewController {
         eventLocationNameLbl.text = data?.address ?? "..."
         eventDescriptionLbl.text = data?.description ?? "N/A"
         contactLbl.text = data?.contact ?? "N/A"
+        personNameLbl.text = data?.personName ?? "N/A"
         eventImage.getFullUrlImage(url: baseUrlDomain.dropLast(4).lowercased() + "\(data?.image ?? "")", placeHolderImage: .event_detail_image)
         
         
@@ -157,7 +159,8 @@ class EventDetailScreen: UIViewController {
             
             
             if let remoteUserId = data?.user?.id {
-                favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
+//                favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
+                favouriteIconContainerView.isHidden = false
             }
             else {
                 favouriteIconContainerView.isHidden = true
@@ -240,6 +243,14 @@ class EventDetailScreen: UIViewController {
     }
     
     //MARK: ButtonActions
+    @IBAction func locationNavigateBtn(_ sender: Any) {
+        let eventData = viewModel.eventDetail.value
+        if let lat = eventData?.lat, let long = eventData?.lng {
+            AppUrlHandler.openInputUrl(url: nil, type: .googleMap(LocationLinkDataModel(latitude: "\(lat)", longitude: "\(long)")))
+        }
+    }
+    
+    
     @IBAction func markFavoruiteBtn(_ sender: Any) {
         viewModel.isFavouriteEvent.toggle()
         favouriteIcon.tintColor = viewModel.isFavouriteEvent ? .clr_primary_light : .clr_gray_1
@@ -247,11 +258,56 @@ class EventDetailScreen: UIViewController {
     }
     
     @IBAction func shareBtn(_ sender: Any) {
+        
+        /*
+         Mahjong invitation
+
+         Event: <event name>
+
+         Location: <google map link>
+
+         Event dates:
+
+         - <first date>
+         - <nth date>
+         */
+        
         // text to share
-        let text = "This is some text that I want to share."
+        var shareText = "Mahjong invitation"
+        
+        let eventData = viewModel.eventDetail.value
+        
+        if let eventname = eventData?.name {
+            shareText += "\n\nEvent: \(eventname)"
+        }
+        
+        if let address = eventData?.address {
+            shareText += "\n\nAddress: \(address)"
+        }
+        
+        if let lat = eventData?.lat, let long = eventData?.lng {
+            let locLink = LocationLinkDataModel(latitude: "\(lat)", longitude: "\(long)")
+            shareText += "\n\nLocation: \(locLink.googleMapLink)"
+        }
+        
+        if let contact = eventData?.contact {
+            shareText += "\n\nContact: \(contact)"
+        }
+        
+        if let eventDates = eventData?.dateTime {
+            
+            if !eventDates.isEmpty {
+                shareText += "\n\nEvent Date & Timings:\n"
+                for date in eventDates {
+                    shareText += "\n• \(date)"
+                }
+            }
+            
+        }
+        
         
         // set up activity view controller
-        let textToShare = [ text ]
+        let textToShare = [ shareText ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
@@ -259,7 +315,7 @@ class EventDetailScreen: UIViewController {
         activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook ]
         
         // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
     
 }

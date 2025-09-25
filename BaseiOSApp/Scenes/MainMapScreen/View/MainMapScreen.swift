@@ -49,6 +49,7 @@ class MainMapScreen: UIViewController {
         setupGoogleMap()
         checkLocationPermission()
         callApis()
+        viewModel.startDashboardEventsFetchingSchedular()
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 //            self.addMyLocationMarker()
@@ -65,10 +66,17 @@ class MainMapScreen: UIViewController {
     }
     
     private func callApis() {
+        
+        guard !viewModel.isRequestInProgress else {
+            print("⏩ Skipping API call, previous request still running")
+            return
+        }
+        
         DispatchQueue.main.async {
             ActivityIndicator.shared.showActivityIndicator(view: self.view)
         }
         viewModel.dashboardApi()
+        
     }
     
     private func setupUiElements() {

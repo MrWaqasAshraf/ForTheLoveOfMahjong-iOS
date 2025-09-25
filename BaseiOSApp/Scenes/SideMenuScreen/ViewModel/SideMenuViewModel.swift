@@ -28,6 +28,7 @@ enum SideMenuSlug {
     case profile
     case events
     case favorite
+    case contactUs
     case darkMode
     case logout
     
@@ -36,8 +37,9 @@ enum SideMenuSlug {
 class SideMenuViewModel {
     
     var sideMenuOptionsList: [SideMenuOptionModel] = [.init(title: "Profile", slug: .profile, image: .groupProfileIconSystem),
-                                                      .init(title: "Events", slug: .events, image: .docIconSystem),
+                                                      .init(title: "Special events", slug: .events, image: .docIconSystem),
                                                       .init(title: "Favorite", slug: .favorite, image: .hearIconSystem),
+                                                      .init(title: "Contacts us", slug: .contactUs, image: .contactUsIconSystem),
 //                                                      .init(title: "Dark Mode", slug: .darkMode, image: .moonHalfIconSystem, isOn: false)
     ]
     

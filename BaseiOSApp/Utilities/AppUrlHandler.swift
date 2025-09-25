@@ -50,7 +50,8 @@ class AppUrlHandler {
 @discardableResult
 func openLink(urlString: String) -> Bool {
     guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else {
-        GenericToast.showToast(message: "Some issue occurred with the link")
+//        GenericToast.showToast(message: "Some issue occurred with the link")
+        print("Some issue occurred with the link")
         return false
     }
     if #available(iOS 10.0, *) {

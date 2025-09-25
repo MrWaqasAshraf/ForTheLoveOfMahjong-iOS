@@ -329,6 +329,9 @@ class EventAndFilterViewModel {
             switch result {
             case .success((let data, let json, let resp)):
                 if let eventData = data?.data?.event {
+                    if eventData.approvalStatus == "approved" {
+                        NotificationCenter.default.post(name: .eventAdded, object: eventData)
+                    }
                     NotificationCenter.default.post(name: .eventDetail, object: eventData)
                 }
             case .failure(let error):

@@ -13,6 +13,10 @@ class MainMapViewModel {
     private(set) var moveCameraAfterResponse: Bool = true
     
     //For API
+    
+    private var timer: Timer?
+    private(set) var isRequestInProgress = false
+    
     var selectedEventType: CustomOptionModel?
     var selectedCategoryType: CustomOptionModel?
     private var allEventsList: [MahjongEventData]?
@@ -32,6 +36,7 @@ class MainMapViewModel {
             filters.append("category=\(selectedCategoryType.title)")
         }
         dashbaordService.dashboardEventsApi(filters: filters) { [weak self] result in
+            self?.isRequestInProgress = false
             switch result {
             case .success((let data, let json, let resp)):
                 self?.allEventsList = data?.data?.events
@@ -41,11 +46,40 @@ class MainMapViewModel {
                 self?.allEventsList = nil
                 self?.dashboardResponse.value = MahjongEventsListResponse(success: -1, message: error.localizedDescription, data: nil)
             }
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                self?.resetMoveCameraFlag()
+            }
+            
         }
         
     }
     
+    func startDashboardEventsFetchingSchedular() {
+        // Invalidate any existing timer
+        stop()
+        
+        // Start new timer
+        timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { [weak self] _ in
+            self?.moveCameraAfterResponse = false
+            self?.dashboardApi()
+        }
+        
+        // Ensure timer runs on main run loop
+        if timer != nil {
+            RunLoop.main.add(timer!, forMode: .common)
+        }
+        
+    }
+    
+    func stop() {
+        timer?.invalidate()
+        timer = nil
+    }
+        
+    
     func observeFavouriteNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(addEventToMap), name: .eventAdded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(mapFavouriteData), name: .toggleFavourite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(mapEventUpdateData), name: .eventDetail, object: nil)
     }
@@ -69,8 +103,8 @@ class MainMapViewModel {
     }
     
     func resetMoveCameraFlag() {
-        if moveCameraAfterResponse {
-            moveCameraAfterResponse = false
+        if moveCameraAfterResponse == false {
+            moveCameraAfterResponse = true
         }
     }
     
@@ -84,6 +118,22 @@ class MainMapViewModel {
                 }
             }
             dashboardResponse.value = mutableObject
+        }
+    }
+    
+    @objc
+    private func addEventToMap(notify: Notification) {
+        if let data = notify.object as? MahjongEventData {
+            var mutableObject = dashboardResponse.value
+            let isEmpty = mutableObject?.data?.events?.isEmpty ?? true
+            if isEmpty {
+                dashboardResponse.value = MahjongEventsListResponse(success: 200, message: "Fetched", data: .init(events: [data]))
+            }
+            else {
+                moveCameraAfterResponse = false
+                dashboardResponse.value?.data?.events?.append(data)
+            }
+            resetMoveCameraFlag()
         }
     }
     
@@ -111,6 +161,7 @@ class MainMapViewModel {
                 }
             }
             dashboardResponse.value = mutableObject
+            resetMoveCameraFlag()
         }
         
     }
