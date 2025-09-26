@@ -103,7 +103,7 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                 appNavigationCoordinator.pushUIKit(vc)
             }
         case .contactUs:
-            GenericToast.showToast(message: "Feature under development")
+            AppUrlHandler.openInputUrl(url: "help@fortheloveofmahjongg.com", type: .email())
         case .logout:
             
             let lbl = ReusableLabelUI.fromNib()
