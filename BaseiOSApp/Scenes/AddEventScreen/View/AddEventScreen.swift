@@ -362,23 +362,23 @@ class AddEventScreen: UIViewController {
     
 }
 
-extension AddEventScreen: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == contactField {
-            // Define the allowed characters
-            let allowedCharacters = NSCharacterSet(charactersIn: "1234567890+-() ")
-            
-            // Create a character set from the replacement string (the new character(s) being typed)
-            let characterSet = CharacterSet(charactersIn: string)
-            
-            // Check if all characters in the replacement string are within the allowed characters
-            return allowedCharacters.isSuperset(of: characterSet)
-        }
-        return true
-    }
-    
-}
+//extension AddEventScreen: UITextFieldDelegate {
+//    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == contactField {
+//            // Define the allowed characters
+//            let allowedCharacters = NSCharacterSet(charactersIn: "1234567890+-() ")
+//            
+//            // Create a character set from the replacement string (the new character(s) being typed)
+//            let characterSet = CharacterSet(charactersIn: string)
+//            
+//            // Check if all characters in the replacement string are within the allowed characters
+//            return allowedCharacters.isSuperset(of: characterSet)
+//        }
+//        return true
+//    }
+//    
+//}
 
 extension AddEventScreen: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     

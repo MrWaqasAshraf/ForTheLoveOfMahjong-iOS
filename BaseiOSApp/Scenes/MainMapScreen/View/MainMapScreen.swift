@@ -257,9 +257,11 @@ class MainMapScreen: UIViewController {
         if let category = data?.category {
             switch category {
             case "American":
-                customIcon.markerImage.image = .map_marker_svg_3
-            case "Chinese":
+//                customIcon.markerImage.image = .map_marker_svg_3
                 customIcon.markerImage.image = .map_marker_svg_5
+            case "Chinese":
+//                customIcon.markerImage.image = .map_marker_svg_5
+                customIcon.markerImage.image = .map_marker_svg_3
             case "Hong Kong":
                 customIcon.markerImage.image = .map_marker_svg_6
             case "Riichi":

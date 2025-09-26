@@ -86,10 +86,10 @@
                                                         <rect key="frame" x="0.0" y="566" width="393" height="200"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVi-Y8-BpJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="361" height="200"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="200"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Central Park, New York, NY, USA" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muw-Gt-hz0">
-                                                                        <rect key="frame" x="16" y="0.0" width="329" height="182"/>
+                                                                        <rect key="frame" x="16" y="0.0" width="321" height="182"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -104,7 +104,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Sd-kw-Rq4">
-                                                                <rect key="frame" x="361" y="0.0" width="32" height="200"/>
+                                                                <rect key="frame" x="353" y="0.0" width="40" height="200"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_link_icon" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-BN-enz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -121,7 +121,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIc-N8-Aju">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="32" height="200"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="200"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                         <connections>
                                                                             <action selector="locationNavigateBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gtH-Xd-sK7"/>
@@ -133,7 +133,7 @@
                                                                     <constraint firstItem="pEf-BN-enz" firstAttribute="leading" secondItem="7Sd-kw-Rq4" secondAttribute="leading" id="5uv-VP-76Y"/>
                                                                     <constraint firstAttribute="trailing" secondItem="WIc-N8-Aju" secondAttribute="trailing" id="Bw5-uR-hAt"/>
                                                                     <constraint firstAttribute="bottom" secondItem="WIc-N8-Aju" secondAttribute="bottom" id="Iey-V4-36g"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="pEf-BN-enz" secondAttribute="trailing" constant="2" id="RtL-Wa-Vs9"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pEf-BN-enz" secondAttribute="trailing" constant="10" id="RtL-Wa-Vs9"/>
                                                                     <constraint firstItem="WIc-N8-Aju" firstAttribute="leading" secondItem="7Sd-kw-Rq4" secondAttribute="leading" id="kDy-aB-Sph"/>
                                                                     <constraint firstItem="WIc-N8-Aju" firstAttribute="top" secondItem="7Sd-kw-Rq4" secondAttribute="top" id="mjV-w4-z2T"/>
                                                                     <constraint firstItem="pEf-BN-enz" firstAttribute="top" secondItem="7Sd-kw-Rq4" secondAttribute="top" id="nhH-7N-gDC"/>
@@ -358,7 +358,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cBE-hY-Lln">
                                                         <rect key="frame" x="0.0" y="552" width="341" height="128"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5py-7W-1t5">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5py-7W-1t5">
                                                                 <rect key="frame" x="0.0" y="0.0" width="341" height="128"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                                 <nil key="textColor"/>

@@ -291,7 +291,7 @@ class EventDetailScreen: UIViewController {
         }
         
         if let contact = eventData?.contact {
-            shareText += "\n\nContact: \(contact)"
+            shareText += "\n\nContact Info: \(contact)"
         }
         
         if let eventDates = eventData?.dateTime {
