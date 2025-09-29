@@ -127,7 +127,7 @@ class MainMapViewModel {
             var mutableObject = dashboardResponse.value
             let isEmpty = mutableObject?.data?.events?.isEmpty ?? true
             if isEmpty {
-                dashboardResponse.value = MahjongEventsListResponse(success: 200, message: "Fetched", data: .init(events: [data]))
+                dashboardResponse.value = MahjongEventsListResponse(success: 200, message: "Fetched", data: .init(events: [data], autoApprovalLimit: 10))
             }
             else {
                 moveCameraAfterResponse = false

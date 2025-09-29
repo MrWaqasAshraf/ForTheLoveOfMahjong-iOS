@@ -58,6 +58,8 @@ enum EndPoint: String {
     case staffByUserAndBusinessId = "/staff_svc/pv/staff/getStaffsByUserAndBusinessId"
     //?userId=574&businessId=423
     
+    case faqsListApi = "/faq"
+    //?page=1&limit=20
     
   
 }

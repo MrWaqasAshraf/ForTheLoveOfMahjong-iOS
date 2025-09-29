@@ -25,6 +25,7 @@ struct MahjongEventsListResponse: Codable {
 
 struct MahjongDataResult: Codable {
     var events: [MahjongEventData]?
+    let autoApprovalLimit: Int?
 }
 
 // MARK: - MahjongEventData
@@ -108,5 +109,26 @@ struct FavouriteInfoData: Codable {
     enum CodingKeys: String, CodingKey {
         case eventID = "eventId"
         case eventName, isFavourited, favouriteCount
+    }
+}
+
+// MARK: - FaqsListResponse
+struct FaqsListResponse: Codable {
+    let success: Bool?
+    var data: [FaqsData]?
+}
+
+// MARK: - FaqsData
+struct FaqsData: Codable {
+    let id, question, answer, category: String?
+    let order: Int?
+    let isActive: Bool?
+    let viewCount: Int?
+    let createdAt, updatedAt: String?
+    var isSelected: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case question, answer, category, order, isActive, viewCount, createdAt, updatedAt
     }
 }

@@ -19,6 +19,9 @@ var profileFetched: Bindable<Bool> = Bindable(false)
 
 var appSecurityManager: AppSecurityManager = AppSecurityManager()
 var locationService: AppLocationService = AppLocationService()
+
+var allowedEventsNumber: Int = 10
+
 var a_id: String {
     return MahjongFileManager.shared.accessPlistValues(plistName: .internalName, keyname: CustomHeaderKeys.a_id.rawValue, returnValuetype: String.self) ?? ""
 }

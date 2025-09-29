@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class EventDetailScreen: UIViewController {
     
@@ -246,7 +247,21 @@ class EventDetailScreen: UIViewController {
     @IBAction func locationNavigateBtn(_ sender: Any) {
         let eventData = viewModel.eventDetail.value
         if let lat = eventData?.lat, let long = eventData?.lng {
-            AppUrlHandler.openInputUrl(url: nil, type: .googleMap(LocationLinkDataModel(latitude: "\(lat)", longitude: "\(long)")))
+            
+            //Old
+//            AppUrlHandler.openInputUrl(url: nil, type: .googleMap(LocationLinkDataModel(latitude: "\(lat)", longitude: "\(long)")))
+            
+            //New
+//            let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long))
+            
+            let address: [String: Any] = [
+                "Street": eventData?.address ?? ""
+                ]
+            let placemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: address)
+            let mapItem = MKMapItem(placemark: placemark)
+            let launchOptions: [String: Any] = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: CLLocationCoordinate2D(latitude: lat, longitude: long))]
+            mapItem.openInMaps(launchOptions: launchOptions)
+            
         }
     }
     

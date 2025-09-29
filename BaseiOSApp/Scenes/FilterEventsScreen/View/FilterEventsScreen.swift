@@ -82,7 +82,7 @@ extension FilterEventsScreen: UICollectionViewDelegate, UICollectionViewDataSour
         }
         else {
             let data = viewModel.eventCategories.value?[indexPath.row]
-            cell.configureCell(data: data)
+            cell.configureCell(data: data, forCategory: true)
         }
         return cell
     }

@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,19 +22,70 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TdK-Td-5ng">
                         <rect key="frame" x="0.0" y="0.0" width="233" height="52"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkS-eD-FKk">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QOm-Bk-GyM">
                                 <rect key="frame" x="10" y="5" width="213" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMo-Pw-TK4">
+                                        <rect key="frame" x="0.0" y="0.0" width="213" height="42"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkS-eD-FKk">
+                                                <rect key="frame" x="0.0" y="0.0" width="213" height="42"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="JkS-eD-FKk" firstAttribute="leading" secondItem="MMo-Pw-TK4" secondAttribute="leading" id="7gO-Ko-rcc"/>
+                                            <constraint firstAttribute="bottom" secondItem="JkS-eD-FKk" secondAttribute="bottom" id="XhZ-gZ-CJO"/>
+                                            <constraint firstItem="JkS-eD-FKk" firstAttribute="top" secondItem="MMo-Pw-TK4" secondAttribute="top" id="kWb-q0-ztn"/>
+                                            <constraint firstAttribute="trailing" secondItem="JkS-eD-FKk" secondAttribute="trailing" id="zBW-ER-Ezb"/>
+                                        </constraints>
+                                    </view>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUs-iA-bvi">
+                                        <rect key="frame" x="0.0" y="0.0" width="15" height="42"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMK-Dm-pY1">
+                                                <rect key="frame" x="0.0" y="13.666666666666668" width="15" height="15"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Emt-6k-9VN">
+                                                        <rect key="frame" x="3" y="5.3333333333333321" width="9" height="5.0000000000000036"/>
+                                                        <color key="tintColor" name="clr_primary"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="Emt-6k-9VN" firstAttribute="top" secondItem="FMK-Dm-pY1" secondAttribute="top" constant="3" id="5G9-8B-i8O"/>
+                                                    <constraint firstAttribute="height" constant="15" id="EYF-Ci-rQK"/>
+                                                    <constraint firstItem="Emt-6k-9VN" firstAttribute="leading" secondItem="FMK-Dm-pY1" secondAttribute="leading" constant="3" id="X6C-Ma-RVu"/>
+                                                    <constraint firstAttribute="width" constant="15" id="mHa-Xu-GHb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Emt-6k-9VN" secondAttribute="bottom" constant="3" id="oWY-m7-FuP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Emt-6k-9VN" secondAttribute="trailing" constant="3" id="s1Y-e6-B3C"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="7.5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="FMK-Dm-pY1" firstAttribute="leading" secondItem="KUs-iA-bvi" secondAttribute="leading" id="8TE-Uu-k1Z"/>
+                                            <constraint firstItem="FMK-Dm-pY1" firstAttribute="centerY" secondItem="KUs-iA-bvi" secondAttribute="centerY" id="Mh3-zc-x8p"/>
+                                            <constraint firstAttribute="trailing" secondItem="FMK-Dm-pY1" secondAttribute="trailing" id="eRX-MD-I1q"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" name="clr_gray_3"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JkS-eD-FKk" secondAttribute="trailing" constant="10" id="3WQ-Yu-ksl"/>
-                            <constraint firstAttribute="bottom" secondItem="JkS-eD-FKk" secondAttribute="bottom" constant="5" id="9H3-Mq-JFl"/>
-                            <constraint firstItem="JkS-eD-FKk" firstAttribute="leading" secondItem="TdK-Td-5ng" secondAttribute="leading" constant="10" id="H3A-z3-ZA7"/>
-                            <constraint firstItem="JkS-eD-FKk" firstAttribute="top" secondItem="TdK-Td-5ng" secondAttribute="top" constant="5" id="YxW-Ks-A44"/>
+                            <constraint firstAttribute="bottom" secondItem="QOm-Bk-GyM" secondAttribute="bottom" constant="5" id="5mL-WO-2pA"/>
+                            <constraint firstAttribute="trailing" secondItem="QOm-Bk-GyM" secondAttribute="trailing" constant="10" id="PUT-wA-Raq"/>
+                            <constraint firstItem="QOm-Bk-GyM" firstAttribute="top" secondItem="TdK-Td-5ng" secondAttribute="top" constant="5" id="bTI-8U-3o1"/>
+                            <constraint firstItem="QOm-Bk-GyM" firstAttribute="leading" secondItem="TdK-Td-5ng" secondAttribute="leading" constant="10" id="sSH-TH-TJM"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -52,6 +104,7 @@
             </constraints>
             <size key="customSize" width="233" height="52"/>
             <connections>
+                <outlet property="checkmarkView" destination="KUs-iA-bvi" id="UXW-nV-c1U"/>
                 <outlet property="containerView" destination="TdK-Td-5ng" id="lr2-Mm-s7D"/>
                 <outlet property="titleLbl" destination="JkS-eD-FKk" id="0ax-jT-vUi"/>
             </connections>
@@ -59,8 +112,15 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <namedColor name="clr_gray_3">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="clr_primary">
+            <color red="0.27843137254901962" green="0.45490196078431372" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

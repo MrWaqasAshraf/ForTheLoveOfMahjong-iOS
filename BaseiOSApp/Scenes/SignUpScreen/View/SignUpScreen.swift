@@ -44,8 +44,22 @@ class SignUpScreen: UIViewController {
         let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(goBack))
         barBtn.tintColor = .black
         
-        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn])]))
+        let img2 = UIImage.info_icon_system.withRenderingMode(.alwaysTemplate)
+        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(showDialogForAutoApprovedEvents))
+        barBtn2.tintColor = .black
         
+        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .right, barButtons: [barBtn2])]))
+        
+    }
+    
+    @objc
+    private func showDialogForAutoApprovedEvents() {
+        let autoApprovedEvents: String = """
+* You can post up to \(allowedEventsNumber) events without approval.
+* Additional events will be approved within 24 hours by the admin.
+* Events take 10–15 minutes to appear on the app after posting.
+"""
+        GenericAlert.showAlert(title: "Mahjong Events", message: autoApprovedEvents, actions: [.init(title: "Ok", style: .default)], controller: self) { _, _, _ in }
     }
     
     @objc

@@ -13,16 +13,42 @@ class CustomOptionCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var checkmarkView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func configureCell(data: CustomOptionModel?) {
+    func configureCell(data: CustomOptionModel?, forCategory: Bool = false) {
         titleLbl.text = data?.title
         titleLbl.textColor = data?.isSelected == true ? .white : .label
         containerView.backgroundColor = data?.isSelected == true ? .clr_primary : .clr_gray_3
+        
+        if forCategory {
+            checkmarkView.isHidden = !(data?.isSelected == true)
+            if let category = data?.title {
+                switch category {
+                case "American":
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_american : .clr_gray_3
+                case "Chinese":
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_chinese : .clr_gray_3
+                case "Hong Kong":
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_hong_kong : .clr_gray_3
+                case "Riichi":
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_riichie : .clr_gray_3
+                case "Wright Patterson":
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_wright_patterson : .clr_gray_3
+                default:
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_primary : .clr_gray_3
+                }
+            }
+        }
+        else {
+            checkmarkView.isHidden = true
+        }
+        
+        
     }
 
 }

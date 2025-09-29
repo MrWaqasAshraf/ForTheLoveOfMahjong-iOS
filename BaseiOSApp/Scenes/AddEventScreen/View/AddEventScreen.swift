@@ -92,11 +92,16 @@ class AddEventScreen: UIViewController {
         let img = UIImage.arrowLeft.withRenderingMode(.alwaysTemplate)
         let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(goBack))
         barBtn.tintColor = .black
+        
+        let img2 = UIImage.info_icon_system.withRenderingMode(.alwaysTemplate)
+        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(showDialogForAutoApprovedEvents))
+        barBtn2.tintColor = .black
+        
         let titleLbl = ReusableLabelUI.fromNib()
         titleLbl.titleLbl.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         titleLbl.titleLbl.text =  "Add Event"
         titleLbl.titleLbl.textColor = .black
-        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .center, customView: titleLbl)]))
+        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .center, customView: titleLbl), .init(position: .right, barButtons: [barBtn2])]))
         
         let cellNib = UINib(nibName: CustomOptionCell.identifier, bundle: .main)
         eventTypesCollectionView.register(cellNib, forCellWithReuseIdentifier: CustomOptionCell.identifier)
@@ -266,8 +271,37 @@ class AddEventScreen: UIViewController {
         }
     }
     
+    @objc
+    private func showDialogForAutoApprovedEvents() {
+        let autoApprovedEvents: String = """
+* You can post up to \(allowedEventsNumber) events without approval.
+* Additional events will be approved within 24 hours by the admin.
+* Events take 10–15 minutes to appear on the app after posting.
+"""
+        GenericAlert.showAlert(title: "Mahjong Events", message: autoApprovedEvents, actions: [.init(title: "Ok", style: .default)], controller: self) { _, _, _ in }
+    }
+    
     //MARK: ButtonActions
     @IBAction func selectAddressBtn(_ sender: Any) {
+        endEditing()
+        
+        let vc = AppUIViewControllers.addLocationSearchScreen()
+        vc.closure = { [weak self] selectedAddress in
+            
+            if let coordinates = selectedAddress.coordinates {
+                self?.viewModel.eventLocationCoordinates = EventLocationInfo(lat: coordinates.latitude, long: coordinates.longitude, address: selectedAddress.location ?? "Game adress")
+            }
+            
+            DispatchQueue.main.async {
+                self?.addressField.text = selectedAddress.location
+            }
+        }
+        appNavigationCoordinator.pushUIKit(vc)
+        
+        
+    }
+    
+    @IBAction func chooseOnMap(_ sender: Any) {
         endEditing()
         let vc = AppUIViewControllers.selectEventLocationScreen()
         vc.closure = { [weak self] selectedAddress, fullAddress, coordinates in
@@ -447,7 +481,7 @@ extension AddEventScreen: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         else {
             let data = viewModel.eventCategories.value?[indexPath.row]
-            cell.configureCell(data: data)
+            cell.configureCell(data: data, forCategory: true)
         }
         return cell
     }

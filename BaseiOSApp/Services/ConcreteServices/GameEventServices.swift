@@ -34,6 +34,9 @@ class EventsListingService: ServicesDelegate {
             switch result {
             case .success((let data, let json, let resp)):
                 print("\(endPoint) API status code: \(resp.statusCode), Data is: \(data)")
+                if let allowedEvents = data.data?.autoApprovalLimit {
+                    allowedEventsNumber = allowedEvents
+                }
                 completion(.success((data, json, resp.statusCode)))
             case .failure(let error):
                 print(error.localizedDescription)

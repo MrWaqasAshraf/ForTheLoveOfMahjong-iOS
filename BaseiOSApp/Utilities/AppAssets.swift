@@ -61,6 +61,11 @@ extension String{
     static let clr_gray_4 = "clr_gray_4"
     static let clr_primary_light_4 = "clr_primary_light_4"
     static let clr_gray_dk = "clr_gray_dk"
+    static let clr_american = "clr_american"
+    static let clr_chinese = "clr_chinese"
+    static let clr_hong_kong = "clr_hong_kong"
+    static let clr_riichie = "clr_riichie"
+    static let clr_wright_patterson = "clr_wright_patterson"
     
     //MARK: Images/Icons
     static let showEyeIcon = "eye.fill"
@@ -165,6 +170,7 @@ extension String{
     static let clr_transparent_shade_1 = "clr_transparent_shade_1"
     static let filter_round_icon = "filter_round_icon"
     static let logout_icon_system = "door.left.hand.open"
+    static let info_icon_system = "info.circle"
     
 }
 
@@ -222,6 +228,11 @@ extension UIColor{
     static let clr_gray_4 = UIColor(named: .clr_gray_4)!
     static let clr_transparent_shade_1 = UIColor(named: .clr_transparent_shade_1)!
     static let clr_gray_dk = UIColor(named: .clr_gray_dk)!
+    static let clr_american = UIColor(named: .clr_american)!
+    static let clr_chinese = UIColor(named: .clr_chinese)!
+    static let clr_hong_kong = UIColor(named: .clr_hong_kong)!
+    static let clr_riichie = UIColor(named: .clr_riichie)!
+    static let clr_wright_patterson = UIColor(named: .clr_wright_patterson)!
     
 }
 
@@ -300,6 +311,7 @@ extension UIImage {
     static let map_marker_svg_7 = UIImage(named: .map_marker_svg_7)!
     static let map_marker_svg_8 = UIImage(named: .map_marker_svg_8)!
     static let trash_icon_system = UIImage(systemName: .trash_icon_system)!
+    static let info_icon_system = UIImage(systemName: .info_icon_system)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!
