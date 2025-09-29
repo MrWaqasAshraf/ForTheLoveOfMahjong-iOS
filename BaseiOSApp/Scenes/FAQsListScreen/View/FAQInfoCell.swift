@@ -31,7 +31,7 @@ class FAQInfoCell: UITableViewCell {
     
     func configureCell(data: FaqsData?) {
         
-//        expandedIconImage.image = .chec
+        expandedIconImage.image = data?.isExpanded == true ? .arrow_up_rect_system_icon : .arrow_down_rect_system_icon
         titleLbl.text = data?.question
         subtitleLbl.text = data?.answer
         subtitleView.isHidden = !(data?.isExpanded == true)

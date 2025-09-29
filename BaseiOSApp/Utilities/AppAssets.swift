@@ -171,6 +171,8 @@ extension String{
     static let filter_round_icon = "filter_round_icon"
     static let logout_icon_system = "door.left.hand.open"
     static let info_icon_system = "info.circle"
+    static let arrow_down_rect_system_icon = "arrowtriangle.down.fill"
+    static let arrow_up_rect_system_icon = "arrowtriangle.up.fill"
     
 }
 
@@ -312,6 +314,8 @@ extension UIImage {
     static let map_marker_svg_8 = UIImage(named: .map_marker_svg_8)!
     static let trash_icon_system = UIImage(systemName: .trash_icon_system)!
     static let info_icon_system = UIImage(systemName: .info_icon_system)!
+    static let arrow_down_rect_system_icon = UIImage(systemName: .arrow_down_rect_system_icon)!
+    static let arrow_up_rect_system_icon = UIImage(systemName: .arrow_up_rect_system_icon)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!

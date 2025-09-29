@@ -200,7 +200,7 @@ class AddEventScreen: UIViewController {
             selectDateTitleLbl.text = "Select multiple dates"
         case .game:
             print("game")
-            selectDateTitleLbl.text = "Select date"
+            selectDateTitleLbl.text = "Select multiple dates"
         }
     }
     
@@ -274,11 +274,11 @@ class AddEventScreen: UIViewController {
     @objc
     private func showDialogForAutoApprovedEvents() {
         let autoApprovedEvents: String = """
-* You can post up to \(allowedEventsNumber) events without approval.
-* Additional events will be approved within 24 hours by the admin.
-* Events take 10–15 minutes to appear on the app after posting.
+• You can post up to \(allowedEventsNumber) events without approval.
+• Additional events will be approved within 24 hours by the admin.
+• Events take 10–15 minutes to appear on the app after posting.
 """
-        GenericAlert.showAlert(title: "Mahjong Events", message: autoApprovedEvents, actions: [.init(title: "Ok", style: .default)], controller: self) { _, _, _ in }
+        GenericAlert.showAlert(title: "Mahjong Events", message: autoApprovedEvents, actions: [.init(title: "Close", style: .default)], controller: self) { _, _, _ in }
     }
     
     //MARK: ButtonActions
