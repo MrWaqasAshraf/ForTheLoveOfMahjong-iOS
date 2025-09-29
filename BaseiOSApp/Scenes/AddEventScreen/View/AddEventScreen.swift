@@ -289,11 +289,11 @@ class AddEventScreen: UIViewController {
         vc.closure = { [weak self] selectedAddress in
             
             if let coordinates = selectedAddress.coordinates {
-                self?.viewModel.eventLocationCoordinates = EventLocationInfo(lat: coordinates.latitude, long: coordinates.longitude, address: selectedAddress.location ?? "Game adress")
+                self?.viewModel.eventLocationCoordinates = EventLocationInfo(lat: coordinates.latitude, long: coordinates.longitude, address: (selectedAddress.locationName == "" ? "" : "\(selectedAddress.locationName ?? ""), " + selectedAddress.location))
             }
             
             DispatchQueue.main.async {
-                self?.addressField.text = selectedAddress.location
+                self?.addressField.text = selectedAddress.locationName == "" ? "" : "\(selectedAddress.locationName ?? ""), " + selectedAddress.location
             }
         }
         appNavigationCoordinator.pushUIKit(vc)
