@@ -10,6 +10,14 @@ import SideMenu
 
 class AppUIViewControllers {
     
+    static func faqsListScreen(viewModel: FAQsViewModel = FAQsViewModel()) -> FAQsListScreen {
+        let sb = UIStoryboard(name: FAQsListScreen.identifier, bundle: nil)
+        let vc = sb.instantiateViewController(identifier: FAQsListScreen.identifier) { coder in
+            FAQsListScreen(coder: coder, viewModel: viewModel)
+        }
+        return vc
+    }
+    
     static func addLocationSearchScreen() -> AddLocationScreen {
         let sb = UIStoryboard(name: AddLocationScreen.identifier, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: AddLocationScreen.identifier) as! AddLocationScreen

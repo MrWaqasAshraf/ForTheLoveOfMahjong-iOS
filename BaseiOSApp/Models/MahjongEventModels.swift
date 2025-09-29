@@ -125,7 +125,7 @@ struct FaqsData: Codable {
     let isActive: Bool?
     let viewCount: Int?
     let createdAt, updatedAt: String?
-    var isSelected: Bool?
+    var isExpanded: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"

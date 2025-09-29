@@ -11,6 +11,13 @@ class FAQInfoCell: UITableViewCell {
     
     static let identifier = "FAQInfoCell"
 
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var subtitleLbl: UILabel!
+    @IBOutlet weak var subtitleView: UIView!
+    @IBOutlet weak var expandedIconImage: UIImageView!
+    
+    var closure: (()->())?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,5 +28,21 @@ class FAQInfoCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configureCell(data: FaqsData?) {
+        
+//        expandedIconImage.image = .chec
+        titleLbl.text = data?.question
+        subtitleLbl.text = data?.answer
+        subtitleView.isHidden = !(data?.isExpanded == true)
+        
+    }
+    
+    @IBAction func expandBtn(_ sender: Any) {
+        if let closure {
+            closure()
+        }
+    }
+    
     
 }
