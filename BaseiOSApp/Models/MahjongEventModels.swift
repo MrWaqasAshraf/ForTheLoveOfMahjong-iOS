@@ -30,14 +30,14 @@ struct MahjongDataResult: Codable {
 
 // MARK: - MahjongEventData
 struct MahjongEventData: Codable {
-    let id: String?
+    var id: String?
     let type, name: String?
     var dateTime, favouritedBy: [String]?
     let locationName, address: String?
     let lat, lng: Double?
     let category, contact, description: String?
     let image: String?
-    let user: UserInfoData?
+    let user: AnyCodableValue?
     let userName, userEmail: String?
     let isActive: Bool?
     let approvalStatus: String?

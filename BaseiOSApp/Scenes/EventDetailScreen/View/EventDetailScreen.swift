@@ -132,7 +132,7 @@ class EventDetailScreen: UIViewController {
                     
                 }
                 else {
-                    if appUserData?.userID == data?.user?.id {
+                    if appUserData?.userID == data?.user?.userInfoModel.id {
                         let editAction = UIAction(title: "Edit", image: actionImageEdit) { [weak self] action in
                             DispatchQueue.main.async {
                                 guard let data = self?.viewModel.eventDetail.value else { return }
@@ -159,7 +159,7 @@ class EventDetailScreen: UIViewController {
         if appUserData?.userID != nil {
             
             
-            if let remoteUserId = data?.user?.id {
+            if let remoteUserId = data?.user?.userInfoModel.id {
 //                favouriteIconContainerView.isHidden = appUserData?.userID == remoteUserId
                 favouriteIconContainerView.isHidden = false
             }

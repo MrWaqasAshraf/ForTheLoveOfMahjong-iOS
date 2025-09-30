@@ -15,7 +15,7 @@ protocol ServicesDelegate {
     
     func loginApi(email: String?, password: String?, completion: @escaping (Result<(UserResponse?, [String: Any], Int?), Error>) -> ())
     func signUpApi(parameters: [String: Any]?, completion: @escaping (Result<(UserResponse?, [String: Any], Int?), Error>) -> ())
-    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
+    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ())
     func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func dashboardEventsApi(filters: [String]?, completion: @escaping (Result<(MahjongEventsListResponse?, [String: Any], Int?), Error>) -> ())
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ())
@@ -50,7 +50,7 @@ extension ServicesDelegate {
         print("Default signUpApi implementation")
     }
     
-    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
+    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default createEventApi implementation")
     }
     

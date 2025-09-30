@@ -83,6 +83,7 @@ class EventAndFilterViewModel {
     var imageUrls: [URL]?
     var selectedEventDates: Bindable<[SelectedEventDateTime]> = Bindable([])
     private(set) var manageEventResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
+    private(set) var manageAddEventResponse: Bindable<MahjongEventDetailResponse> = Bindable<MahjongEventDetailResponse>()
     //MahjongEventDetailService
     
     private var manageMahjongEventsService: any ServicesDelegate
@@ -324,8 +325,12 @@ class EventAndFilterViewModel {
         return (isValid, validationMessage, payload)
     }
     
-    private func getEventDetailApi() {
-        mahjongEventDetailService.mahjongEventDetailApi(eventId: eventDetailForEdit?.id) { result in
+    private func getEventDetailApi(eventId: String? = nil) {
+        var eventToFetch = eventDetailForEdit?.id
+        if let eventId {
+            eventToFetch = eventId
+        }
+        mahjongEventDetailService.mahjongEventDetailApi(eventId: eventToFetch) { result in
             switch result {
             case .success((let data, let json, let resp)):
                 if let eventData = data?.data?.event {
@@ -357,13 +362,21 @@ class EventAndFilterViewModel {
             }
         }
         else {
-            manageMahjongEventsService.createEventApi(parameters: parameters, images: imageUrls) { [weak self] result in
+            mahjongEventDetailService.createEventApi(parameters: parameters, images: imageUrls) { [weak self] result in
                 switch result {
                 case .success((let data, let json, let resp)):
-                    self?.manageEventResponse.value = data
+                    if data?.isSuccessful == true {
+                        if let eventData = data?.data?.event {
+                            if eventData.approvalStatus == "approved" {
+                                NotificationCenter.default.post(name: .eventAdded, object: eventData)
+                            }
+                            NotificationCenter.default.post(name: .eventDetail, object: eventData)
+                        }
+                    }
+                    self?.manageAddEventResponse.value = data
                 case .failure(let error):
                     print(error.localizedDescription)
-                    self?.manageEventResponse.value = GeneralResponse(success: -1, message: error.localizedDescription)
+                    self?.manageAddEventResponse.value = MahjongEventDetailResponse(success: -1, message: error.localizedDescription, data: nil)
                 }
             }
         }

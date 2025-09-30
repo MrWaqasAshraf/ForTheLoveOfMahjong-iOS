@@ -49,28 +49,6 @@ class EventsListingService: ServicesDelegate {
 
 class ManageMahjongEventsService: ServicesDelegate {
     
-    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
-        /*
-         {
-             "type":"Tournament",
-             "name":"Annual Mahjong Championship 2025",
-             "dateTime":["Saturday, March 15, 2025 – 10:00 AM", "Saturday, March 15, 2025 – 06:00 PM"],
-             "locationName":"Grand Mahjong Hall",
-             "address":"123 Tournament Street, Mahjong City, MC 12345",
-             "lat":40.7589,
-             "lng":-73.9851,
-             "category":"Chinese",
-             "contact":"+1-555-MAHJONG",
-             "description":"Join us for the most exciting Mahjong tournament of the year! Open to all skill levels with multiple prize categories. Professional dealers and equipment provided.",
-         }
-         */
-        var files: FileParameters?
-        if let images {
-            files = FileParameters(fileName: "image", urls: images)
-        }
-        getResponse(.post, endPoint: EndPoint.createEventApi.rawValue, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
-    }
-    
     func updateEventApi(parameters: [String: Any]?, images: [URL]?, eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ()) {
         /*
          {
@@ -141,11 +119,33 @@ class ManageMahjongEventsService: ServicesDelegate {
 class MahjongEventDetailService: ServicesDelegate {
     
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {
-        var endPoint: String = EndPoint.dashboardApi.rawValue
+        var endPoint: String = EndPoint.eventsListApi.rawValue
         if let eventId, eventId != "" {
             endPoint += "/\(eventId)"
         }
         getResponse(.get, endPoint: endPoint, customHeaders: [CustomHeaderKeys.a_id.rawValue: a_id], completion: completion)
+    }
+    
+    func createEventApi(parameters: [String: Any]?, images: [URL]?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {
+        /*
+         {
+             "type":"Tournament",
+             "name":"Annual Mahjong Championship 2025",
+             "dateTime":["Saturday, March 15, 2025 – 10:00 AM", "Saturday, March 15, 2025 – 06:00 PM"],
+             "locationName":"Grand Mahjong Hall",
+             "address":"123 Tournament Street, Mahjong City, MC 12345",
+             "lat":40.7589,
+             "lng":-73.9851,
+             "category":"Chinese",
+             "contact":"+1-555-MAHJONG",
+             "description":"Join us for the most exciting Mahjong tournament of the year! Open to all skill levels with multiple prize categories. Professional dealers and equipment provided.",
+         }
+         */
+        var files: FileParameters?
+        if let images {
+            files = FileParameters(fileName: "image", urls: images)
+        }
+        getResponse(.post, endPoint: EndPoint.createEventApi.rawValue, parameters: parameters, isMultiPartData: .multiPartFormData, files: files, completion: completion)
     }
     
     func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {

@@ -509,6 +509,15 @@ extension AddEventScreen {
     
     private func bindViewModel() {
         
+        viewModel.manageAddEventResponse.bind { [weak self] response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            if response?.isSuccessful == true {
+                DispatchQueue.main.async {
+                    self?.goBackToMainScreen()
+                }
+            }
+        }
+        
         viewModel.manageEventResponse.bind { [weak self] response in
             
             ActivityIndicator.shared.removeActivityIndicator()
