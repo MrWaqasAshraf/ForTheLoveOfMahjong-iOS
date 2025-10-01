@@ -39,7 +39,7 @@ struct MahjongEventData: Codable {
     let image: String?
     let user: AnyCodableValue?
     let userName, userEmail: String?
-    let isActive: Bool?
+    let isActive, isSpecial: Bool?
     let approvalStatus: String?
     let personName: String?
     var viewCount, favouriteCount: Int?
@@ -49,7 +49,7 @@ struct MahjongEventData: Codable {
         case user = "userId"
         case id = "_id"
         case personName = "person_name"
-        case userName, userEmail, isActive, viewCount, favouriteCount, favouritedBy, approvalStatus
+        case userName, userEmail, isActive, isSpecial, viewCount, favouriteCount, favouritedBy, approvalStatus
     }
 }
 

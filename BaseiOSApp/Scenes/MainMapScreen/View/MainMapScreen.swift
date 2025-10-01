@@ -254,24 +254,30 @@ class MainMapScreen: UIViewController {
         
         
         let customIcon = CustomMarker.fromNib()
-        if let category = data?.category {
-            switch category {
-            case "American":
-//                customIcon.markerImage.image = .map_marker_svg_3
-                customIcon.markerImage.image = .map_marker_svg_5
-            case "Chinese":
-//                customIcon.markerImage.image = .map_marker_svg_5
-                customIcon.markerImage.image = .map_marker_svg_3
-            case "Hong Kong":
-                customIcon.markerImage.image = .map_marker_svg_6
-            case "Riichi":
-                customIcon.markerImage.image = .map_marker_svg_7
-            case "Wright Patterson":
-                customIcon.markerImage.image = .map_marker_svg_8
-            default:
-                customIcon.markerImage.image = .map_marker_svg_3
+        if data?.isSpecial == true {
+            customIcon.markerImage.image = .map_marker_svg_9
+        }
+        else {
+            if let category = data?.category {
+                switch category {
+                case "American":
+    //                customIcon.markerImage.image = .map_marker_svg_3
+                    customIcon.markerImage.image = .map_marker_svg_5
+                case "Chinese":
+    //                customIcon.markerImage.image = .map_marker_svg_5
+                    customIcon.markerImage.image = .map_marker_svg_3
+                case "Hong Kong":
+                    customIcon.markerImage.image = .map_marker_svg_10
+                case "Riichi":
+                    customIcon.markerImage.image = .map_marker_svg_7
+                case "Wright Patterson":
+                    customIcon.markerImage.image = .map_marker_svg_8
+                default:
+                    customIcon.markerImage.image = .map_marker_svg_3
+                }
             }
         }
+        
         
         marker.title = title
         marker.userData = data

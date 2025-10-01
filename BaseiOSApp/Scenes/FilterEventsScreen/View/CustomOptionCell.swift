@@ -34,7 +34,7 @@ class CustomOptionCell: UICollectionViewCell {
                 case "Chinese":
                     containerView.backgroundColor = data?.isSelected == true ? .clr_chinese : .clr_gray_3
                 case "Hong Kong":
-                    containerView.backgroundColor = data?.isSelected == true ? .clr_hong_kong : .clr_gray_3
+                    containerView.backgroundColor = data?.isSelected == true ? .clr_yellow : .clr_gray_3
                 case "Riichi":
                     containerView.backgroundColor = data?.isSelected == true ? .clr_riichie : .clr_gray_3
                 case "Wright Patterson":

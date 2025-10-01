@@ -66,6 +66,8 @@ extension String{
     static let clr_hong_kong = "clr_hong_kong"
     static let clr_riichie = "clr_riichie"
     static let clr_wright_patterson = "clr_wright_patterson"
+    static let clr_special = "clr_special"
+    static let clr_yellow = "clr_yellow"
     
     //MARK: Images/Icons
     static let showEyeIcon = "eye.fill"
@@ -102,6 +104,8 @@ extension String{
     static let map_marker_svg_6 = "map_marker_svg_6"
     static let map_marker_svg_7 = "map_marker_svg_7"
     static let map_marker_svg_8 = "map_marker_svg_8"
+    static let map_marker_svg_9 = "map_marker_svg_9"
+    static let map_marker_svg_10 = "map_marker_svg_10"
     static let jcb_card_icon = "jcb_card_icon"
     static let discover_card_icon = "discover_card_icon"
     static let diners_club_card_icon = "diners_club_card_icon"
@@ -235,6 +239,8 @@ extension UIColor{
     static let clr_hong_kong = UIColor(named: .clr_hong_kong)!
     static let clr_riichie = UIColor(named: .clr_riichie)!
     static let clr_wright_patterson = UIColor(named: .clr_wright_patterson)!
+    static let clr_special = UIColor(named: .clr_special)!
+    static let clr_yellow = UIColor(named: .clr_yellow)!
     
 }
 
@@ -312,6 +318,8 @@ extension UIImage {
     static let map_marker_svg_6 = UIImage(named: .map_marker_svg_6)!
     static let map_marker_svg_7 = UIImage(named: .map_marker_svg_7)!
     static let map_marker_svg_8 = UIImage(named: .map_marker_svg_8)!
+    static let map_marker_svg_9 = UIImage(named: .map_marker_svg_9)!
+    static let map_marker_svg_10 = UIImage(named: .map_marker_svg_10)!
     static let trash_icon_system = UIImage(systemName: .trash_icon_system)!
     static let info_icon_system = UIImage(systemName: .info_icon_system)!
     static let arrow_down_rect_system_icon = UIImage(systemName: .arrow_down_rect_system_icon)!

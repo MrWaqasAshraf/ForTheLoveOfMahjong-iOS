@@ -12,6 +12,7 @@ class EventsListScreen: UIViewController {
     static let identifier = "EventsListScreen"
     
     @IBOutlet weak var eventsListTable: UITableView!
+    @IBOutlet weak var noRecordsLbl: UILabel!
     
     private var viewModel: EventsListViewModel
     
@@ -128,6 +129,13 @@ extension EventsListScreen {
             DispatchQueue.main.async {
                 self?.eventsListTable.reloadData()
             }
+            
+            let isEmpty = self?.viewModel.eventsListResponse.value?.data?.events?.isEmpty ?? true
+            DispatchQueue.main.async {
+                self?.noRecordsLbl.isHidden = !isEmpty
+            }
+            
+            
             if response?.isSuccessful != true {
                 GenericToast.showToast(message: response?.message ?? "")
             }

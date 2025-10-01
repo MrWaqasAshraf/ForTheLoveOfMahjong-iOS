@@ -94,7 +94,7 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
         case .favorite:
             if let appUserData {
                 dismiss(animated: true)
-                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Favourites", eventsListType: .favourites))
+                let vc = AppUIViewControllers.eventsListScreen(viewModel: EventsListViewModel(screenTitle: "Favorites", eventsListType: .favourites))
                 appNavigationCoordinator.pushUIKit(vc)
             }
             else {

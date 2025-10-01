@@ -87,14 +87,23 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="ckz-GI-PmP"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No records found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6q-jX-UdK">
+                                <rect key="frame" x="20" y="416" width="353" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="clr_gray_dk"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2pj-Ug-K9o" secondAttribute="trailing" id="65w-Yb-3n9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="e6q-jX-UdK" secondAttribute="trailing" constant="20" id="BbB-5H-lmm"/>
                             <constraint firstItem="dSv-vP-ouZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Kkd-Bj-t1a"/>
+                            <constraint firstItem="e6q-jX-UdK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="M8e-fg-oap"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="dSv-vP-ouZ" secondAttribute="bottom" id="Uib-FS-CUK"/>
                             <constraint firstItem="2pj-Ug-K9o" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="XrS-Sr-OVb"/>
+                            <constraint firstItem="e6q-jX-UdK" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="f5O-VH-SrM"/>
                             <constraint firstItem="dSv-vP-ouZ" firstAttribute="top" secondItem="2pj-Ug-K9o" secondAttribute="bottom" id="kTW-LB-Dqm"/>
                             <constraint firstItem="2pj-Ug-K9o" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qIP-nt-gIs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="dSv-vP-ouZ" secondAttribute="trailing" id="sgR-E8-1ZK"/>
@@ -102,6 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="eventsListTable" destination="dSv-vP-ouZ" id="lin-VP-hzZ"/>
+                        <outlet property="noRecordsLbl" destination="e6q-jX-UdK" id="tpK-DP-Vbz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -113,6 +123,9 @@
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <namedColor name="clr_gray_1">
             <color red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="clr_gray_dk">
+            <color red="0.68199998140335083" green="0.68199998140335083" blue="0.69800001382827759" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="clr_violet_concrete">
             <color red="0.33725490196078434" green="0.45490196078431372" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
