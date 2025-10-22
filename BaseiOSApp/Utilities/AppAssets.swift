@@ -139,6 +139,8 @@ extension String{
     static let receiptsIconSystem = "list.bullet.rectangle.portrait.fill"
     static let subscriptionPlansIconSystem = "dollarsign.arrow.circlepath"
     static let contactUsIconSystem = "phone.bubble.fill.rtl"
+    static let contact_us_icon = "contact_us_icon"
+    static let language_icon_svg = "language_icon_svg"
     static let changePasswordSystem = "key.viewfinder"
     static let changeLanguageIconSystem = "translate"
     static let termsIconSystem = "list.clipboard.fill"
@@ -177,6 +179,7 @@ extension String{
     static let info_icon_system = "info.circle"
     static let arrow_down_rect_system_icon = "arrowtriangle.down.fill"
     static let arrow_up_rect_system_icon = "arrowtriangle.up.fill"
+    static let report_icon_svg = "report_icon_svg"
     
 }
 
@@ -360,6 +363,10 @@ extension UIImage {
     static let hearIconSystem = UIImage(systemName: .hearIconSystem)!
     static let moonHalfIconSystem = UIImage(systemName: .moonHalfIconSystem)!
     static let event_detail_image = UIImage(named: .event_detail_image)!
+    static let report_icon_svg = UIImage(named: .report_icon_svg)!
+    
+    static let contact_us_icon = UIImage(named: .contact_us_icon)!
+    static let language_icon_svg = UIImage(named: .language_icon_svg)!
     
 }
 

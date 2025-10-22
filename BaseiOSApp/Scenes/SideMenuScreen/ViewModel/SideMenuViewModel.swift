@@ -40,8 +40,8 @@ class SideMenuViewModel {
     var sideMenuOptionsList: [SideMenuOptionModel] = [.init(title: "Profile", slug: .profile, image: .groupProfileIconSystem),
                                                       .init(title: "Special events", slug: .events, image: .docIconSystem),
                                                       .init(title: "Favorite", slug: .favorite, image: .hearIconSystem),
-                                                      .init(title: "Contacts us", slug: .contactUs, image: .contactUsIconSystem),
-                                                      .init(title: "FAQs", slug: .faqs, image: .changeLanguageIconSystem),
+                                                      .init(title: "Contacts us", slug: .contactUs, image: .contact_us_icon),
+                                                      .init(title: "FAQs", slug: .faqs, image: .language_icon_svg),
 //                                                      .init(title: "Dark Mode", slug: .darkMode, image: .moonHalfIconSystem, isOn: false)
     ]
     

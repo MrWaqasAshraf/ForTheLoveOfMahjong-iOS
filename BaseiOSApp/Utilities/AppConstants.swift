@@ -165,8 +165,8 @@ enum AppFlow {
 }
 
 enum AppLink {
-    static let privacyPolicy = "https://dev.zeroifta.com/latest-agreement"
-    static let termsOfService = "https://dev.zeroifta.com/latest-agreement"
+    static let privacyPolicy = "https://fortheloveofmahjongg.com/privacy-policy"
+    static let termsOfService = "https://fortheloveofmahjongg.com/privacy-policy"
 }
 
 enum AppRegex {

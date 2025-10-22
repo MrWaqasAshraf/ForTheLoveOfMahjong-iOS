@@ -165,6 +165,9 @@ class PasswordAuthenticationService {
 
 class SignUpViewModel {
     
+    //For UI
+    var termsSelected: Bindable<Bool> = Bindable(false)
+    
     //For APIs
     private(set) var resetToken: String?
     private(set) var signUpResponse: Bindable<UserResponse> = Bindable<UserResponse>()

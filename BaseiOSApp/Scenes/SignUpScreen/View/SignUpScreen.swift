@@ -18,6 +18,9 @@ class SignUpScreen: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var passwordEyeIcon: UIImageView!
     @IBOutlet weak var confirmPasswordEyeIcon: UIImageView!
+    @IBOutlet weak var acceptanceTextView: UITextView!
+    @IBOutlet weak var signUpBtn: UIButton!
+    @IBOutlet weak var termsSelectedImage: UIImageView!
     
     private var viewModel: SignUpViewModel
     
@@ -38,6 +41,25 @@ class SignUpScreen: UIViewController {
         setupUiElements()
     }
     
+    private func setupAgreementText(){
+        let textFieldText = NSMutableAttributedString(string: "I agree to For The Love of Mahjong's Terms of Use and Privacy Policy")
+        let attributeLinks = [("Privacy Policy", AppLink.privacyPolicy), ("Terms of Use", AppLink.termsOfService)]
+        var attributes: [AttributeModel] = []
+        for link in attributeLinks {
+            attributes.append(.init(name: .link, value: link.1, range: (textFieldText.string as NSString).range(of: link.0)))
+            attributes.append(.init(name: NSAttributedString.Key.foregroundColor, value: UIColor.clr_primary, range: (textFieldText.string as NSString).range(of: link.0)))
+        }
+        textFieldText.setupAttributes(attributes: attributes)
+        let linkAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clr_primary, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]
+        acceptanceTextView.attributedText = textFieldText
+        acceptanceTextView.linkTextAttributes = linkAttributes
+        DispatchQueue.main.async {
+            self.acceptanceTextView.sizeToFit()
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     private func setupUiElements() {
         
         let img = UIImage.arrowLeft.withRenderingMode(.alwaysTemplate)
@@ -49,6 +71,8 @@ class SignUpScreen: UIViewController {
         barBtn2.tintColor = .black
         
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]), .init(position: .right, barButtons: [barBtn2])]))
+        
+        setupAgreementText()
         
     }
     
@@ -71,7 +95,20 @@ class SignUpScreen: UIViewController {
         appNavigationCoordinator.popToSpecificVc(vc: MainMapScreen.self)
     }
     
+    private func shouldTermAccepted(accepted: Bool){
+        signUpBtn.isEnabled = accepted
+        signUpBtn.backgroundColor = accepted ? .clr_primary : .clr_gray_1
+        termsSelectedImage.image = accepted ? .checkmarkSquareIconSystem : .unmarkSquareIconSystem
+//        termsSelectedImage.tintColor = accepted ? .clr_primary : .clr_gray_1
+    }
+    
     //MARK: ButtonActions
+    
+    @IBAction func acceptTermBtn(_ sender: Any) {
+        viewModel.termsSelected.value?.toggle()
+    }
+    
+    
     @IBAction func signInBtn(_ sender: Any) {
         appNavigationCoordinator.pop()
     }
@@ -102,6 +139,7 @@ class SignUpScreen: UIViewController {
 }
 
 extension SignUpScreen {
+    
     private func bindViewModel() {
         
         viewModel.signUpResponse.bind { [weak self] response in
@@ -114,6 +152,15 @@ extension SignUpScreen {
                 DispatchQueue.main.async {
                     self?.goBackToMap()
                 }
+            }
+        }
+        
+        viewModel.termsSelected.bind { [weak self] termSelected in
+            
+            guard let termSelected else { return }
+            
+            DispatchQueue.main.async {
+                self?.shouldTermAccepted(accepted: termSelected)
             }
         }
         

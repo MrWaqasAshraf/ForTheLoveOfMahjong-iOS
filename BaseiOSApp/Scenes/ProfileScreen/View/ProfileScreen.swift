@@ -39,7 +39,12 @@ class ProfileScreen: UIViewController {
         let barBtn = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(goBack))
         barBtn.tintColor = .black
         
-        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn])]))
+        let img2 = UIImage.trash_icon_system.withRenderingMode(.alwaysTemplate)
+        let barBtn2 = UIBarButtonItem(image: img2, style: .plain, target: self, action: #selector(deleteProfile))
+        barBtn2.tintColor = .red
+        
+        createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: [.init(position: .left, barButtons: [barBtn]),
+                                                                                               .init(position: .right, barButtons: [barBtn2])]))
         
         emailLbl.text = appUserData?.email ?? "..."
         firstNameLbl.text = appUserData?.firstName ?? "..."
@@ -50,6 +55,15 @@ class ProfileScreen: UIViewController {
     @objc
     private func goBack() {
         appNavigationCoordinator.pop()
+    }
+    
+    @objc
+    private func deleteProfile() {
+        GenericAlert.showAlert(title: "Delete Profile", message: "This will delete your profile and remove all the events you created, do you want to continue?", actions: [.init(title: "Yes", style: .destructive), .init(title: "No", style: .default)], controller: self) { _, btnIndex, _ in
+            if btnIndex == 0 {
+                print("Delete profile api")
+            }
+        }
     }
     
     @IBAction func backToHomeBtn(_ sender: Any) {

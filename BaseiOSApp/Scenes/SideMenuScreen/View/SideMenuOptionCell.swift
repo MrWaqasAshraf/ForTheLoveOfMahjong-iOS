@@ -28,7 +28,12 @@ class SideMenuOptionCell: UITableViewCell {
     }
     
     func configureCell(data: SideMenuOptionModel) {
-        leadIconImage.image = UIImage(systemName: data.image)
+        if let image = UIImage(systemName: data.image) {
+            leadIconImage.image = image
+        }
+        else if let image = UIImage(named: data.image) {
+            leadIconImage.image = image
+        }
         titleLbl.text = data.title
         modeSwitch.isHidden = !(data.slug == .darkMode)
         trailingIconImage.isHidden = data.slug == .darkMode

@@ -68,8 +68,21 @@ class EventDetailScreen: UIViewController {
         
     }
     
-    private func setupNabBar(barButtons: [BarButtonModel] = []) {
+    private func setupNavBar(barButtons: [BarButtonModel] = []) {
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: barButtons))
+    }
+    
+    private func showReportReasonAlert() {
+        GenericAlert.showAlert(title: "Report Event", message: "Enter the reason why you want to report this event", textFieldActions: [.init(identifier: 101, placeholder: "Enter reporting reason")], actions: [.init(title: "Send Report", style: .default),.init(title: "Cancel", style: .default)], controller: self) { _, btnIndex, textFields in
+            if btnIndex == 0 {
+                if let reason = textFields?.first?.textFieldValue, !reason.replacingOccurrences(of: " ", with: "").isEmpty {
+                    
+                }
+                else {
+                    GenericToast.showToast(message: "Reason shouldn't be empty")
+                }
+            }
+        }
     }
     
     private func mapEventDetailData(data: MahjongEventData?, firstLoad: Bool = false) {
@@ -97,16 +110,30 @@ class EventDetailScreen: UIViewController {
             
             var allBarButtons: [BarButtonModel] = [.init(position: .left, barButtons: [barBtn]), .init(position: .center, customView: titleLbl)]
             
+            let img2 = UIImage.kebab_menu_icon.withRenderingMode(.alwaysTemplate)
+            
+            let reportAction = UIAction(title: "Report Event", image: .report_icon_svg) { [weak self] action in
+                
+                if let userId = appUserData?.userID, userId != "" {
+                    DispatchQueue.main.async {
+                        self?.showReportReasonAlert()
+                    }
+                }
+                else {
+                    GenericToast.showToast(message: "Please login to report this event")
+                }
+                
+            }
+            var allActions: [UIMenuElement] = [reportAction]
             
             if appUserData?.userID != nil {
                 
-                let img2 = UIImage.kebab_menu_icon.withRenderingMode(.alwaysTemplate)
                 let actionImageEdit: UIImage = .edit_green_icon.withRenderingMode(.alwaysTemplate)
                 actionImageEdit.withTintColor(.white)
                 let actionImageDelete: UIImage = .trash_icon_system.withRenderingMode(.alwaysTemplate)
                 actionImageDelete.withTintColor(.white)
                 
-                if appUserData?.role == "role" {
+                if appUserData?.role == "admin" {
                     
                     let editAction = UIAction(title: "Edit", image: actionImageEdit) { [weak self] action in
                         print("Edit")
@@ -125,10 +152,11 @@ class EventDetailScreen: UIViewController {
                             }
                         }
                     }
-                    let optionsMenu = UIMenu(children: [editAction, deleteAction])
-                    let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
-                    barBtn2.tintColor = .white
-                    allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
+                    allActions.append(contentsOf: [editAction, deleteAction])
+//                    let optionsMenu = UIMenu(children: [editAction, deleteAction])
+//                    let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
+//                    barBtn2.tintColor = .white
+//                    allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
                     
                 }
                 else {
@@ -145,15 +173,22 @@ class EventDetailScreen: UIViewController {
                                 self?.deleteReasonDialog()
                             }
                         }
-                        let optionsMenu = UIMenu(children: [editAction, deleteAction])
-                        let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
-                        barBtn2.tintColor = .white
-                        allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
+                        allActions.append(contentsOf: [editAction, deleteAction])
+//                        let optionsMenu = UIMenu(children: [editAction, deleteAction])
+//                        let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
+//                        barBtn2.tintColor = .white
+//                        allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
                     }
                 }
             }
             
-            setupNabBar(barButtons: allBarButtons)
+            print("All actions: \(allActions.count)")
+            var optionsMenu = UIMenu(children: allActions)
+            let barBtn2 = UIBarButtonItem(title: nil, image: img2, primaryAction: nil, menu: optionsMenu)
+            barBtn2.tintColor = .white
+            allBarButtons.append(.init(position: .right, barButtons: [barBtn2]))
+            setupNavBar(barButtons: allBarButtons)
+            
         }
         
         if appUserData?.userID != nil {
