@@ -118,12 +118,6 @@ enum HttpHeaderKey: String{
 
 enum GMapKey: String{
     
-    //dont use
-//    case apiKey = "AIzaSyBtQuABE7uPsvBnnkXtCNMt9BpG9hjeDIg"
-    
-    //For ios only
-//    case apiKey = "AIzaSyBWwfvwm1ifgUtjH6rdueP70cqPn49BSDQ"
-    
     //For ios only
     case apiKey = "AIzaSyAE7XlUGTXjl7wwrm9lvUxoXCpgaPNPTDg"
     
@@ -154,7 +148,7 @@ enum SubscriptionSlug: String {
 }
 
 enum AppLinks: String {
-    case termsAndConditions = "http://zeroifta.alnairtech.com/terms-and-conditions"
+    case termsAndConditions = "https://fortheloveofmahjongg.com/terms-and-conditions"
 }
 
 enum AppFlow {
@@ -166,7 +160,7 @@ enum AppFlow {
 
 enum AppLink {
     static let privacyPolicy = "https://fortheloveofmahjongg.com/privacy-policy"
-    static let termsOfService = "https://fortheloveofmahjongg.com/privacy-policy"
+    static let termsOfService = "https://fortheloveofmahjongg.com/terms-and-conditions"
 }
 
 enum AppRegex {

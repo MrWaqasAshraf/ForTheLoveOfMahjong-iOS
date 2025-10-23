@@ -14,6 +14,7 @@
 		7797B60E2E63669600D3D5F6 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B60D2E63669600D3D5F6 /* GoogleMaps */; };
 		7797B6112E6367AB00D3D5F6 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B6102E6367AB00D3D5F6 /* GooglePlaces */; };
 		7797B6132E6367AB00D3D5F6 /* GooglePlacesSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7797B6122E6367AB00D3D5F6 /* GooglePlacesSwift */; };
+		A7AF62E62EAA5C51005114FE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A7AF62E52EAA5C51005114FE /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		77477D8C2E42374200653F05 /* BaseiOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseiOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77477DA52E42374300653F05 /* BaseiOSAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseiOSAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77477DAF2E42374300653F05 /* BaseiOSAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseiOSAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7AF62E52EAA5C51005114FE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -105,6 +107,7 @@
 		77477D832E42374200653F05 = {
 			isa = PBXGroup;
 			children = (
+				A7AF62E52EAA5C51005114FE /* PrivacyInfo.xcprivacy */,
 				77477D8E2E42374200653F05 /* BaseiOSApp */,
 				77477DA82E42374300653F05 /* BaseiOSAppTests */,
 				77477DB22E42374300653F05 /* BaseiOSAppUITests */,
@@ -256,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7AF62E62EAA5C51005114FE /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
