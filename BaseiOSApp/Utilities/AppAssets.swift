@@ -180,6 +180,7 @@ extension String{
     static let arrow_down_rect_system_icon = "arrowtriangle.down.fill"
     static let arrow_up_rect_system_icon = "arrowtriangle.up.fill"
     static let report_icon_svg = "report_icon_svg"
+    static let login_icon_svg = "login_icon_svg"
     
 }
 
@@ -327,6 +328,7 @@ extension UIImage {
     static let info_icon_system = UIImage(systemName: .info_icon_system)!
     static let arrow_down_rect_system_icon = UIImage(systemName: .arrow_down_rect_system_icon)!
     static let arrow_up_rect_system_icon = UIImage(systemName: .arrow_up_rect_system_icon)!
+    static let login_icon_svg = UIImage(named: .login_icon_svg)!
     
     //Side menu
     static let paymentMethodIconSystem = UIImage(systemName: .paymentMethodIconSystem)!

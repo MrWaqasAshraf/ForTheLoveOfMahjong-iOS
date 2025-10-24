@@ -28,6 +28,8 @@ protocol ServicesDelegate {
     func eventDeleteRequestApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func eventDeleteApi(eventId: String?, completion: @escaping (Result<(GeneralResponse?, [String: Any], Int?), Error>) -> ())
     func faqsListApi(pageNo: Int?, pageSize: Int?, completion: @escaping (Result<(FaqsListResponse?, [String: Any], Int?), Error>) -> ())
+    func reportEventApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ())
+    func deleteUserApi(completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ())
     
     //MARK: Test APIs
     func businessListApi(userId: Int?, pageNo: Int?, pageSize: Int?, dynamicListing: BooleanCustomEnum?, completion: @escaping (Result<(BusinessListResponse?, [String: Any], Int?), Error>) -> ())
@@ -100,6 +102,14 @@ extension ServicesDelegate {
     
     func faqsListApi(pageNo: Int?, pageSize: Int?, completion: @escaping (Result<(FaqsListResponse?, [String: Any], Int?), Error>) -> ()) {
         print("Default faqsListApi implementation")
+    }
+    
+    func reportEventApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        print("Default reportEventApi implementation")
+    }
+    
+    func deleteUserApi(completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        print("Default deleteUserApi implementation")
     }
     
     //MARK: Test APIs

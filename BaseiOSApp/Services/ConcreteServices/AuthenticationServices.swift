@@ -161,3 +161,25 @@ class ReAuthService: ServicesDelegate {
     }
     
 }
+
+class DeleteUserService: ServicesDelegate {
+    
+    func deleteUserApi(completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        getResponse(.delete, endPoint: EndPoint.deleteUserApi.rawValue, parameters: nil, completion: completion)
+    }
+    
+    func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]?, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        
+        API.shared.api(useAlamofire: useAlamofire, type: type, ignoreBaseUrl: ignoreBaseUrl, endpoint: endPoint, parameters: parameters, customHeaders: customHeaders, isMultiPartData: isMultiPartData, rawData: rawData, files: files, expecting: GeneralResponseTwo.self) { result in
+            switch result {
+            case .success((let data, let json, let resp)):
+                print("\(endPoint) API status code: \(resp.statusCode), Data is: \(data)")
+                completion(.success((data, json, resp.statusCode)))
+            case .failure(let error):
+                print(error.localizedDescription)
+                appErrorHandler.handleErrorWithFailureCase(error: error, completion: completion)
+            }
+        }
+    }
+    
+}

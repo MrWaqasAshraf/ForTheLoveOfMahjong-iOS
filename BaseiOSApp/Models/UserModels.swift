@@ -22,6 +22,12 @@ struct GeneralResponse: Codable {
     
 }
 
+// MARK: - GeneralResponseTwo
+struct GeneralResponseTwo: Codable {
+    let success: Bool?
+    let message: String?
+}
+
 // MARK: - UserResponse
 struct UserResponse: Codable {
     

@@ -48,6 +48,8 @@ enum EndPoint: String {
     case eventDeleteRequestApi = "/events/request-delete"
     case eventDeleteApi = "/events/delete"
     // events/delete/68cbc75bd28a38e6d5972c5e -> 68cbc75bd28a38e6d5972c5e is event id
+    case reportEventApi = "/event/report"
+    case deleteUserApi = "/user/delete"
     
     //Test apis
     case dashboardTestApi = "/attendace_svc/pb/employee-detail/dashboard/"

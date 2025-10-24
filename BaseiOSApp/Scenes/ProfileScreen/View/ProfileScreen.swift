@@ -30,6 +30,7 @@ class ProfileScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bindViewMode()
         setupUiElements()
     }
     
@@ -52,6 +53,13 @@ class ProfileScreen: UIViewController {
         
     }
     
+    private func deleteUserApi() {
+        DispatchQueue.main.async {
+            ActivityIndicator.shared.showActivityIndicator(view: self.view)
+        }
+        viewModel.deleteUserApi()
+    }
+    
     @objc
     private func goBack() {
         appNavigationCoordinator.pop()
@@ -59,9 +67,11 @@ class ProfileScreen: UIViewController {
     
     @objc
     private func deleteProfile() {
-        GenericAlert.showAlert(title: "Delete Profile", message: "This will delete your profile and remove all the events you created, do you want to continue?", actions: [.init(title: "Yes", style: .destructive), .init(title: "No", style: .default)], controller: self) { _, btnIndex, _ in
+        GenericAlert.showAlert(title: "Delete Profile", message: "This will delete your profile, are you sure?", actions: [.init(title: "Yes", style: .destructive), .init(title: "No", style: .default)], controller: self) { [weak self] _, btnIndex, _ in
             if btnIndex == 0 {
-                print("Delete profile api")
+                
+                self?.deleteUserApi()
+                
             }
         }
     }
@@ -71,5 +81,23 @@ class ProfileScreen: UIViewController {
     }
     
     
+}
+
+extension ProfileScreen {
+    
+    private func bindViewMode() {
+        viewModel.deleteUserResponse.bind { [weak self] response in
+            
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+            
+            if response?.success == true {
+                DispatchQueue.main.async {
+                    self?.goBack()
+                }
+            }
+            
+        }
+    }
     
 }

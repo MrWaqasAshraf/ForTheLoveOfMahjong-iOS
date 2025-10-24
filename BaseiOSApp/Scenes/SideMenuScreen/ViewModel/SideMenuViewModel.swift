@@ -32,6 +32,7 @@ enum SideMenuSlug {
     case faqs
     case darkMode
     case logout
+    case login
     
 }
 
@@ -54,9 +55,15 @@ class SideMenuViewModel {
             if !sideMenuOptionsList.contains(where: { $0.slug == .logout }) {
                 sideMenuOptionsList.append(.init(title: "Logout", slug: .logout, image: .logout_icon_system))
             }
+            sideMenuOptionsList.removeAll { $0.slug == .login }
         }
         else {
             sideMenuOptionsList.removeAll { $0.slug == .logout }
+            
+            if !sideMenuOptionsList.contains(where: { $0.slug == .login }) {
+                sideMenuOptionsList.append(.init(title: "Login", slug: .login, image: .login_icon_svg))
+            }
+            
         }
     }
     

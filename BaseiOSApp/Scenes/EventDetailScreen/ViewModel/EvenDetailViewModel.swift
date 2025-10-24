@@ -23,11 +23,13 @@ class EvenDetailViewModel {
     private(set) var favoruiteEventResponse: Bindable<FavouriteInfoResponse> = Bindable<FavouriteInfoResponse>()
     private(set) var eventDeleteResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
     private(set) var eventDeleteRequestResponse: Bindable<GeneralResponse> = Bindable<GeneralResponse>()
+    private(set) var reportEventResponse: Bindable<GeneralResponseTwo> = Bindable<GeneralResponseTwo>()
     private var eventDetailService: any ServicesDelegate
     private var favouriteMahjongEventService: any ServicesDelegate
     private var manageMahjongEventService: any ServicesDelegate
+    private var reportEventService: any ServicesDelegate
     
-    init(showShareBtn: Bool = true, eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService(), manageMahjongEventService: any ServicesDelegate = ManageMahjongEventsService()) {
+    init(showShareBtn: Bool = true, eventDetail: MahjongEventData? = nil, eventDetailService: any ServicesDelegate = MahjongEventDetailService(), favouriteMahjongEventService: any ServicesDelegate = FavouriteMahjongEventService(), manageMahjongEventService: any ServicesDelegate = ManageMahjongEventsService(), reportEventService: any ServicesDelegate = ReportEventService()) {
         if let eventDetail {
             self.eventDetail.value = eventDetail
         }
@@ -35,6 +37,7 @@ class EvenDetailViewModel {
         self.eventDetailService = eventDetailService
         self.favouriteMahjongEventService = favouriteMahjongEventService
         self.manageMahjongEventService = manageMahjongEventService
+        self.reportEventService = reportEventService
     }
     
     func observeNotifications() {
@@ -44,6 +47,18 @@ class EvenDetailViewModel {
     @objc func mapEventUpdateData(notify: Notification) {
         if let data = notify.object as? MahjongEventData {
             eventDetail.value = data
+        }
+    }
+    
+    func reportEventApi(reason: String?) {
+        reportEventService.reportEventApi(eventId: eventDetail.value?.id, reason: reason) { [weak self] result in
+            switch result{
+            case .success((let data, let json, _)):
+                self?.reportEventResponse.value = data
+            case .failure(let error):
+                print(error.localizedDescription)
+                self?.reportEventResponse.value = GeneralResponseTwo(success: false, message: error.localizedDescription)
+            }
         }
     }
     

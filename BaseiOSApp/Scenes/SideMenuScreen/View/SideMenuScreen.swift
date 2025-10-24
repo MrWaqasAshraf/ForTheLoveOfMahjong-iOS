@@ -124,7 +124,10 @@ extension SideMenuScreen: UITableViewDelegate, UITableViewDataSource {
                     dialog.removeFromSuperview()
                 }
             }
-            
+        case .login:
+            dismiss(animated: true)
+            let vc = AppUIViewControllers.signInScreen()
+            appNavigationCoordinator.pushUIKit(vc)
         case .darkMode:
             print("TBD")
         }

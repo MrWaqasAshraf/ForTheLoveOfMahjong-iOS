@@ -116,6 +116,35 @@ class ManageMahjongEventsService: ServicesDelegate {
     
 }
 
+class ReportEventService: ServicesDelegate {
+    
+    func reportEventApi(eventId: String?, reason: String?, completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        var parameters: [String: Any] = [:]
+        if let eventId {
+            parameters.updateValue(eventId, forKey: "eventId")
+        }
+        if let reason {
+            parameters.updateValue(reason, forKey: "reason")
+        }
+        getResponse(.post, endPoint: EndPoint.reportEventApi.rawValue, parameters: parameters, completion: completion)
+    }
+    
+    func getResponse(useAlamofire: Bool = false, _ type: RequestType, ignoreBaseUrl: Bool = false, endPoint: String, parameters: [String : Any]? = nil, customHeaders: [String : String]? = nil, isMultiPartData: ParameterType? = nil, rawData: String? = nil, files: FileParameters? = nil, completion: @escaping (Result<(GeneralResponseTwo?, [String: Any], Int?), Error>) -> ()) {
+        
+        API.shared.api(useAlamofire: useAlamofire, type: type, ignoreBaseUrl: ignoreBaseUrl, endpoint: endPoint, parameters: parameters, customHeaders: customHeaders, isMultiPartData: isMultiPartData, rawData: rawData, files: files, expecting: GeneralResponseTwo.self) { result in
+            switch result {
+            case .success((let data, let json, let resp)):
+                print("\(endPoint) API status code: \(resp.statusCode), Data is: \(data)")
+                completion(.success((data, json, resp.statusCode)))
+            case .failure(let error):
+                print(error.localizedDescription)
+                appErrorHandler.handleErrorWithFailureCase(error: error, completion: completion)
+            }
+        }
+    }
+    
+}
+
 class MahjongEventDetailService: ServicesDelegate {
     
     func mahjongEventDetailApi(eventId: String?, completion: @escaping (Result<(MahjongEventDetailResponse?, [String: Any], Int?), Error>) -> ()) {

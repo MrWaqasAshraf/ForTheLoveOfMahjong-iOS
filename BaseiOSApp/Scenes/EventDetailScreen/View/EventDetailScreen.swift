@@ -72,11 +72,18 @@ class EventDetailScreen: UIViewController {
         createSystemNavBar(systemNavBarSetup: .init(hideSystemBackButton: true, buttonsSetup: barButtons))
     }
     
+    private func reportEventApiCall(reason: String?) {
+        DispatchQueue.main.async {
+            ActivityIndicator.shared.showActivityIndicator(view: self.view)
+        }
+        viewModel.reportEventApi(reason: reason)
+    }
+    
     private func showReportReasonAlert() {
-        GenericAlert.showAlert(title: "Report Event", message: "Enter the reason why you want to report this event", textFieldActions: [.init(identifier: 101, placeholder: "Enter reporting reason")], actions: [.init(title: "Send Report", style: .default),.init(title: "Cancel", style: .default)], controller: self) { _, btnIndex, textFields in
+        GenericAlert.showAlert(title: "Report Event", message: "Enter the reason why you want to report this event", textFieldActions: [.init(identifier: 101, placeholder: "Enter reporting reason")], actions: [.init(title: "Send Report", style: .default),.init(title: "Cancel", style: .default)], controller: self) { [weak self] _, btnIndex, textFields in
             if btnIndex == 0 {
                 if let reason = textFields?.first?.textFieldValue, !reason.replacingOccurrences(of: " ", with: "").isEmpty {
-                    
+                    self?.reportEventApiCall(reason: reason)
                 }
                 else {
                     GenericToast.showToast(message: "Reason shouldn't be empty")
@@ -373,6 +380,11 @@ class EventDetailScreen: UIViewController {
 extension EventDetailScreen {
     
     private func bindViewModel() {
+        
+        viewModel.reportEventResponse.bind { response in
+            ActivityIndicator.shared.removeActivityIndicator()
+            GenericToast.showToast(message: response?.message ?? "")
+        }
         
         viewModel.eventDeleteResponse.bind { [weak self] response in
             ActivityIndicator.shared.removeActivityIndicator()
